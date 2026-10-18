@@ -1,7 +1,9 @@
 个人学术网站：开始使用
 ====================
 
-当前是 ZHANG, Qi 的英文网站初稿，还没有上传或公开发布。
+当前是 ZHANG, Qi 的英文网站初稿，已通过 GitHub Pages 公开发布。
+正式网址：https://keyjone.github.io/
+网站仓库：https://github.com/KeyJONE/keyjone.github.io
 单位和研究方向采用你提供的信息，简介及资料链接参照已有澳门大学主页。
 
 1. 看效果
@@ -33,17 +35,16 @@ publications.jemdoc 是论文入口，software.jemdoc 是软件，MENU 控制左
 KaTeX 在生成网页时运行，不需要购买服务器或安装完整的 LaTeX。
 并非所有 LaTeX 宏包、命令都受支持；如果生成报错，把公式发给我即可。
 
-5. 以后发布到 GitHub Pages
+5. GitHub Pages 发布与更新
 GitHub 账户已确认是 KeyJONE；不要发送密码、访问令牌或恢复码。
-拟使用的个人主页仓库名称是 keyjone.github.io。
+已使用的个人主页仓库名称是 keyjone.github.io。
 免费账户可使用公开仓库；网站中的内容也会公开。
-准备好真实内容后，把项目提交到该仓库的 main 分支，
-在 Settings > Pages 中选择 Deploy from a branch，main，/docs。
+项目已提交到该仓库的 main 分支；后续更新也提交到这个分支。
+Settings > Pages 已设置为 Deploy from a branch，main，/docs。
 docs/.nojekyll 已准备好，GitHub 将直接发布生成的静态网页。
-发布成功后的预期网站地址是 https://keyjone.github.io/。
-上线后必须完成：确认正式网址可访问，再把 site/index.jemdoc 中 Contact 的
-旧个人主页链接及显示文字替换为正式网址，重新生成并上传。
-若最终采用自定义域名，以实际发布的网址为准；上线前保留现有链接。
+正式网址已验证可访问：https://keyjone.github.io/。
+首页 Contact 的个人主页链接及显示文字已改成正式网址。
+若以后采用自定义域名，需要同步更新 Contact 的链接。
 后续每次修改 .jemdoc 后，都需要重新生成并上传最新的 docs。
 
 6. 页面风格
