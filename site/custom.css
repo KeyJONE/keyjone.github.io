@@ -26,6 +26,12 @@ dl a {
     min-width: 0;
 }
 
+.contact-email {
+    font-family: Consolas, "Liberation Mono", "Courier New", monospace;
+    font-size: 1em;
+    color: #000000;
+}
+
 /* The portrait uses its dimensions from index.jemdoc without enlarging it. */
 table.imgtable img {
     max-width: none;
