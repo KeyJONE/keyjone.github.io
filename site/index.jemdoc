@@ -1,0 +1,34 @@
+# jemdoc: menu{MENU}{index.html}, addcss{custom.css}
+# Name, affiliation, research interests, and GitHub account supplied by the owner.
+# Biography and office: https://personal.feg.um.edu.mo/qzhang/ (retrieved 2026-10-18).
+# Title and institutional contact: https://feg.um.edu.mo/people/qzhang/.
+# Replace portrait-placeholder.svg with your preferred photo when ready.
+# Public email is the university address; no account-login email is used.
+= ZHANG, Qi
+
+~~~
+{}{img_left}{images/portrait-placeholder.svg}{Portrait to be added}{300}{200}
+ZHANG, Qi\n
+Assistant Professor\n
+[https://feg.um.edu.mo/cee/ Department of Civil and Environmental Engineering]\n
+[https://feg.um.edu.mo/ Faculty of Engineering]\n
+[https://www.um.edu.mo/ University of Macau]
+~~~
+
+== Contact
+E11-3009, University of Macau, Macau, China\n
+[qzhang@um.edu.mo qzhang@um.edu.mo]\n
+# After the new website is deployed and verified, replace the following URL
+# and label with the final public homepage address (owner request, 2026-10-18).
+[https://personal.feg.um.edu.mo/qzhang/ University-hosted academic homepage]
+
+== Research interests
+- Computational Poromechanics
+- Smoothed Finite Element Method
+- Finite Element Method / Finite Volume Method
+- Neural Network
+
+== Academic profiles
+[https://feg.um.edu.mo/people/qzhang/ University profile]\n
+[https://orcid.org/0000-0002-4637-6308 ORCID]\n
+[https://github.com/KeyJONE GitHub]

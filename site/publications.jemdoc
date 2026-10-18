@@ -1,0 +1,20 @@
+# jemdoc: menu{MENU}{publications.html}, addcss{custom.css}
+# Both links below are present in the owner's existing academic homepage:
+# https://personal.feg.um.edu.mo/qzhang/ (retrieved 2026-10-18).
+# The linked publication document has not been copied or represented as parsed.
+= ZHANG, Qi -- Papers
+[https://feg.um.edu.mo/cee/ Department of Civil and Environmental Engineering], [https://www.um.edu.mo/ University of Macau]
+
+== Publication list
+Please see my [https://uofmacau-my.sharepoint.com/:w:/g/personal/qzhang_um_edu_mo/IQAwNy-Ip_RDTLBS9ghp8iuqAdvZ06J9puE0Zuqs-gzsoew?e=GuTw6x publication list (Word document)].
+
+== Research profile
+[https://orcid.org/0000-0002-4637-6308 ORCID: 0000-0002-4637-6308]
+
+# Individual publication entries can be added below as needed.
+# Suggested entry structure (remove the leading comment markers to use it):
+# - *Paper title.*
+#   Author names. /Journal or conference/, year.
+#   [https://doi.org/YOUR-DOI DOI] | [papers/YOUR-PAPER.pdf PDF]
+# Use only real titles, authors, venues, years, and working links.
+# You can create separate headings for published papers and preprints.

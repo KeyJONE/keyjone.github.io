@@ -1,0 +1,84 @@
+个人学术网站：开始使用
+====================
+
+当前是 ZHANG, Qi 的英文网站初稿，还没有上传或公开发布。
+单位和研究方向采用你提供的信息，简介及资料链接参照已有澳门大学主页。
+
+1. 看效果
+直接双击 docs 文件夹内的 index.html。
+公式已提前排版，字体和样式也保存在本地，不需要联网下载才能看。
+
+2. 修改文字
+用记事本或代码编辑器打开 site 文件夹里的 .jemdoc 文件，以 UTF-8 保存。
+index.jemdoc 是首页，biography.jemdoc 是简介，research.jemdoc 是研究与公式示例，
+publications.jemdoc 是论文入口，software.jemdoc 是软件，MENU 控制左侧导航。
+菜单用 Code 显示软件页；teaching.jemdoc 和 people.jemdoc 暂留占位内容。
+不要直接改 docs 内的 HTML；下次生成时会覆盖它们。
+照片放在 site/images，论文 PDF 放在 site/papers，简历放在 site/files。
+把文件放入文件夹后，还需要在 .jemdoc 中添加对应链接。
+首页头像暂时是浅灰空白占位；换照片时，把新照片放到 site/images，
+并将 index.jemdoc 中 images/portrait-placeholder.svg 改成新照片路径。
+
+3. 重新生成
+双击 preview.cmd，生成后会打开首页。也可双击 build.cmd，只生成文件。
+终端方式：在本项目目录运行 python -X utf8 build.py
+若浏览器里已经打开页面，请刷新。
+
+4. 写公式
+行内示例：The norm is $\|x\|_2$.
+独立公式示例（括号形式是 jemdoc 的语法）：
+\(
+  E = mc^2
+\)
+KaTeX 在生成网页时运行，不需要购买服务器或安装完整的 LaTeX。
+并非所有 LaTeX 宏包、命令都受支持；如果生成报错，把公式发给我即可。
+
+5. 以后发布到 GitHub Pages
+GitHub 账户已确认是 KeyJONE；不要发送密码、访问令牌或恢复码。
+拟使用的个人主页仓库名称是 keyjone.github.io。
+免费账户可使用公开仓库；网站中的内容也会公开。
+准备好真实内容后，把项目提交到该仓库的 main 分支，
+在 Settings > Pages 中选择 Deploy from a branch，main，/docs。
+docs/.nojekyll 已准备好，GitHub 将直接发布生成的静态网页。
+发布成功后的预期网站地址是 https://keyjone.github.io/。
+上线后必须完成：确认正式网址可访问，再把 site/index.jemdoc 中 Contact 的
+旧个人主页链接及显示文字替换为正式网址，重新生成并上传。
+若最终采用自定义域名，以实际发布的网址为准；上线前保留现有链接。
+后续每次修改 .jemdoc 后，都需要重新生成并上传最新的 docs。
+
+6. 页面风格
+按你的偏好参照 Stephen Boyd 的主页，使用白底、Helvetica 字体、蓝色标题，
+以及一直位于左侧的浅灰导航。已取消最初的手机顶部导航切换。
+窄窗口会保留桌面结构，可能需要横向滚动；放大窗口可看到完整布局。
+照片区与 Boyd 主页一样，暂按 300×200 的横向比例留白。
+当前菜单是 Home、Teaching、Biography，以及 Research 下的 Papers、Code、People。
+不包含 Books、Classes、MOOC 及其课程链接；正文内容留待之后继续完善。
+外观参考：https://web.stanford.edu/~boyd/index.html
+site/boyd-base.css 保存参考页面公开的 jemdoc.css；custom.css 是本地补充样式。
+
+文件夹用途
+site/       你平时编辑的网页源文件
+docs/       生成的成品网页，也是 GitHub Pages 发布目录
+tools/      jemdoc-cvx 及 KaTeX，不需日常修改
+downloads/  官方下载包及 SHA256 校验文件
+runtime.local.json  本机 Node 路径，不提交到 GitHub
+
+迁移到其他电脑
+需要 Python 3.11+ 和 Node.js。
+在 tools/jemdoc-cvx-1.0.0 中运行 npm install（或 pnpm install）。
+回到项目根目录，运行 python -X utf8 build.py。
+本机使用已有 Python 3.13.9 和 Node.js 24，KaTeX 为官方固定的 0.16.11。
+
+来源与改动
+官方版本：jemdoc-cvx v1.0.0。
+https://github.com/cvxgrp/jemdoc-cvx/releases/tag/v1.0.0
+保留原始 LICENSE、README 和下载包。
+对 tools/jemdoc-cvx-1.0.0/jemdoc 做了 Windows 兼容调整：
+通过 Node 直接调用 KaTeX CLI，并明确使用 UTF-8 读取公式输出。
+site/site.conf 增加手机视口，并改为使用本地 KaTeX 样式和字体。
+
+官方参考
+https://www.cvxgrp.org/jemdoc-cvx/syntax.html
+https://www.cvxgrp.org/jemdoc-cvx/latex.html
+https://docs.github.com/en/pages/quickstart
+https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site

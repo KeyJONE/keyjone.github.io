@@ -1,0 +1,7 @@
+**/node_modules/
+**/katexcache/
+**/__pycache__/
+downloads/
+runtime.local.json
+qa/
+*.log

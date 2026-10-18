@@ -1,0 +1,51 @@
+/* Boyd-style overrides, based on:
+   https://web.stanford.edu/~boyd/jemdoc.css
+   https://web.stanford.edu/~boyd/boyd.css
+   The base theme supplies the white background, Helvetica, and two-column grid. */
+
+#layout-menu {
+    width: 150px;
+}
+
+dl {
+    margin-left: 2em;
+    color: #222222;
+}
+
+dl a {
+    color: #021b6d;
+}
+
+/* Keep the left navigation and readable content on narrow screens.
+   Smaller viewports can scroll horizontally; the menu does not move above. */
+#tlayout {
+    min-width: 740px;
+}
+
+#layout-content {
+    min-width: 0;
+}
+
+/* The portrait uses its dimensions from index.jemdoc without enlarging it. */
+table.imgtable img {
+    max-width: none;
+}
+
+.eqwl,
+.katex-display {
+    max-width: 100%;
+    overflow-x: auto;
+    overflow-y: hidden;
+    padding-bottom: 0.35em;
+}
+
+a:focus-visible {
+    outline: 2px solid #224b8d;
+    outline-offset: 3px;
+}
+
+@media print {
+    #tlayout {
+        min-width: 0;
+    }
+}

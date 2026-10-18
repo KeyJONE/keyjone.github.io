@@ -1,0 +1,54 @@
+# jemdoc: menu{MENU}{research.html}, addcss{custom.css}
+# Research headings supplied by the owner; descriptions grounded in the
+# research interests and code summaries at https://personal.feg.um.edu.mo/qzhang/.
+# Smoothed FEM is owner-supplied; no project outcomes are asserted.
+= ZHANG, Qi -- Research
+[https://feg.um.edu.mo/cee/ Department of Civil and Environmental Engineering], [https://www.um.edu.mo/ University of Macau]
+
+== Research overview
+My interests connect continuum mechanics, numerical discretization,
+and learning methods for geomaterials.
+
+=== Computational Poromechanics
+I study the mechanical processes involved in the formation and recovery of
+earth resources in sedimentary rocks, with an interest in energy and
+environmental sustainability. Coupled fluid flow and solid deformation
+are central to this work.
+
+=== Smoothed Finite Element Method
+My numerical-method interests include the smoothed finite element method.
+
+=== Finite Element Method / Finite Volume Method
+I am interested in finite element and finite volume discretizations for
+complex geomaterials and nonlinear continuum mechanics, including their
+connection to machine learning.
+
+=== Neural Network
+I am interested in physics-informed neural networks for geomaterials and
+FEM/FVM discretization-guided machine learning. Related interests include
+statistical learning for identifying hazards in mining and tunneling.
+
+== Research software
+See [software.html Code] for code and implementations.
+
+== Mathematical typesetting examples
+The formulas below illustrate mathematical typesetting with KaTeX.
+They are illustrative examples, not statements of a particular research result.
+
+=== A quadratic minimization problem
+For a symmetric positive definite matrix $Q \in \mathbb{R}^{n\times n}$
+and a vector $b \in \mathbb{R}^{n}$, consider
+\(
+    \min_{x \in \mathbb{R}^{n}}\; \frac{1}{2}x^{\mathsf T}Qx - b^{\mathsf T}x.
+\)
+Its unique minimizer is $x^{\star} = Q^{-1}b$.
+
+=== A normal probability density
+If $X \sim \mathcal{N}(\mu,\sigma^2)$ with $\sigma>0$, its density is
+\(
+    p(x) = \frac{1}{\sigma\sqrt{2\pi}}
+    \exp\!\left(-\frac{(x-\mu)^2}{2\sigma^2}\right).
+\)
+
+# Inline math uses $...$; display math uses \( and \) on separate lines.
+# Replace or remove this example section when adding your own research.
