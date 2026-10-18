@@ -500,6 +500,10 @@ def pc(f, ditchcomments=True):
     """Peeks at next character in the file."""
     # Should only be used to look at the first character of a new line.
     c = f.inf.read(1).decode("cp1252")
+    # Binary input preserves CRLF on Windows. A CR starts the same blank line
+    # as LF; leave it for nl() to consume after restoring the file position.
+    if c == "\r":
+        c = "\n"
     if c:  # only undo forward movement if we're not at the end.
         if ditchcomments and c == "#":
             l = nl(f)
@@ -537,7 +541,7 @@ def doincludes(f, l):
 
 def nl(f, withcount=False, codemode=False):
     """Get input file line."""
-    s = f.inf.readline().decode("utf-8")
+    s = f.inf.readline().decode("utf-8").replace("\r\n", "\n")
     if not s and f.otherfiles:
         f.nextfile()
         return nl(f, withcount, codemode)
@@ -756,7 +760,7 @@ def replacelinks(b):
             option = ""
             m1 = m1[1:]
         else:
-            option = ' target="blank"'
+            option = quote(' target="_blank" rel="noopener noreferrer"')
 
         if "@" in m1 and not m1.startswith("mailto:") and not m1.startswith("http://"):
             link = "mailto:" + m1

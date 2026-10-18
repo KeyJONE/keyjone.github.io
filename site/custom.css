@@ -32,6 +32,16 @@ dl a {
     color: #000000;
 }
 
+/* Paper pages follow Boyd's compact title, authors, citation, and links. */
+.paper-page #toptitle {
+    border-bottom: 0;
+    margin-bottom: 1.5em;
+}
+
+.paper-page #toptitle h1 {
+    font-size: 1.3em;
+}
+
 /* The portrait uses its dimensions from index.jemdoc without enlarging it. */
 table.imgtable img {
     max-width: none;

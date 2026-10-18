@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="generator" content="jemdoc-cvx">
+<link rel="stylesheet" href="../boyd-base.css">
+<link rel="stylesheet" href="../custom.css">
+<title>Deep Learning-Based Upscaling for Reservoir Models on Corner-Point Grids via Finite-Volume Physics-Informed Fourier Neural Operator</title>
+</head>
+<body class="paper-page">
+<div id="tlayout">
+<nav id="layout-menu">
+<div class="menu-category">ZHANG, Qi</div>
+<div class="menu-item"><a href="../index.html">Home</a></div>
+<div class="menu-item"><a href="../teaching.html">Teaching</a></div>
+<div class="menu-item"><a href="../biography.html">Biography</a></div>
+<div class="menu-category">Research</div>
+<div class="menu-item"><a href="../publications.html" class="current">Papers</a></div>
+<div class="menu-item"><a href="../software.html">Code</a></div>
+<div class="menu-item"><a href="../people.html">People</a></div>
+</nav>
+<main id="layout-content">
+<div id="toptitle">
+<h1>Deep Learning-Based Upscaling for Reservoir Models on Corner-Point Grids via Finite-Volume Physics-Informed Fourier Neural Operator</h1>
+<div id="subtitle"><i>J.-Q. Lin, X. Yan, K. Zhang, Q. Zhang, Z. Zhang, L.-M. Zhang, and P.-Y. Liu</i>
+</div>
+</div>
+<p><i>Petroleum Science</i>, 23(9):5662 - 5692, 2026.
+</p>
+<ul>
+<li><p><a href="https://doi.org/10.1016/j.petsci.2026.04.037" target="_blank" rel="noopener noreferrer">Manuscript</a>
+</p>
+</li>
+</ul>
+<h2>Summary</h2>
+<p>The study proposes a neural-network-assisted method for global flow-based upscaling of reservoir models defined on corner-point grids. Its aim is to reduce the cost of repeatedly solving fine-grid pressure problems, which can make conventional global upscaling expensive in uncertainty analysis and optimization. Fourier neural operators act as pressure-solution surrogates within the upscaling procedure. Their training uses a loss constructed from finite-volume flow equations rather than requiring a large set of labeled simulation outputs. This formulation incorporates neighboring-cell fluxes and the geometry of corner-point grids while avoiding the automatic-differentiation difficulties associated with strongly heterogeneous properties. The approach exploits the regular logical structure retained by these grids despite their distorted physical geometry. By embedding physical constraints in the surrogate, the work connects neural operator learning with an established flow-based upscaling workflow rather than treating coarse-grid property prediction as an unconstrained mapping.
+</p>
+<div id="footer">
+<div id="footer-text">
+Built with <a href="https://github.com/cvxgrp/jemdoc-cvx" target="_blank" rel="noopener noreferrer">jemdoc-cvx</a>.
+</div>
+</div>
+</main>
+</div>
+</body>
+</html>

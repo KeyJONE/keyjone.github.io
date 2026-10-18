@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="generator" content="jemdoc-cvx">
+<link rel="stylesheet" href="../boyd-base.css">
+<link rel="stylesheet" href="../custom.css">
+<title>A Finite-Volume Based Physics-Informed Fourier Neural Operator Network for Parametric Learning of Subsurface Flow</title>
+</head>
+<body class="paper-page">
+<div id="tlayout">
+<nav id="layout-menu">
+<div class="menu-category">ZHANG, Qi</div>
+<div class="menu-item"><a href="../index.html">Home</a></div>
+<div class="menu-item"><a href="../teaching.html">Teaching</a></div>
+<div class="menu-item"><a href="../biography.html">Biography</a></div>
+<div class="menu-category">Research</div>
+<div class="menu-item"><a href="../publications.html" class="current">Papers</a></div>
+<div class="menu-item"><a href="../software.html">Code</a></div>
+<div class="menu-item"><a href="../people.html">People</a></div>
+</nav>
+<main id="layout-content">
+<div id="toptitle">
+<h1>A Finite-Volume Based Physics-Informed Fourier Neural Operator Network for Parametric Learning of Subsurface Flow</h1>
+<div id="subtitle"><i>X. Yan, J. Lin, Y. Ju, Q. Zhang, Z. Zhang, L. Zhang, J. Yao, and K. Zhang</i>
+</div>
+</div>
+<p><i>Advances in Water Resources</i>, 205:105087, 2025.
+</p>
+<ul>
+<li><p><a href="https://doi.org/10.1016/j.advwatres.2025.105087" target="_blank" rel="noopener noreferrer">Manuscript</a>
+</p>
+</li>
+</ul>
+<h2>Summary</h2>
+<p>The study develops a physics-informed Fourier neural operator for steady subsurface flow through heterogeneous porous media. Rather than differentiating network outputs automatically to form the governing-equation loss, it uses a finite-volume discretization and intercell fluxes. This construction addresses difficulties caused by discontinuous or strongly varying material properties. A gated Fourier neural operator combines spatial or temporal-domain gating with spectral filtering to improve feature selection and suppress noise. Tests use two- and three-dimensional reservoir models with varying permeability contrasts, spatial correlation lengths, and amounts of training data. Compared with purely data-driven models, the proposed approach provides improved accuracy and robustness, especially when observations are scarce. Further evaluations examine predictions outside the training parameter range and the consistency of derived velocity fields. The reported scope is steady flow; transient problems are explicitly left for later investigation.
+</p>
+<div id="footer">
+<div id="footer-text">
+Built with <a href="https://github.com/cvxgrp/jemdoc-cvx" target="_blank" rel="noopener noreferrer">jemdoc-cvx</a>.
+</div>
+</div>
+</main>
+</div>
+</body>
+</html>

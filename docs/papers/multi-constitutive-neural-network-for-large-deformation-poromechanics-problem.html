@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="generator" content="jemdoc-cvx">
+<link rel="stylesheet" href="../boyd-base.css">
+<link rel="stylesheet" href="../katex/katex.min.css">
+<link rel="stylesheet" href="../custom.css">
+<title>Multi-Constitutive Neural Network for Large Deformation Poromechanics Problem</title>
+</head>
+<body class="paper-page">
+<div id="tlayout">
+<nav id="layout-menu">
+<div class="menu-category">ZHANG, Qi</div>
+<div class="menu-item"><a href="../index.html">Home</a></div>
+<div class="menu-item"><a href="../teaching.html">Teaching</a></div>
+<div class="menu-item"><a href="../biography.html">Biography</a></div>
+<div class="menu-category">Research</div>
+<div class="menu-item"><a href="../publications.html" class="current">Papers</a></div>
+<div class="menu-item"><a href="../software.html">Code</a></div>
+<div class="menu-item"><a href="../people.html">People</a></div>
+</nav>
+<main id="layout-content">
+<div id="toptitle">
+<h1>Multi-Constitutive Neural Network for Large Deformation Poromechanics Problem</h1>
+<div id="subtitle"><i>Q. Zhang, Y. Chen, Z. Yang, and E. Darve</i>
+</div>
+</div>
+<p><i>Proceedings of the Machine Learning and the Physical Sciences Workshop, 34th Conference on Neural Information Processing Systems (NeurIPS), Virtual (Online)</i>, 2020.
+</p>
+<p>Q. Zhang, Y. Chen, and Z. Yang contributed equally to this work.
+</p>
+<ul>
+<li><p><a href="https://ml4physicalsciences.github.io/2020/files/NeurIPS_ML4PS_2020_96.pdf" target="_blank" rel="noopener noreferrer">Manuscript</a>
+</p>
+</li>
+<li><p><a href="https://ml4physicalsciences.github.io/2020/files/NeurIPS_ML4PS_2020_96_poster.pdf" target="_blank" rel="noopener noreferrer">Poster</a>
+</p>
+</li>
+</ul>
+<h2>Summary</h2>
+<p>The multi-constitutive neural network (MCNN) addresses large-strain consolidation while allowing a single trained model to represent several constitutive laws. Instead of training a separate solver for each material law, the method adds a one-hot constitutive-law label to the dimensionless spatial and temporal coordinates <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mover accent="true"><mi>X</mi><mo>^</mo></mover></mrow><annotation encoding="application/x-tex">\hat{X}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.9468em;"></span><span class="mord accent"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.9468em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord mathnormal" style="margin-right:0.07847em;">X</span></span><span style="top:-3.2523em;"><span class="pstrut" style="height:3em;"></span><span class="accent-body" style="left:-0.1667em;"><span class="mord">^</span></span></span></span></span></span></span></span></span></span> and <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mover accent="true"><mi>t</mi><mo>^</mo></mover></mrow><annotation encoding="application/x-tex">\hat{t}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8785em;"></span><span class="mord accent"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8785em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord mathnormal">t</span></span><span style="top:-3.1841em;"><span class="pstrut" style="height:3em;"></span><span class="accent-body" style="left:-0.1667em;"><span class="mord">^</span></span></span></span></span></span></span></span></span></span> supplied to a deep neural network. The label selects the relevant governing equation during training and prediction. Demonstrations use three hyperelastic laws and compare the learned responses with finite-difference reference solutions and independently trained physics-informed networks. The shared model gives accurate consolidation and settlement predictions across the tested laws. In two of the three benchmark cases, it also achieves lower errors than the corresponding independent networks. These results suggest that jointly learning related governing equations can improve data efficiency and generalization while reducing the need for separate models.
+</p>
+<div id="footer">
+<div id="footer-text">
+Built with <a href="https://github.com/cvxgrp/jemdoc-cvx" target="_blank" rel="noopener noreferrer">jemdoc-cvx</a>.
+</div>
+</div>
+</main>
+</div>
+</body>
+</html>

@@ -1,0 +1,1593 @@
+[
+  {
+    "id": 10,
+    "slug": "a-unified-finite-element-upper-bound-framework-for-the-lateral",
+    "title": "A unified finite element upper-bound framework for the lateral bearing capacity of monopiles in undrained clays considering different failure mechanisms",
+    "citation_year": 2026,
+    "doi": "10.1016/j.oceaneng.2026.128120",
+    "manuscript_url": "https://doi.org/10.1016/j.oceaneng.2026.128120",
+    "extra_links": [],
+    "equal_contributors": [],
+    "authors": [
+      "J. Zhou",
+      "Y. Chen",
+      "X. Kang",
+      "J. Yu",
+      "Z. Xiao",
+      "Q. Zhang"
+    ],
+    "online_date": null,
+    "online_date_source": null,
+    "group_year": 2026,
+    "journal": "Ocean Engineering",
+    "volume": "367",
+    "issue": null,
+    "pages": "128120",
+    "abstract_text": "Large-diameter monopile foundations are generally subjected to severe lateral loading during the construction of offshore wind farms. The failure of rigid monopiles can typically be divided into two mechanisms: one involves the formation of a passive wedge in front of the pile accompanied by soil-pile separation near the mudline behind it (one-sided wedge failure mechanism), while the other involves the development of an active wedge behind the pile without soil-pile separation (two-sided wedge failure mechanism). However, these two mechanisms are typically considered in isolation in existing studies, thereby introducing additional uncertainty and conservatism into practical engineering design. In this study, a unified finite element upper bound framework for evaluating the lateral bearing capacity of rigid monopiles in undrained clays considering both mechanisms is developed. First, the Total-displacement-loading Extended Mobilized Strength Design (T-EMSD) method is used to evaluate the ultimate lateral bearing capacity of rigid monopiles. The results indicate that once an active wedge has formed, the ultimate bearing capacity becomes insensitive to the soil unit weight. In addition, a transition criterion between the two failure mechanisms is identified, which is related to the slenderness ratio (𝐿/𝐷), adhesion coefficient (𝛼), and dimensionless strength coefficient (𝜂). Based on these findings, a unified upper-bound empirical equation is proposed. Using this equation, the lateral bearing capacity can be determined directly without the need for any priori assumption regarding the failure mechanism. Finally, the reliability of the proposed method is validated by comparing its predictions with numerical simulation results, laboratory test data, and field test data reported in the literature.",
+    "abstract_source": "Full abstract supplied by the author in chat on 2026-10-19.",
+    "abstract_kind": "original",
+    "abstract_reuse_basis": "User-provided text, reproduced at the user's request.",
+    "notes": [
+      "First online date not yet verified; Crossref has only issue publication dates. DOI creation/deposit dates are not used as online dates.",
+      "Provisional grouping year 2026; exact first-online date not established from retrieved primary evidence.",
+      "The author supplied the complete abstract on 2026-10-19. Its wording is preserved; the three original mathematical expressions use KaTeX."
+    ],
+    "sources": [
+      "https://api.crossref.org/works/10.1016/j.oceaneng.2026.128120",
+      "https://linkinghub.elsevier.com/retrieve/pii/S0029801826039545"
+    ],
+    "group_year_status": "year-only; see research notes",
+    "abstract_latex": "Large-diameter monopile foundations are generally subjected to severe lateral loading during the construction of offshore wind farms. The failure of rigid monopiles can typically be divided into two mechanisms: one involves the formation of a passive wedge in front of the pile accompanied by soil-pile separation near the mudline behind it (one-sided wedge failure mechanism), while the other involves the development of an active wedge behind the pile without soil-pile separation (two-sided wedge failure mechanism). However, these two mechanisms are typically considered in isolation in existing studies, thereby introducing additional uncertainty and conservatism into practical engineering design. In this study, a unified finite element upper bound framework for evaluating the lateral bearing capacity of rigid monopiles in undrained clays considering both mechanisms is developed. First, the Total-displacement-loading Extended Mobilized Strength Design (T-EMSD) method is used to evaluate the ultimate lateral bearing capacity of rigid monopiles. The results indicate that once an active wedge has formed, the ultimate bearing capacity becomes insensitive to the soil unit weight. In addition, a transition criterion between the two failure mechanisms is identified, which is related to the slenderness ratio ($L/D$), adhesion coefficient ($\\alpha$), and dimensionless strength coefficient ($\\eta$). Based on these findings, a unified upper-bound empirical equation is proposed. Using this equation, the lateral bearing capacity can be determined directly without the need for any priori assumption regarding the failure mechanism. Finally, the reliability of the proposed method is validated by comparing its predictions with numerical simulation results, laboratory test data, and field test data reported in the literature.",
+    "latex_test_note": "Author-supplied slenderness ratio, adhesion coefficient, and dimensionless strength coefficient typeset as L/D, alpha, and eta."
+  },
+  {
+    "id": 11,
+    "slug": "stabilized-unified-multi-physics-framework-for-methane-hydrate-production",
+    "title": "Stabilized unified multi-physics framework for methane hydrate production",
+    "citation_year": 2027,
+    "doi": "10.1016/j.compgeo.2026.108567",
+    "manuscript_url": "https://doi.org/10.1016/j.compgeo.2026.108567",
+    "extra_links": [],
+    "equal_contributors": [],
+    "authors": [
+      "Z.-Q. Tang",
+      "J. Yang",
+      "Q. Zhang",
+      "W.-Q. Xu"
+    ],
+    "online_date": null,
+    "online_date_source": null,
+    "group_year": 2026,
+    "journal": "Computers and Geotechnics",
+    "volume": "202",
+    "issue": null,
+    "pages": "108567",
+    "abstract_text": "This study develops a finite element framework for methane hydrate extraction that combines flexible multiphysics coupling with numerical stabilization. Different combinations of thermal, hydraulic, mechanical, and chemical processes can be activated across geological regions and production stages. To address pressure oscillations under nearly incompressible conditions, the method enriches an edge-based smoothed finite element displacement field with bubble functions. Streamline upwind Petrov–Galerkin stabilization addresses oscillations associated with convection-dominated transport. A mixed explicit–implicit solution updates porosity and phase saturations explicitly while solving displacement, pressure, and temperature implicitly, reducing the size of the nonlinear system. Benchmark tests and reservoir-scale applications examine the resulting predictions. The examples identify temperature as an important control on hydrate dissociation and explore the combined effects of depressurization and heating. The framework supports production studies in which extraction efficiency and reservoir deformation must be assessed together.",
+    "abstract_source": "https://www.sciencedirect.com/science/article/abs/pii/S0266352X26006737",
+    "abstract_kind": "summary",
+    "abstract_reuse_basis": "Original English paraphrase based on publisher/author-source abstract or article description; not the published abstract. Under 200 words.",
+    "notes": [
+      "First online date not yet verified; Crossref has only issue publication dates. DOI creation/deposit dates are not used as online dates.",
+      "Author-posted SSRN preprint explicitly states Posted 3 Jun 2026. This independently confirms a public version in 2026, but is not substituted for the journal first-online date. Final bounded lookup could not retrieve journal publication history.",
+      "Author confirmed the first-online publication year as 2026 on 2026-10-19; exact month and day remain unspecified. The journal issue year is retained in the citation."
+    ],
+    "sources": [
+      "https://api.crossref.org/works/10.1016/j.compgeo.2026.108567",
+      "https://linkinghub.elsevier.com/retrieve/pii/S0266352X26006737",
+      "https://www.sciencedirect.com/science/article/abs/pii/S0266352X26006737",
+      "https://papers.ssrn.com/sol3/papers.cfm?abstract_id=6875478"
+    ],
+    "preprint_date": "2026-06-03",
+    "preprint_url": "https://papers.ssrn.com/sol3/papers.cfm?abstract_id=6875478",
+    "group_year_status": "author-confirmed",
+    "group_year_source": "Author confirmed the first-online publication year in chat on 2026-10-19."
+  },
+  {
+    "id": 12,
+    "slug": "an-element-wise-self-adapting-enriched-physics-informed-neural-network",
+    "title": "An Element-Wise Self-Adapting Enriched Physics-Informed Neural Network for Solving Parameter-Varying Two-Phase Flow Problems in Heterogeneous Porous Media",
+    "citation_year": 2026,
+    "doi": "10.1016/j.jcp.2026.115180",
+    "manuscript_url": "https://doi.org/10.1016/j.jcp.2026.115180",
+    "extra_links": [],
+    "equal_contributors": [],
+    "authors": [
+      "J. Lin",
+      "X. Yan",
+      "K. Zhang",
+      "L. Zhang",
+      "Z. Zhang",
+      "P. Liu",
+      "S. Sun",
+      "Q. Zhang"
+    ],
+    "online_date": null,
+    "online_date_source": null,
+    "group_year": 2026,
+    "journal": "Journal of Computational Physics",
+    "volume": "565",
+    "issue": null,
+    "pages": "115180",
+    "abstract_text": "The paper examines why strong spatial heterogeneity and changing parameters make enriched physics-informed neural networks difficult to train for transient two-phase flow. A response-function analysis links these difficulties to localized perturbations in the learning process. The proposed Attune mechanism introduces element-level adaptation that follows the numerical discretization, producing an Attuned Enriched Physics-Informed Neural Network. Its updates work with AdaGrad to give different elements different learning rates and strengthen gradients associated with parameters that are harder to optimize. Numerical experiments compare the method with the earlier EPINN under heterogeneous and time-dependent conditions. Reported convergence improvements range from threefold to twentyfold, alongside improved solution accuracy. Diagnostic analyses associate these gains with more stable gradients and a more even distribution of equation residuals. Additional examples explore inverse modeling and data assimilation, while retaining the limitations of the tested problem sizes.",
+    "abstract_source": "https://www.sciencedirect.com/science/article/abs/pii/S0021999126005322",
+    "abstract_kind": "summary",
+    "abstract_reuse_basis": "Original English paraphrase based on publisher/author-source abstract or article description; not the published abstract. Under 200 words.",
+    "notes": [
+      "First online date not yet verified; Crossref has only issue publication dates. DOI creation/deposit dates are not used as online dates.",
+      "Provisional grouping year 2026; exact first-online date not established from retrieved primary evidence."
+    ],
+    "sources": [
+      "https://api.crossref.org/works/10.1016/j.jcp.2026.115180",
+      "https://linkinghub.elsevier.com/retrieve/pii/S0021999126005322",
+      "https://www.sciencedirect.com/science/article/abs/pii/S0021999126005322"
+    ],
+    "group_year_status": "year-only; see research notes"
+  },
+  {
+    "id": 13,
+    "slug": "prediction-of-tunnelling-induced-longitudinal-deformation-based-on-knowledge-guided",
+    "title": "Prediction of tunnelling-induced longitudinal deformation based on knowledge-guided neural network",
+    "citation_year": 2026,
+    "doi": "10.1016/j.trgeo.2026.102103",
+    "manuscript_url": "https://doi.org/10.1016/j.trgeo.2026.102103",
+    "extra_links": [],
+    "equal_contributors": [],
+    "authors": [
+      "J. Zhou",
+      "S. Wei",
+      "X. Kang",
+      "Z. Xiao",
+      "Q. Zhang"
+    ],
+    "online_date": null,
+    "online_date_source": null,
+    "group_year": 2026,
+    "journal": "Transportation Geotechnics",
+    "volume": "61",
+    "issue": null,
+    "pages": "102103",
+    "abstract_text": "This study develops a physics-informed approach for predicting longitudinal ground deformation caused by shield tunnelling when monitoring observations are sparse. The model incorporates governing equations for elastic ground deformation and the associated boundary conditions into neural network training. Automatic differentiation evaluates the physical constraints. To represent layered ground with contrasting properties, a multidomain formulation divides the problem into separate regions and imposes continuity conditions at their interfaces. This treatment targets the gradient discontinuities that can undermine a single-network approximation in composite strata. Comparisons with FLAC3D simulations test displacement predictions for both homogeneous and layered configurations. The results support the use of physical constraints to supplement limited observations and show that the multidomain approach improves behavior near material interfaces. The framework combines observed data and mechanical assumptions, with its scope determined by the adopted elastic ground model.",
+    "abstract_source": "https://www.sciencedirect.com/science/article/abs/pii/S2214391226002138",
+    "abstract_kind": "summary",
+    "abstract_reuse_basis": "Original English paraphrase based on publisher/author-source abstract or article description; not the published abstract. Under 200 words.",
+    "notes": [
+      "First online date not yet verified; Crossref has only issue publication dates. DOI creation/deposit dates are not used as online dates.",
+      "Provisional grouping year 2026; exact first-online date not established from retrieved primary evidence."
+    ],
+    "sources": [
+      "https://api.crossref.org/works/10.1016/j.trgeo.2026.102103",
+      "https://linkinghub.elsevier.com/retrieve/pii/S2214391226002138",
+      "https://www.sciencedirect.com/science/article/abs/pii/S2214391226002138"
+    ],
+    "group_year_status": "year-only; see research notes"
+  },
+  {
+    "id": 14,
+    "slug": "lower-bound-limit-analysis-of-unsaturated-soil-slope-stability-under",
+    "title": "Lower bound limit analysis of unsaturated soil slope stability under fluctuating water levels using finite elements and convex optimization",
+    "citation_year": 2026,
+    "doi": "10.1016/j.advwatres.2026.105297",
+    "manuscript_url": "zhou-zhang-2026-lower-bound-slope-stability.pdf",
+    "extra_links": [],
+    "equal_contributors": [
+      "J. Zhou",
+      "Q. Zhang"
+    ],
+    "authors": [
+      "J. Zhou",
+      "Q. Zhang",
+      "H. Zhang",
+      "X. Kang",
+      "Z. Zhang"
+    ],
+    "online_date": "2026-04-02",
+    "online_date_source": "C:\\Users\\zq112\\Zotero\\storage\\DREI5353\\Zhou 等 - 2026 - Lower bound limit analysis of unsaturated soil slope stability under fluctuating water levels using.pdf",
+    "group_year": 2026,
+    "journal": "Advances in Water Resources",
+    "volume": "212",
+    "issue": null,
+    "pages": "105297",
+    "abstract_text": "Extensive evidence indicates that slope failure is frequently associated with intensive rainfall, but the coupled effects of matric suction and fluctuating water levels under such events have not been sufficiently investigated. This work develops a lower bound limit analysis framework, based on finite elements and convex optimization, to assess the stability of unsaturated slopes under fluctuating water levels. Within Bishop’s effective stress framework, a novel convex formulation of the load multiplier \\(\\lambda_F\\) considering the mixed-form Richards equation and finite element discretization is proposed. A rigorous lower bound solution for the Factor of Safety (FoS) of an unsaturated slope is derived by coupling the strength reduction technique with CVX, a MATLAB package for disciplined convex programming. Through model validation, the proposed convex formulation greatly outperforms the original Linear Program (LP) formulation, and the performance of CVX is highly competitive compared with other specific solvers in the literature. The model application section systematically summarizes the relative magnitudes and variation patterns of FoS under four typical slope seepage scenarios: slow reservoir drawdown, non-trivial steady-state reservoir drawdown considering external water supply, rapid transient reservoir drawdown, and post-drawdown rainfall. Results indicate that neglecting matric suction leads to an underestimation of slope stability, and when matric suction is incorporated, the \\(\\chi = S_e\\) model yields a more conservative estimate of the FoS compared to other \\(\\chi\\) models. During reservoir drawdown, the asynchronous response between the internal and external phreatic surfaces significantly influences the FoS. Consequently, two bounding scenarios, i.e., slow drawdown FoS and the initially sharply declining FoS during rapid drawdown, can be used to establish a reasonable prediction range for the FoS in practice. These results provide valuable guidance for the safety assessment of slopes subjected to fluctuating water levels, as well as for reservoir management.",
+    "abstract_source": "C:\\Users\\zq112\\Zotero\\storage\\DREI5353\\Zhou 等 - 2026 - Lower bound limit analysis of unsaturated soil slope stability under fluctuating water levels using.pdf",
+    "abstract_kind": "original",
+    "abstract_reuse_basis": "Abstract extracted from PDF supplied directly by the user; do not upload the PDF.",
+    "notes": [
+      "User-supplied PDF first page explicitly marks Jianfeng Zhou and Qi Zhang as equal contributors.",
+      "PDF abstract mathematical symbols are normalized to LaTeX; wording otherwise preserved.",
+      "Author requested that Manuscript open the supplied PDF directly on 2026-10-19."
+    ],
+    "sources": [
+      "https://api.crossref.org/works/10.1016/j.advwatres.2026.105297",
+      "https://linkinghub.elsevier.com/retrieve/pii/S030917082600093X",
+      "C:\\Users\\zq112\\Zotero\\storage\\DREI5353\\Zhou 等 - 2026 - Lower bound limit analysis of unsaturated soil slope stability under fluctuating water levels using.pdf"
+    ],
+    "group_year_status": "verified",
+    "abstract_latex": "Extensive evidence indicates that slope failure is frequently associated with intensive rainfall, but the coupled effects of matric suction and fluctuating water levels under such events have not been sufficiently investigated. This work develops a lower bound limit analysis framework, based on finite elements and convex optimization, to assess the stability of unsaturated slopes under fluctuating water levels. Within Bishop’s effective stress framework, a novel convex formulation of the load multiplier $\\lambda_F$ considering the mixed-form Richards equation and finite element discretization is proposed. A rigorous lower bound solution for the Factor of Safety (FoS) of an unsaturated slope is derived by coupling the strength reduction technique with CVX, a MATLAB package for disciplined convex programming. Through model validation, the proposed convex formulation greatly outperforms the original Linear Program (LP) formulation, and the performance of CVX is highly competitive compared with other specific solvers in the literature. The model application section systematically summarizes the relative magnitudes and variation patterns of FoS under four typical slope seepage scenarios: slow reservoir drawdown, non-trivial steady-state reservoir drawdown considering external water supply, rapid transient reservoir drawdown, and post-drawdown rainfall. Results indicate that neglecting matric suction leads to an underestimation of slope stability, and when matric suction is incorporated, the $\\chi = S_e$ model yields a more conservative estimate of the FoS compared to other $\\chi$ models. During reservoir drawdown, the asynchronous response between the internal and external phreatic surfaces significantly influences the FoS. Consequently, two bounding scenarios, i.e., slow drawdown FoS and the initially sharply declining FoS during rapid drawdown, can be used to establish a reasonable prediction range for the FoS in practice. These results provide valuable guidance for the safety assessment of slopes subjected to fluctuating water levels, as well as for reservoir management.",
+    "latex_test_note": "Original load multiplier and Bishop parameter typeset as lambda_F, chi = S_e, and chi."
+  },
+  {
+    "id": 15,
+    "slug": "deep-learning-based-upscaling-for-reservoir-models-on-corner-point",
+    "title": "Deep Learning-Based Upscaling for Reservoir Models on Corner-Point Grids via Finite-Volume Physics-Informed Fourier Neural Operator",
+    "citation_year": 2026,
+    "doi": "10.1016/j.petsci.2026.04.037",
+    "manuscript_url": "https://doi.org/10.1016/j.petsci.2026.04.037",
+    "extra_links": [],
+    "equal_contributors": [],
+    "authors": [
+      "J.-Q. Lin",
+      "X. Yan",
+      "K. Zhang",
+      "Q. Zhang",
+      "Z. Zhang",
+      "L.-M. Zhang",
+      "P.-Y. Liu"
+    ],
+    "online_date": "2026-04-27",
+    "online_date_source": "https://www.sciopen.com/article/10.1016/j.petsci.2026.04.037",
+    "group_year": 2026,
+    "journal": "Petroleum Science",
+    "volume": "23",
+    "issue": "9",
+    "pages": "5662 - 5692",
+    "abstract_text": "The study proposes a neural-network-assisted method for global flow-based upscaling of reservoir models defined on corner-point grids. Its aim is to reduce the cost of repeatedly solving fine-grid pressure problems, which can make conventional global upscaling expensive in uncertainty analysis and optimization. Fourier neural operators act as pressure-solution surrogates within the upscaling procedure. Their training uses a loss constructed from finite-volume flow equations rather than requiring a large set of labeled simulation outputs. This formulation incorporates neighboring-cell fluxes and the geometry of corner-point grids while avoiding the automatic-differentiation difficulties associated with strongly heterogeneous properties. The approach exploits the regular logical structure retained by these grids despite their distorted physical geometry. By embedding physical constraints in the surrogate, the work connects neural operator learning with an established flow-based upscaling workflow rather than treating coarse-grid property prediction as an unconstrained mapping.",
+    "abstract_source": "https://www.sciopen.com/article/10.1016/j.petsci.2026.04.037",
+    "abstract_kind": "summary",
+    "abstract_reuse_basis": "Original English paraphrase based on publisher/author-source abstract or article description; not the published abstract. Under 200 words.",
+    "notes": [],
+    "sources": [
+      "https://api.crossref.org/works/10.1016/j.petsci.2026.04.037",
+      "https://linkinghub.elsevier.com/retrieve/pii/S1995822626002451",
+      "https://www.sciopen.com/article/10.1016/j.petsci.2026.04.037",
+      "https://www.sciopen.com/article/10.1016/j.petsci.2026.04.037"
+    ],
+    "group_year_status": "verified"
+  },
+  {
+    "id": 16,
+    "slug": "a-facies-constrained-flow-network-model-for-fast-history-matching",
+    "title": "A facies-constrained flow-network model for fast history matching and production optimization of polymer flooding reservoirs",
+    "citation_year": 2026,
+    "doi": "10.1016/j.petsci.2026.02.004",
+    "manuscript_url": "https://doi.org/10.1016/j.petsci.2026.02.004",
+    "extra_links": [],
+    "equal_contributors": [],
+    "authors": [
+      "G.-Y. Qin",
+      "X. Yan",
+      "K. Zhang",
+      "L.-M. Zhang",
+      "Q. Zhang",
+      "M.-X. Zhang",
+      "C.-Y. Wang"
+    ],
+    "online_date": null,
+    "online_date_source": null,
+    "group_year": 2026,
+    "journal": "Petroleum Science",
+    "volume": "23",
+    "issue": "6",
+    "pages": "3408 - 3438",
+    "abstract_text": "This work introduces a flow-network model that incorporates sedimentary facies information to accelerate history matching and polymer-flooding optimization. The model extends GPSNet by representing connections between wells with one-dimensional discretized grids while preserving facies boundaries identified using edge detection and level-set methods. Grid properties are assigned and calibrated according to the resulting facies regions, giving the simplified network geological constraints that its predecessor lacks. History matching uses an ensemble smoother with multiple data assimilation, and production controls are optimized with differential evolution. Numerical examples compare the facies-constrained model with the original network approach. The reported improvements concern predictive accuracy, reliability, and reduced ambiguity in history matching. The method is intended to support repeated, rapid simulations in closed-loop reservoir management, where geological consistency must be balanced with the computational demands of updating models and choosing operating strategies.",
+    "abstract_source": "https://www.sciencedirect.com/science/article/pii/S1995822626000841",
+    "abstract_kind": "summary",
+    "abstract_reuse_basis": "Original English paraphrase based on publisher/author-source abstract or article description; not the published abstract. Under 200 words.",
+    "notes": [
+      "First online date not yet verified; Crossref has only issue publication dates. DOI creation/deposit dates are not used as online dates.",
+      "Provisional grouping year 2026; exact first-online date not established from retrieved primary evidence."
+    ],
+    "sources": [
+      "https://api.crossref.org/works/10.1016/j.petsci.2026.02.004",
+      "https://linkinghub.elsevier.com/retrieve/pii/S1995822626000841",
+      "https://www.sciencedirect.com/science/article/pii/S1995822626000841"
+    ],
+    "group_year_status": "year-only; see research notes"
+  },
+  {
+    "id": 17,
+    "slug": "hybrid-explicit-implicit-fem-for-porous-media-multiphase-flow-with",
+    "title": "Hybrid Explicit-Implicit FEM for Porous Media Multiphase Flow with Possible Solid-Phase Decomposition",
+    "citation_year": 2026,
+    "doi": "10.3390/jmse14020217",
+    "manuscript_url": "https://doi.org/10.3390/jmse14020217",
+    "extra_links": [
+      {
+        "label": "Supplementary material",
+        "url": "https://drive.google.com/file/d/1ByEGXkt0bO2c0BupgWyNJQ-zrIA9GraS/view?usp=sharing"
+      }
+    ],
+    "equal_contributors": [],
+    "authors": [
+      "Q. Zhang",
+      "X. Sheng"
+    ],
+    "online_date": "2026-01-21",
+    "online_date_source": "https://api.crossref.org/works/10.3390/jmse14020217",
+    "group_year": 2026,
+    "journal": "Journal of Marine Science and Engineering",
+    "volume": "14",
+    "issue": "2",
+    "pages": "217",
+    "abstract_text": "Multiphase flow in porous media is ubiquitous in physical processes, yet modeling it consistently remains difficult, and sometimes it can be coupled with solid-phase decomposition and phase change, such as in hydrate dissociation or internal erosion processes. Recent code comparison studies have highlighted this difficulty, revealing clear inconsistencies in numerical results across different research groups for the same benchmark problem. This paper presents a new, reliable benchmark test and a hybrid explicit-implicit finite element method adaptable to various scenarios. In our mathematical framework, the solid decomposition is described by a rate equation for porosity that depends on the fluid pressure, and the phase change is modeled via mass source terms. The hybrid explicit-implicit finite element method features a novel three-stage updating strategy, which incorporates an artificial diffusion term and carefully selects the transport equation for the final saturation update. Validation results demonstrate that our proposed method achieves substantial agreement with those of the fully implicit finite volume method, confirming its reliability. Furthermore, our analysis confirms that the saturation update must use the transport equation of the incompressible fluid phase, and that the artificial diffusion term is critical for capturing physically correct saturation profiles, even when advection is not dominant. Overall, this work provides a consistent and effective tool for simulating complex multiphase flow scenarios and serves as a valuable complement to future benchmark studies.",
+    "abstract_source": "https://doi.org/10.3390/jmse14020217",
+    "abstract_kind": "original",
+    "abstract_reuse_basis": "Publisher metadata explicitly licenses this article CC BY 4.0; attribution and DOI must be retained.",
+    "notes": [],
+    "sources": [
+      "https://api.crossref.org/works/10.3390/jmse14020217",
+      "https://www.mdpi.com/2077-1312/14/2/217"
+    ],
+    "group_year_status": "verified"
+  },
+  {
+    "id": 18,
+    "slug": "a-micromechanical-study-of-shear-weakening-characteristics-of-granular-flow",
+    "title": "A micromechanical study of shear-weakening characteristics of granular flow in a torsional shear cell",
+    "citation_year": 2026,
+    "doi": "10.1016/j.compgeo.2025.107591",
+    "manuscript_url": "https://doi.org/10.1016/j.compgeo.2025.107591",
+    "extra_links": [],
+    "equal_contributors": [],
+    "authors": [
+      "X. Sheng",
+      "Q. Zhang",
+      "H. Shi"
+    ],
+    "online_date": null,
+    "online_date_source": null,
+    "group_year": 2025,
+    "journal": "Computers and Geotechnics",
+    "volume": "189",
+    "issue": null,
+    "pages": "107591",
+    "abstract_text": "Discrete element simulations are used to connect granular shear weakening with changes in particle-scale force networks. A torsional shear cell is examined across quasi-static, transitional, and grain-inertial flow regimes. Two configurations with slightly different initial packing densities provide a comparison of macroscopic stresses and internal force-chain evolution. Modified constitutive relations describe the measured stress trends, while microscopic analyses track chain length, abundance, curvature, orientation, and load distribution. The results show that these characteristics evolve differently across regimes and depend differently on the initial packing state. Changes in force-chain number and anisotropy help distinguish configurations with stronger transitional shear weakening. Curvature is less sensitive to packing density and stress, suggesting that it more directly reflects structural rearrangement. The study therefore links macroscopic constitutive behavior with selected microscopic indicators rather than attributing weakening to a single universal force-network measure.",
+    "abstract_source": "https://www.sciencedirect.com/science/article/abs/pii/S0266352X25005403",
+    "abstract_kind": "summary",
+    "abstract_reuse_basis": "Original English paraphrase based on publisher/author-source abstract or article description; not the published abstract. Under 200 words.",
+    "notes": [
+      "First online date not yet verified; Crossref has only issue publication dates. DOI creation/deposit dates are not used as online dates.",
+      "Final bounded lookup: Elsevier public XML only returns January 2026 coverDate and no first-online date; institution/preprint searches did not locate a primary-source date. The author subsequently confirmed the first-online publication year as 2025 on 2026-10-19.",
+      "Author confirmed the first-online publication year as 2025 on 2026-10-19; exact month and day remain unspecified. The journal issue year is retained in the citation."
+    ],
+    "sources": [
+      "https://api.crossref.org/works/10.1016/j.compgeo.2025.107591",
+      "https://linkinghub.elsevier.com/retrieve/pii/S0266352X25005403",
+      "https://www.sciencedirect.com/science/article/abs/pii/S0266352X25005403"
+    ],
+    "group_year_status": "author-confirmed",
+    "group_year_source": "Author confirmed the first-online publication year in chat on 2026-10-19."
+  },
+  {
+    "id": 19,
+    "slug": "theoretical-and-numerical-studies-on-hydro-mechanical-wing-crack-propagation",
+    "title": "Theoretical and numerical studies on hydro-mechanical wing crack propagation in pre-cracked rock materials considering T-stress",
+    "citation_year": 2025,
+    "doi": "10.70425/rml.202504.26",
+    "manuscript_url": "https://doi.org/10.70425/rml.202504.26",
+    "extra_links": [],
+    "equal_contributors": [],
+    "authors": [
+      "J. Shao",
+      "Q. Zhang"
+    ],
+    "online_date": "2025-10-29",
+    "online_date_source": "https://api.crossref.org/works/10.70425/rml.202504.26",
+    "group_year": 2025,
+    "journal": "Rock Mechanics Letters",
+    "volume": "2",
+    "issue": "4",
+    "pages": "26",
+    "abstract_text": "To examine the propagation mechanisms of wing cracks in rock under hydro-mechanical interactions, we developed a theoretical model that incorporates compressive loading effects, T-stress, and hydraulic pressure. Complementing this, a coupled hydro-mechanical-damage numerical model was employed for observation and comparative analysis. The influences of water pressure and confining pressure on wing crack evolution were systematically investigated. When T-stress effects are considered, the initiation angle of the compression-shear crack varies with the crack’s inclination, which is consistent with previous experimental results, as opposed to the initiation angle of 70.5° from the traditional theory. In the presence of water pressure, hydraulic forces transmitted within the cracks partially counteract the compressive stresses on the crack faces, thereby enhancing tensile damage. This results in an increased mode I stress intensity factor at the wing crack tip in the theoretical model, promoting both crack initiation and propagation. Conversely, an increase in confining pressure elevates compressive stress while reducing shear stress along the crack planes, which delays tensile damage and decreases the mode I stress intensity factor, thus inhibiting wing crack development. The numerical model effectively visualizes both the crack propagation process and the associated flow field, with simulation outcomes demonstrating good agreement with theoretical and experimental results. These findings contribute to a deeper understanding of crack propagation and failure behavior in geotechnical engineering contexts.",
+    "abstract_source": "https://doi.org/10.70425/rml.202504.26",
+    "abstract_kind": "original",
+    "abstract_reuse_basis": "Publisher metadata explicitly licenses this article CC BY 4.0; attribution and DOI must be retained.",
+    "notes": [
+      "Publisher title uses precracked rather than Word pre-cracked; Word title retained. Publisher cites article number 26; Crossref also records pages 195-202.",
+      "Removed line-break hyphenation artifact com-pressive from licensed original abstract."
+    ],
+    "sources": [
+      "https://api.crossref.org/works/10.70425/rml.202504.26",
+      "https://www.journal-rml.com/2/4/26"
+    ],
+    "group_year_status": "verified"
+  },
+  {
+    "id": 20,
+    "slug": "mining-induced-damage-evolution-and-infiltration-failure-in-deep-mudstone",
+    "title": "Mining-induced damage evolution and infiltration failure in deep mudstone-sandstone interbedded strata",
+    "citation_year": 2025,
+    "doi": "10.1016/j.rineng.2025.107095",
+    "manuscript_url": "https://doi.org/10.1016/j.rineng.2025.107095",
+    "extra_links": [],
+    "equal_contributors": [],
+    "authors": [
+      "X. Zhu",
+      "Q. Zhang",
+      "M. Liang",
+      "W. Zhang"
+    ],
+    "online_date": null,
+    "online_date_source": null,
+    "group_year": 2025,
+    "journal": "Results in Engineering",
+    "volume": "28",
+    "issue": null,
+    "pages": "107095",
+    "abstract_text": "Laboratory experiments and numerical modeling are combined to examine how mining changes damage and seepage in deep interbedded mudstone and sandstone. The analysis follows interactions among stress redistribution, fracture development, and permeability, including a case study of the 1304N mining panel. Increasing the sandstone proportion raises initial strength but can accelerate cracking and damage when seepage pressure becomes high. A larger contribution from weak mudstone instead increases deformation and fracture growth, reducing both structural stability and sealing capacity. Interfaces introduce a further tradeoff: tightly bonded contacts transmit stress effectively but concentrate stress and water pressure, whereas weaker contacts can slip or separate and create additional flow paths. These different mechanisms explain why changing either the layer composition or interface properties may increase water-inrush risk. The findings support coupled mechanical and hydraulic assessment of layered coal-mine roofs.",
+    "abstract_source": "https://www.sciencedirect.com/science/article/pii/S2590123025031500",
+    "abstract_kind": "summary",
+    "abstract_reuse_basis": "Original English paraphrase based on publisher/author-source abstract or article description; not the published abstract. Under 200 words.",
+    "notes": [
+      "First online date not yet verified; Crossref has only issue publication dates. DOI creation/deposit dates are not used as online dates.",
+      "Provisional grouping year 2025; first-online date requires publisher-history or PDF confirmation. Do not use issue date as online date."
+    ],
+    "sources": [
+      "https://api.crossref.org/works/10.1016/j.rineng.2025.107095",
+      "https://linkinghub.elsevier.com/retrieve/pii/S2590123025031500",
+      "https://www.sciencedirect.com/science/article/pii/S2590123025031500"
+    ],
+    "group_year_status": "year-only; see research notes"
+  },
+  {
+    "id": 21,
+    "slug": "a-layer-specific-constraint-based-enriched-physics-informed-neural-network",
+    "title": "A Layer-Specific Constraint-Based Enriched Physics-Informed Neural Network for Solving Two-Phase Flow Problems in Heterogeneous Porous Media",
+    "citation_year": 2025,
+    "doi": "10.1016/j.petsci.2025.07.008",
+    "manuscript_url": "https://doi.org/10.1016/j.petsci.2025.07.008",
+    "extra_links": [],
+    "equal_contributors": [],
+    "authors": [
+      "J.-Q. Lin",
+      "X. Yan",
+      "E.-Z. Wang",
+      "Q. Zhang",
+      "K. Zhang",
+      "P.-Y. Liu",
+      "L.-M. Zhang"
+    ],
+    "online_date": "2025-07-19",
+    "online_date_source": "https://www.cup.edu.cn/petroleumscience/docs/2025-12/c75c3aa143ec481ebefecdee54d2317c.pdf",
+    "group_year": 2025,
+    "journal": "Petroleum Science",
+    "volume": "22",
+    "issue": "11",
+    "pages": "4714 - 4735",
+    "abstract_text": "This paper studies how the internal layers of an enriched physics-informed neural network contribute to two-phase-flow prediction in heterogeneous porous media. An interpretation of layer outputs distinguishes dimensional transformations, local potential construction, higher-level feature extraction, and longer-range dependencies. These observations motivate a regularized training strategy that updates different layers at different frequencies. Layers associated more strongly with local fitting are updated less often, encouraging the network to retain features that transfer across time steps. Numerical examples of increasing complexity evaluate the effect on convergence and accuracy. Further analysis examines gradient propagation, equation residuals, and information compression during training. The reported benefits include more structured gradient behavior and more uniform residual distributions. The work connects an interpretable account of network organization with a practical training constraint, aiming to improve generalization without replacing the underlying EPINN flow formulation.",
+    "abstract_source": "https://www.cup.edu.cn/petroleumscience/docs/2025-12/c75c3aa143ec481ebefecdee54d2317c.pdf",
+    "abstract_kind": "summary",
+    "abstract_reuse_basis": "Original English paraphrase based on publisher/author-source abstract or article description; not the published abstract. Under 200 words.",
+    "notes": [],
+    "sources": [
+      "https://api.crossref.org/works/10.1016/j.petsci.2025.07.008",
+      "https://linkinghub.elsevier.com/retrieve/pii/S1995822625002444",
+      "https://www.cup.edu.cn/petroleumscience/docs/2025-12/c75c3aa143ec481ebefecdee54d2317c.pdf",
+      "https://www.cup.edu.cn/petroleumscience/docs/2025-12/c75c3aa143ec481ebefecdee54d2317c.pdf"
+    ],
+    "group_year_status": "verified"
+  },
+  {
+    "id": 22,
+    "slug": "a-finite-volume-based-physics-informed-fourier-neural-operator-network",
+    "title": "A Finite-Volume Based Physics-Informed Fourier Neural Operator Network for Parametric Learning of Subsurface Flow",
+    "citation_year": 2025,
+    "doi": "10.1016/j.advwatres.2025.105087",
+    "manuscript_url": "https://doi.org/10.1016/j.advwatres.2025.105087",
+    "extra_links": [],
+    "equal_contributors": [],
+    "authors": [
+      "X. Yan",
+      "J. Lin",
+      "Y. Ju",
+      "Q. Zhang",
+      "Z. Zhang",
+      "L. Zhang",
+      "J. Yao",
+      "K. Zhang"
+    ],
+    "online_date": "2025-08",
+    "online_date_source": "https://faculty.sdu.edu.cn/zhangzhao/en/lwcg/1263472/list/index.htm",
+    "group_year": 2025,
+    "journal": "Advances in Water Resources",
+    "volume": "205",
+    "issue": null,
+    "pages": "105087",
+    "abstract_text": "The study develops a physics-informed Fourier neural operator for steady subsurface flow through heterogeneous porous media. Rather than differentiating network outputs automatically to form the governing-equation loss, it uses a finite-volume discretization and intercell fluxes. This construction addresses difficulties caused by discontinuous or strongly varying material properties. A gated Fourier neural operator combines spatial or temporal-domain gating with spectral filtering to improve feature selection and suppress noise. Tests use two- and three-dimensional reservoir models with varying permeability contrasts, spatial correlation lengths, and amounts of training data. Compared with purely data-driven models, the proposed approach provides improved accuracy and robustness, especially when observations are scarce. Further evaluations examine predictions outside the training parameter range and the consistency of derived velocity fields. The reported scope is steady flow; transient problems are explicitly left for later investigation.",
+    "abstract_source": "https://www.sciencedirect.com/science/article/pii/S0309170825002015",
+    "abstract_kind": "summary",
+    "abstract_reuse_basis": "Original English paraphrase based on publisher/author-source abstract or article description; not the published abstract. Under 200 words.",
+    "notes": [
+      "First online date not yet verified; Crossref has only issue publication dates. DOI creation/deposit dates are not used as online dates.",
+      "Author institutional publication list records August 2025; exact first-online day remains unverified."
+    ],
+    "sources": [
+      "https://api.crossref.org/works/10.1016/j.advwatres.2025.105087",
+      "https://linkinghub.elsevier.com/retrieve/pii/S0309170825002015",
+      "https://www.sciencedirect.com/science/article/pii/S0309170825002015"
+    ],
+    "group_year_status": "verified"
+  },
+  {
+    "id": 23,
+    "slug": "diffusion-mechanism-of-seepage-grouting-in-water-bearing-sand-layer",
+    "title": "Diffusion mechanism of seepage grouting in water-bearing sand layer under slurry-water replacement effect",
+    "citation_year": 2025,
+    "doi": "10.16285/j.rsm.2024.0958",
+    "manuscript_url": "https://doi.org/10.16285/j.rsm.2024.0958",
+    "extra_links": [],
+    "equal_contributors": [],
+    "authors": [
+      "X.-X. Zhu",
+      "Q. Zhang",
+      "J.-P. Ma",
+      "Y.-J. Wang",
+      "F.-Z. Meng"
+    ],
+    "online_date": "2025-06-11",
+    "online_date_source": "https://ytlx.whrsm.ac.cn/EN/10.16285/j.rsm.2024.0958",
+    "group_year": 2025,
+    "journal": "岩土力學 (Rock and Soil Mechanics)",
+    "volume": "46",
+    "issue": "6",
+    "pages": "1957 - 1966",
+    "abstract_text": "",
+    "abstract_source": null,
+    "abstract_kind": "omitted-by-owner",
+    "abstract_reuse_basis": null,
+    "notes": [
+      "Publisher explicitly labels Online 2025-06-11 and Published 2025-06-10; online date used. Chinese abstract omitted at user request."
+    ],
+    "sources": [
+      "https://ytlx.whrsm.ac.cn/EN/10.16285/j.rsm.2024.0958"
+    ],
+    "title_zh": "浆−水置换效应下含水砂层渗透注浆扩散机制",
+    "authors_zh": [
+      "朱先祥",
+      "张琦",
+      "马俊鹏",
+      "王永军",
+      "孟凡贞"
+    ],
+    "abstract_omitted_by_user": true,
+    "group_year_status": "verified",
+    "chinese_title": "漿-水置換效應下含水砂層滲透注漿擴散機制",
+    "chinese_authors": "朱先祥、張琦、馬俊鵬、王永軍、孟凡貞"
+  },
+  {
+    "id": 24,
+    "slug": "numerical-modeling-of-gas-flow-and-solid-deformation-in-unconventional",
+    "title": "Numerical modeling of gas flow and solid deformation in unconventional anisotropic shale",
+    "citation_year": 2025,
+    "doi": "10.1016/j.compgeo.2025.107441",
+    "manuscript_url": "https://doi.org/10.1016/j.compgeo.2025.107441",
+    "extra_links": [],
+    "equal_contributors": [],
+    "authors": [
+      "Q. Zhang",
+      "X. Yan",
+      "X. Wang"
+    ],
+    "online_date": null,
+    "online_date_source": null,
+    "group_year": 2025,
+    "journal": "Computers and Geotechnics",
+    "volume": "187",
+    "issue": null,
+    "pages": "107441",
+    "abstract_text": "This work develops a coupled simulator for gas flow and deformation in anisotropic shale, including elastoplastic behavior and fractures. The formulation combines mixed displacement–pressure finite elements with a one-dimensional finite element description of fracture flow. Compressible gas is represented explicitly, allowing the study to distinguish its response from that of a slightly compressible pore fluid. The simulations address an apparent tension between production losses associated with reduced permeability and additional gas release caused by pore compaction. Validated examples include intact shale specimens and fractured reservoirs at field scale. They examine bedding orientation, mechanical anisotropy, plastic strain development, and the role of fluid compressibility. The results distinguish ultimate recovery from production over a limited operating period: deformation-related permeability reduction can inhibit short-term output even when compaction increases ultimate recovery. Bedding-dependent permeability evolution is identified as an important production control.",
+    "abstract_source": "https://www.sciencedirect.com/science/article/pii/S0266352X25003908",
+    "abstract_kind": "summary",
+    "abstract_reuse_basis": "Original English paraphrase based on publisher/author-source abstract or article description; not the published abstract. Under 200 words.",
+    "notes": [
+      "First online date not yet verified; Crossref has only issue publication dates. DOI creation/deposit dates are not used as online dates.",
+      "Provisional grouping year 2025; first-online date requires publisher-history or PDF confirmation. Do not use issue date as online date."
+    ],
+    "sources": [
+      "https://api.crossref.org/works/10.1016/j.compgeo.2025.107441",
+      "https://linkinghub.elsevier.com/retrieve/pii/S0266352X25003908",
+      "https://www.sciencedirect.com/science/article/pii/S0266352X25003908"
+    ],
+    "group_year_status": "year-only; see research notes"
+  },
+  {
+    "id": 25,
+    "slug": "composite-solid-sand-reinforcement-grouting-material-preparation-and-diffusion-characteristics",
+    "title": "Composite solid sand reinforcement grouting material preparation and diffusion characteristics of slurry-water replacement grouting",
+    "citation_year": 2025,
+    "doi": "10.1016/j.cscm.2025.e04213",
+    "manuscript_url": "https://doi.org/10.1016/j.cscm.2025.e04213",
+    "extra_links": [],
+    "equal_contributors": [],
+    "authors": [
+      "X. Zhu",
+      "Q. Zhang",
+      "D. Hu",
+      "L. Zhong",
+      "Z. Li",
+      "L. Jin"
+    ],
+    "online_date": null,
+    "online_date_source": null,
+    "group_year": 2025,
+    "journal": "Case Studies in Construction Materials",
+    "volume": "22",
+    "issue": "",
+    "pages": "e04213",
+    "notes": [
+      "Exact online publication date not confirmed; Crossref provides issue date only. Group year is supported by the same-year publication and DOI registration; DOI registration is not represented as the online publication date."
+    ],
+    "sources": [
+      "https://api.crossref.org/works/10.1016/j.cscm.2025.e04213",
+      "https://www.sciencedirect.com/science/article/pii/S2214509525000129"
+    ],
+    "abstract_text": "The complexities of geological conditions and the intensifying disturbances from mining in deep mines present significant challenges to safety and stability, particularly in controlling groundwater disasters and ensuring rock mass stability. To address these issues, especially the instability, fluidity, and high water pressure of Cenozoic sand layers above deep coal seams, a novel green grouting material has been introduced. This eco-friendly material combines calcined coal gangue powder and fly ash as Material A with a chemical slurry of silica sol as Material B, enhanced with curing agents and catalysts. Utilizing the Box-Behnken design within the response surface methodology, the physical and chemical properties of the raw materials were thoroughly investigated. This approach led to an optimal mix ratio: 33.2 % coal gangue, a water-cement ratio of 0.756 for Material A, and an equal mass ratio of Materials A and B. The study revealed a direct correlation between the amount of slurry in the solidified mixture and its compressive strength, and an inverse relationship with its permeability, confirming the grouting's transformative effect on the sand layer. Further analysis using COMSOL's porous medium two-phase flow module examined the diffusion characteristics of the grouting material in the water-bearing sand layer. The research focused on the grouting diffusion mechanism under drainage pressure and optimized the positioning and spacing of the drainage pipe layer. These findings offer a pioneering method for the grouting reinforcement of deep wells and thick, loose strata, advancing the field of deep mining safety and stability.",
+    "abstract_kind": "original",
+    "abstract_source": "https://www.sciencedirect.com/science/article/pii/S2214509525000129",
+    "abstract_reuse_basis": "Publisher article is open access; Crossref Version of Record license is CC BY-NC 4.0 (http://creativecommons.org/licenses/by-nc/4.0/).",
+    "group_year_status": "year-only; see research notes"
+  },
+  {
+    "id": 26,
+    "slug": "enhanced-thm-coupling-for-anisotropic-geomaterials-and-smoothed-fem-simulation",
+    "title": "Enhanced THM coupling for anisotropic geomaterials and smoothed-FEM simulation",
+    "citation_year": 2025,
+    "doi": "10.1016/j.ijmecsci.2025.110087",
+    "manuscript_url": "wu-zhang-2025-enhanced-thm-coupling.pdf",
+    "extra_links": [
+      {
+        "label": "WeChat post",
+        "url": "https://mp.weixin.qq.com/s/tXVhUGb3VeSkK_Q2XEaZEg"
+      }
+    ],
+    "equal_contributors": [
+      "X.-H. Wu",
+      "Q. Zhang"
+    ],
+    "authors": [
+      "X.-H. Wu",
+      "Q. Zhang",
+      "W.-Q. Feng",
+      "Z.-Y. Yin",
+      "H. Fang"
+    ],
+    "online_date": "2025-03-01",
+    "online_date_source": "C:\\Users\\zq112\\Zotero\\storage\\2YERX48X\\MS110087_corrected.pdf (page 1, Available online)",
+    "group_year": 2025,
+    "journal": "International Journal of Mechanical Sciences",
+    "volume": "290",
+    "issue": "",
+    "pages": "110087",
+    "notes": [
+      "Author requested that Manuscript open the supplied PDF directly on 2026-10-19."
+    ],
+    "sources": [
+      "https://api.crossref.org/works/10.1016/j.ijmecsci.2025.110087",
+      "C:\\Users\\zq112\\Zotero\\storage\\2YERX48X\\MS110087_corrected.pdf"
+    ],
+    "abstract_text": "As the thermo-hydro-mechanical (THM) coupling phenomenon becomes more and more common in various engineering applications, a deeper understanding of the behavior of the porous media under combined “THM loading” would be extremely useful. As researchers in computational geomechanics, we first revisit the established poromechanics theory and then move one step forward to (1) derive a generalized fluid flow equation that incorporates both mechanical and thermal strain anisotropy; and to (2) propose an analogous poro-elasto-plastic structural heating/cooling term that bridges not only to the phenomenological porothermoelasticity but also to the uncoupled standard thermal equation. Next in the section of the numerical method, we enrich the stabilized node-based smoothed finite element method (SNS-FEM) to incorporate THM coupling, which leads to the development of smoothed nodal thermal strain and smoothed thermal strain gradient. Subsequently, the proposed numerical framework is verified against three benchmark tests, which aim for the correct implementation of heat convection and THM contact, as well as the comparison with FEM. Finally, two hypothetical model application examples are presented, which investigate the effect of mechanical anisotropy and cross-coupling in THM biaxial test and the effect of temperature in pipeline penetration, respectively. Overall, this study offers a promising contribution to the understanding and modeling of THM problems.",
+    "abstract_kind": "original",
+    "abstract_source": "C:\\Users\\zq112\\Zotero\\storage\\2YERX48X\\MS110087_corrected.pdf",
+    "abstract_reuse_basis": "User-provided PDF, page 1; extracted and visually checked against rendered first page. Line breaks normalized.",
+    "group_year_status": "verified"
+  },
+  {
+    "id": 27,
+    "slug": "a-novel-coupled-bes-fem-formulation-with-supg-stabilization-for",
+    "title": "A novel coupled bES-FEM formulation with SUPG stabilization for thermo-hydro-mechanical analysis in saturated porous media",
+    "citation_year": 2024,
+    "doi": "10.1016/j.compgeo.2024.106454",
+    "manuscript_url": "https://doi.org/10.1016/j.compgeo.2024.106454",
+    "extra_links": [],
+    "equal_contributors": [],
+    "authors": [
+      "Z.-Q. Tang",
+      "X.-W. Zhou",
+      "Y.-F. Jin",
+      "Z.-Y. Yin",
+      "Q. Zhang"
+    ],
+    "online_date": null,
+    "online_date_source": null,
+    "group_year": 2024,
+    "journal": "Computers and Geotechnics",
+    "volume": "173",
+    "issue": "",
+    "pages": "106454",
+    "notes": [
+      "Exact online publication date not confirmed; Crossref provides issue date only. Group year is supported by the same-year publication and DOI registration; DOI registration is not represented as the online publication date.",
+      "arXiv author manuscript submitted 20 May 2024, not treated as journal first-online date."
+    ],
+    "sources": [
+      "https://api.crossref.org/works/10.1016/j.compgeo.2024.106454",
+      "https://arxiv.org/abs/2406.05138"
+    ],
+    "abstract_text": "Two primary types of numerical instabilities often occur in low-order finite element method (FEM) analyses of thermo-hydro-mechanical (THM) phenomena: (1) pressure oscillations arising improper interpolation of pressure and displacement fields; and (2) spatial oscillations induced by nonlinear convection terms in convection-dominated scenarios. In response to these issues, this paper proposes a novel stabilized edge-based smoothed FEM with a bubble function (bES-FEM) for THM analysis within saturated porous media. In the proposed framework, a cubic bubble function is first incorporated into ES-FEM to efficiently mitigate pressure oscillations that breach the Inf-Sup condition, and then the Streamline Upwind Petrov-Galerkin (SUPG) scheme is adopted in bES-FEM to effectively reduce the spurious oscillations in convection-dominated heat transfer scenarios. The accuracy of the bES-FEM with SUPG formulation for THM coupled problems is validated through a series of five benchmark tests. Moreover, the simulations of open-loop ground source energy systems demonstrate the proposed method's exceptional capability in tackling complex THM challenges in real-world applications. All the obtained results showcase the superiority of proposed bES-FEM with SUPG in eliminating the spatial and pressure oscillations, marking it as a promising tool for the exploration of coupled THM issues.",
+    "abstract_kind": "original",
+    "abstract_source": "https://arxiv.org/abs/2406.05138",
+    "abstract_reuse_basis": "Author-deposited manuscript; arXiv page links a Creative Commons Attribution 4.0 license.",
+    "group_year_status": "year-only; see research notes"
+  },
+  {
+    "id": 28,
+    "slug": "solid-waste-slurry-grouting-transformation-mechanism-of-loose-sand-layer",
+    "title": "Solid waste slurry grouting transformation mechanism of loose sand layer based on slurry-water replacement effect",
+    "citation_year": 2024,
+    "doi": "10.1063/5.0217551",
+    "manuscript_url": "https://doi.org/10.1063/5.0217551",
+    "extra_links": [],
+    "equal_contributors": [],
+    "authors": [
+      "X. Zhu",
+      "Q. Zhang",
+      "W. Zhang",
+      "L. Jin",
+      "Z. Li"
+    ],
+    "online_date": "2024-07-22",
+    "online_date_source": "https://api.crossref.org/works/10.1063/5.0217551 (published-online)",
+    "group_year": 2024,
+    "journal": "Physics of Fluids",
+    "volume": "36",
+    "issue": "7",
+    "pages": "073330",
+    "notes": [],
+    "sources": [
+      "https://api.crossref.org/works/10.1063/5.0217551",
+      "https://ira.lib.polyu.edu.hk/handle/10397/111072"
+    ],
+    "abstract_text": "Water-bearing sand layers can become pathways for dangerous water and sand inflows during coal extraction. This study examines how grout moves through such layers when injected slurry displaces groundwater, while accounting for the tortuous paths within the pore network. A spherical diffusion relationship is developed for a power-law grout, and its predictions are assessed with a purpose-built laboratory arrangement. Three-dimensional COMSOL simulations then examine how sand porosity, the separation between injection and drainage holes, injection pressure, and slurry viscosity change the treated volume. Among these variables, injection pressure has the strongest influence, followed by hole spacing, sand porosity, and viscosity. The combined experimental and numerical results suggest that deliberate slurry-water displacement can increase the reach of grouting and improve treatment of loose, saturated sand under high water pressure. The approach provides a basis for designing grouting layouts and operating conditions in mining applications.",
+    "abstract_kind": "summary",
+    "abstract_source": "https://ira.lib.polyu.edu.hk/handle/10397/111072",
+    "abstract_reuse_basis": "Original English paraphrase of the accessible publisher/institutional abstract; source does not provide a verified license allowing reproduction of the full abstract. Must be presented as a summary, not the original abstract.",
+    "group_year_status": "verified"
+  },
+  {
+    "id": 29,
+    "slug": "evolution-of-mining-induced-water-inrush-disaster-from-a-hidden",
+    "title": "Evolution of mining-induced water inrush disaster from a hidden fault in coal seam floor based on a coupled stress - seepage - damage model",
+    "citation_year": 2024,
+    "doi": "10.1007/s40948-024-00790-w",
+    "manuscript_url": "https://doi.org/10.1007/s40948-024-00790-w",
+    "extra_links": [],
+    "equal_contributors": [],
+    "authors": [
+      "J. Shao",
+      "Q. Zhang",
+      "W. Zhang"
+    ],
+    "online_date": "2024-04-23",
+    "online_date_source": "https://api.crossref.org/works/10.1007/s40948-024-00790-w (published-online)",
+    "group_year": 2024,
+    "journal": "Geomechanics and Geophysics for Geo-Energy and Geo-Resources",
+    "volume": "10",
+    "issue": "1",
+    "pages": "78",
+    "notes": [],
+    "sources": [
+      "https://api.crossref.org/works/10.1007/s40948-024-00790-w",
+      "https://research.polyu.edu.hk/en/publications/evolution-of-mining-induced-water-inrush-disaster-from-a-hidden-f/"
+    ],
+    "abstract_text": "Water inrush originating from hidden faults in the coal seam floor is challenging to prevent due to their concealed nature. This paper develops a coupled stress–seepage–damage model for simulating rock fracture, implemented using the finite element method. The model is validated against compression-seepage tests on rock samples, capturing realistic dynamics of shear and tensile damage as well as permeability. The model is applied to the 27305 working face of a coal mine in Shandong Province, China, revealing the evolution of water inrush caused by a hidden fault. The results indicate that as the working face progresses, both the floor damage and the internal damage within the hidden fault escalate gradually. When mining reaches 80 m, the hidden fault has been activated internally, and the depth of floor damage reaches 13 m, which still has a certain distance from the hidden fault. At 100 m, the depth of the floor damage has stabilized, while the stress concentration at the hidden fault's tip increases, and it begins to expand if conditions for tensile damage are met. By the time mining reaches 110 m, the hidden fault has expanded 9.2 m in length and connected with the floor damage zone, forming a water inrush channel that links the aquifer to the working face, presenting a significant water inrush risk. This work provides an intuitive approach to understanding the evolution of water inrush from a hidden fault, aiding in the prevention of water inrush disasters in practical engineering applications.",
+    "abstract_kind": "original",
+    "abstract_source": "https://api.crossref.org/works/10.1007/s40948-024-00790-w",
+    "abstract_reuse_basis": "Publisher-deposited abstract; Version of Record license recorded in Crossref: https://creativecommons.org/licenses/by/4.0",
+    "group_year_status": "verified"
+  },
+  {
+    "id": 30,
+    "slug": "anisotropic-continuum-framework-of-coupled-gas-flow-adsorption-deformation-in",
+    "title": "Anisotropic continuum framework of coupled gas flow - adsorption - deformation in sedimentary rocks",
+    "citation_year": 2024,
+    "doi": "10.1002/nag.3674",
+    "manuscript_url": "https://doi.org/10.1002/nag.3674",
+    "extra_links": [],
+    "equal_contributors": [],
+    "authors": [
+      "Q. Zhang",
+      "Z.-Y. Yin",
+      "X. Yan"
+    ],
+    "online_date": "2023-12-27",
+    "online_date_source": "https://api.crossref.org/works/10.1002/nag.3674 (published-online)",
+    "group_year": 2023,
+    "journal": "International Journal for Numerical and Analytical Methods in Geomechanics",
+    "volume": "48",
+    "issue": "4",
+    "pages": "1018 - 1045",
+    "notes": [
+      "First online 27 December 2023; journal issue is 2024. Group under 2023, retaining 2024 in citation."
+    ],
+    "sources": [
+      "https://api.crossref.org/works/10.1002/nag.3674",
+      "https://onlinelibrary.wiley.com/doi/abs/10.1002/nag.3674"
+    ],
+    "abstract_text": "Solid deformation is always a crucial factor of gas transport in sedimentary rocks. While previous studies always adopt the assumption of isotropic poroelastic deformation, anisotropic poroelastoplastic deformation is rarely considered, despite anisotropy being a ubiquitous property of natural sedimentary rocks. In this work, an anisotropic poromechanical model is established to analyze the matrix porosity and apparent permeability evolutions during the process of gas migration. Using a thermodynamic formulation that treats the fluid–solid interface as an independent phase, we derive a rate form for matrix porosity and obtain the new dissipation function that contains three parts: dissipations from solid deformation, gas adsorption, and fluid flow. For gas adsorption, we justify the rationality of the adopted model; for fluid flow, the updated porosity can be substituted into sophisticated apparent permeability models for full‐scale analysis; and for solid deformation, a recently developed constitutive model appropriate for rocks exhibiting transverse isotropy in both the elastic and plastic responses is adopted in this work. Through the novel stress‐point simulation incorporating two effective stress measures and adsorption strain, new patterns of apparent permeability are obtained, which fit the experimental data quite well and cannot be reproduced from the assumption of isotropic poroelasticity. The advantages of our poromechanical model include thermodynamic consistency and the ability to employ finite‐element‐based formulation. Finally, an initial‐boundary value problem of gas production considering anisotropic plasticity is conducted, and the effects of the bedding plane and different adsorption models are highlighted.",
+    "abstract_kind": "original",
+    "abstract_source": "https://api.crossref.org/works/10.1002/nag.3674",
+    "abstract_reuse_basis": "Publisher-deposited abstract; Version of Record license recorded in Crossref: http://creativecommons.org/licenses/by/4.0/",
+    "group_year_status": "verified"
+  },
+  {
+    "id": 31,
+    "slug": "material-constants-of-anisotropic-poroelasticity-and-its-impacts-on-shale",
+    "title": "Material Constants of Anisotropic Poroelasticity and Its Impacts on Shale Gas Production",
+    "citation_year": 2023,
+    "doi": "10.1021/acs.energyfuels.3c02656",
+    "manuscript_url": "https://doi.org/10.1021/acs.energyfuels.3c02656",
+    "extra_links": [],
+    "equal_contributors": [],
+    "authors": [
+      "Q. Zhang",
+      "Z.-Y. Yin",
+      "X. Yan"
+    ],
+    "online_date": "2023-11-17",
+    "online_date_source": "https://api.crossref.org/works/10.1021/acs.energyfuels.3c02656 (published-online)",
+    "group_year": 2023,
+    "journal": "Energy & Fuels",
+    "volume": "37",
+    "issue": "23",
+    "pages": "18722 - 18734",
+    "notes": [],
+    "sources": [
+      "https://api.crossref.org/works/10.1021/acs.energyfuels.3c02656",
+      "https://pubs.acs.org/doi/10.1021/acs.energyfuels.3c02656"
+    ],
+    "abstract_text": "This study investigates how anisotropic mechanical and hydraulic properties influence shale-gas production. A mixture-theory formulation develops poroelastic material constants for porous solids whose grains and internal structure can be both heterogeneous and direction dependent. The treatment of intrinsic solid density and deformation under unjacketed loading produces a complete parameter set and associated bounds, which are compared with an existing intrinsic-constant formulation. The practical consequences are explored in a three-dimensional shale reservoir model that includes elastic and permeability anisotropy. The horizontal stress component parallel to the wellbore, σxx, differs substantially between isotropic and transversely isotropic descriptions. Tilting the plane associated with permeability anisotropy also reduces gas production and changes the orientation of the stress distribution. These comparisons show that an isotropic approximation can miss important stress changes during extraction. The framework therefore connects constitutive characterization at smaller scales with predictions of deformation and production in shale reservoirs.",
+    "abstract_kind": "summary",
+    "abstract_source": "https://pubs.acs.org/doi/10.1021/acs.energyfuels.3c02656",
+    "abstract_reuse_basis": "Original English paraphrase of the accessible publisher/institutional abstract; source does not provide a verified license allowing reproduction of the full abstract. Must be presented as a summary, not the original abstract.",
+    "latex_suggestion": {
+      "text": "σxx",
+      "latex": "\\sigma_{xx}",
+      "basis": "Publisher abstract explicitly identifies horizontal stress parallel to the wellbore as sigma_xx."
+    },
+    "group_year_status": "verified",
+    "abstract_latex": "This study investigates how anisotropic mechanical and hydraulic properties influence shale-gas production. A mixture-theory formulation develops poroelastic material constants for porous solids whose grains and internal structure can be both heterogeneous and direction dependent. The treatment of intrinsic solid density and deformation under unjacketed loading produces a complete parameter set and associated bounds, which are compared with an existing intrinsic-constant formulation. The practical consequences are explored in a three-dimensional shale reservoir model that includes elastic and permeability anisotropy. The horizontal stress component parallel to the wellbore, $\\sigma_{xx}$, differs substantially between isotropic and transversely isotropic descriptions. Tilting the plane associated with permeability anisotropy also reduces gas production and changes the orientation of the stress distribution. These comparisons show that an isotropic approximation can miss important stress changes during extraction. The framework therefore connects constitutive characterization at smaller scales with predictions of deformation and production in shale reservoirs.",
+    "latex_test_note": "Publisher abstract explicitly identifies horizontal stress parallel to the wellbore as sigma_xx."
+  },
+  {
+    "id": 32,
+    "slug": "multiscale-multiphysics-modeling-in-geotechnical-engineering",
+    "title": "Multiscale multiphysics modeling in geotechnical engineering",
+    "citation_year": 2023,
+    "doi": "10.1631/jzus.A22MMMiG",
+    "manuscript_url": "https://doi.org/10.1631/jzus.A22MMMiG",
+    "extra_links": [],
+    "equal_contributors": [],
+    "authors": [
+      "Z. Yin",
+      "Q. Zhang",
+      "F. Laouafa"
+    ],
+    "online_date": "2023-01-24",
+    "online_date_source": "https://api.crossref.org/works/10.1631/jzus.A22MMMiG (published-online)",
+    "group_year": 2023,
+    "journal": "Journal of Zhejiang University-SCIENCE A",
+    "volume": "24",
+    "issue": "1",
+    "pages": "1 - 5",
+    "notes": [
+      "Editorial, not a research article; original contains no abstract. Publisher/Crossref spell first author Zhenyu Yin, yielding Z. Yin; other papers use Zhen-Yu Yin."
+    ],
+    "sources": [
+      "https://api.crossref.org/works/10.1631/jzus.A22MMMiG",
+      "https://crossmark.crossref.org/dialog/?doi=10.1631%2Fjzus.A22MMMiG",
+      "https://jzus.zju.edu.cn/opentxt.php?doi=10.1631%2Fjzus.A22MMMiG"
+    ],
+    "abstract_text": "",
+    "abstract_kind": "not-applicable",
+    "abstract_source": "https://jzus.zju.edu.cn/opentxt.php?doi=10.1631%2Fjzus.A22MMMiG",
+    "abstract_reuse_basis": "Editorial; original text starts directly with Introduction and has no standalone abstract.",
+    "group_year_status": "verified",
+    "publication_type": "Editorial"
+  },
+  {
+    "id": 33,
+    "slug": "a-novel-collaborative-study-of-abnormal-roof-water-inrush-in",
+    "title": "A novel collaborative study of abnormal roof water inrush in coal seam mining based on strata separation and wing crack initiation",
+    "citation_year": 2022,
+    "doi": "10.1016/j.engfailanal.2022.106762",
+    "manuscript_url": "https://doi.org/10.1016/j.engfailanal.2022.106762",
+    "extra_links": [],
+    "equal_contributors": [],
+    "authors": [
+      "Z. Wang",
+      "Q. Zhang",
+      "W. Zhang"
+    ],
+    "online_date": null,
+    "online_date_source": null,
+    "group_year": 2022,
+    "journal": "Engineering Failure Analysis",
+    "volume": "142",
+    "issue": "",
+    "pages": "106762",
+    "notes": [
+      "Exact online publication date not confirmed; Crossref provides issue date only. Group year is supported by the same-year publication and DOI registration; DOI registration is not represented as the online publication date."
+    ],
+    "sources": [
+      "https://api.crossref.org/works/10.1016/j.engfailanal.2022.106762",
+      "https://research.polyu.edu.hk/en/publications/a-novel-collaborative-study-of-abnormal-roof-water-inrush-in-coal/"
+    ],
+    "abstract_text": "This work combines a physical simulation and a fracture-mechanics model to investigate water inrush from roof-bed separation during coal mining. A laboratory model based on the Yushujing mine's 21805 working face tracks the formation of separation spaces, their accumulation of water, and the eventual release of that water under hydrostatic pressure. An analytical treatment of wing-crack initiation includes T-stress and covers both compression-shear and tension-shear fractures. It also incorporates overburden loading, water pressure, fracture geometry, and rock properties. The timing of water inrush in the laboratory agrees with the field observations, while the predicted crack directions agree with those observed after water injection. The results indicate that separation cavities develop over an extended period. Together, the experimental and theoretical analyses help explain the development of water-conducting fractures and support measures for preventing roof-water hazards.",
+    "abstract_kind": "summary",
+    "abstract_source": "https://research.polyu.edu.hk/en/publications/a-novel-collaborative-study-of-abnormal-roof-water-inrush-in-coal/",
+    "abstract_reuse_basis": "Original English paraphrase of the accessible publisher/institutional abstract; source does not provide a verified license allowing reproduction of the full abstract. Must be presented as a summary, not the original abstract.",
+    "group_year_status": "year-only; see research notes"
+  },
+  {
+    "id": 34,
+    "slug": "a-novel-stabilized-ns-fem-formulation-for-anisotropic-double-porosity",
+    "title": "A novel stabilized NS-FEM formulation for anisotropic double porosity media",
+    "citation_year": 2022,
+    "doi": "10.1016/j.cma.2022.115666",
+    "manuscript_url": "https://doi.org/10.1016/j.cma.2022.115666",
+    "extra_links": [],
+    "equal_contributors": [],
+    "authors": [
+      "Q. Zhang",
+      "Z.-Y. Wang",
+      "Z.-Y. Yin",
+      "Y.-F. Jin"
+    ],
+    "online_date": null,
+    "online_date_source": null,
+    "group_year": 2022,
+    "journal": "Computer Methods in Applied Mechanics and Engineering",
+    "volume": "401",
+    "issue": "",
+    "pages": "115666",
+    "notes": [
+      "Exact online publication date not confirmed; Crossref provides issue date only. Group year is supported by the same-year publication and DOI registration; DOI registration is not represented as the online publication date."
+    ],
+    "sources": [
+      "https://api.crossref.org/works/10.1016/j.cma.2022.115666",
+      "https://www.sciencedirect.com/science/article/abs/pii/S0045782522006211"
+    ],
+    "abstract_text": "The paper develops a coupled description of deformation and fluid transport in anisotropic materials with two interacting pore systems. Macroscopic poroelastic coefficients are derived from the intrinsic properties of the constituent single-porosity materials, and the momentum contribution associated with fluid exchange is evaluated. Calculations for sandstone provide a comparison with established parameter estimates. The resulting equations are implemented using a node-based smoothed finite element formulation. Numerical stability is improved by distributing several stress points across each smoothing domain and applying polynomial pressure projection. Four benchmark problems are used to check the implementation against reference solutions and assess the scope of the anisotropic formulation. Further simulations examine elastoplastic behavior, focusing on permeability directionality, differences in permeability between the pore systems, and strain softening. The combined theoretical and computational framework offers a means of representing both material anisotropy and the interaction of distinct storage and transport networks.",
+    "abstract_kind": "summary",
+    "abstract_source": "https://www.sciencedirect.com/science/article/abs/pii/S0045782522006211",
+    "abstract_reuse_basis": "Original English paraphrase of the accessible publisher/institutional abstract; source does not provide a verified license allowing reproduction of the full abstract. Must be presented as a summary, not the original abstract.",
+    "group_year_status": "year-only; see research notes"
+  },
+  {
+    "id": 35,
+    "slug": "a-mathematical-framework-for-multiphase-poromechanics-in-multiple-porosity-media",
+    "title": "A mathematical framework for multiphase poromechanics in multiple porosity media",
+    "citation_year": 2022,
+    "doi": "10.1016/j.compgeo.2022.104728",
+    "manuscript_url": "https://doi.org/10.1016/j.compgeo.2022.104728",
+    "extra_links": [],
+    "equal_contributors": [],
+    "authors": [
+      "Q. Zhang",
+      "X. Yan",
+      "Z. Li"
+    ],
+    "online_date": null,
+    "online_date_source": null,
+    "group_year": 2022,
+    "journal": "Computers and Geotechnics",
+    "volume": "146",
+    "issue": "",
+    "pages": "104728",
+    "notes": [
+      "Exact online publication date not confirmed; Crossref provides issue date only. Group year is supported by the same-year publication and DOI registration; DOI registration is not represented as the online publication date."
+    ],
+    "sources": [
+      "https://api.crossref.org/works/10.1016/j.compgeo.2022.104728",
+      "https://zihao-academic.com/publication/hydromechanical/Hydromechanical.pdf",
+      "https://research.polyu.edu.hk/en/publications/a-mathematical-framework-for-multiphase-poromechanics-in-multiple/"
+    ],
+    "abstract_text": "A mixture-theory framework is developed for deformable porous materials containing several pore scales and one or two fluid phases. The formulation identifies the governing field equations and the constitutive relationships needed to describe their interaction. An effective stress, σ′, follows from the energy balance and can be used for elastic as well as elastoplastic deformation; its construction accounts for the fractions and fluid saturations of the different pore systems. The framework supports both flow-only calculations and simulations that couple flow with deformation. For the flow-only case, Laplace transformation and numerical inversion reveal successive stages of depletion in a naturally fractured reservoir. Coupled examples include strip loading and two-phase flow in a deformable three-dimensional reservoir. These applications demonstrate how plastic response, multiple pore scales, exchange between pore systems, and capillary pressure alter the predicted response.",
+    "abstract_kind": "summary",
+    "abstract_source": "https://research.polyu.edu.hk/en/publications/a-mathematical-framework-for-multiphase-poromechanics-in-multiple/",
+    "abstract_reuse_basis": "Original English paraphrase of the accessible publisher/institutional abstract; source does not provide a verified license allowing reproduction of the full abstract. Must be presented as a summary, not the original abstract.",
+    "latex_suggestion": {
+      "text": "σ′",
+      "latex": "\\sigma^{\\prime}",
+      "basis": "Publisher/institutional abstract explicitly writes effective stress as sigma prime."
+    },
+    "group_year_status": "year-only; see research notes",
+    "abstract_latex": "A mixture-theory framework is developed for deformable porous materials containing several pore scales and one or two fluid phases. The formulation identifies the governing field equations and the constitutive relationships needed to describe their interaction. An effective stress, $\\sigma^{\\prime}$, follows from the energy balance and can be used for elastic as well as elastoplastic deformation; its construction accounts for the fractions and fluid saturations of the different pore systems. The framework supports both flow-only calculations and simulations that couple flow with deformation. For the flow-only case, Laplace transformation and numerical inversion reveal successive stages of depletion in a naturally fractured reservoir. Coupled examples include strip loading and two-phase flow in a deformable three-dimensional reservoir. These applications demonstrate how plastic response, multiple pore scales, exchange between pore systems, and capillary pressure alter the predicted response.",
+    "latex_test_note": "Publisher/institutional abstract explicitly writes effective stress as sigma prime."
+  },
+  {
+    "id": 36,
+    "slug": "mathematical-evaluation-on-the-control-of-mining-induced-ground-subsidence",
+    "title": "Mathematical Evaluation on the Control of Mining-Induced Ground Subsidence in Thick Loose Strata",
+    "citation_year": 2021,
+    "doi": "10.1021/acsomega.1c04970",
+    "manuscript_url": "https://doi.org/10.1021/acsomega.1c04970",
+    "extra_links": [],
+    "equal_contributors": [],
+    "authors": [
+      "Z. Wang",
+      "Q. Zhang",
+      "J. Shao",
+      "W. Zhang",
+      "X. Wu",
+      "Y. Lei",
+      "X. Wu"
+    ],
+    "online_date": "2021-12-08",
+    "online_date_source": "https://api.crossref.org/works/10.1021/acsomega.1c04970 (published-online)",
+    "group_year": 2021,
+    "journal": "ACS Omega",
+    "volume": "6",
+    "issue": "50",
+    "pages": "34596 - 34605",
+    "notes": [
+      "Expanded et al. to all seven Crossref/publisher authors. Xintao Wu and Xunan Wu both abbreviate to X. Wu, and both entries must remain."
+    ],
+    "sources": [
+      "https://api.crossref.org/works/10.1021/acsomega.1c04970",
+      "https://pubs.acs.org/doi/10.1021/acsomega.1c04970"
+    ],
+    "abstract_text": "Coal mining under thick loose strata in North China leads to ground subsidence, which is a natural result of hydromechanical coupling (fluid flow coupled with solid deformation). Therefore, the land surrounding the mining areas is greatly damaged. In this study, the combined weight (CW) method and the fuzzy matter-element analysis (FMEA) method were used to analyze and evaluate the control effect of subsiding land. Overall, 20 sets of geological samples were collected from this area. The influencing factors and the corresponding weights for the control effect of subsiding land were comprehensively analyzed, and an FMEA model was built to predict and verify the results. The results showed that (1) the two evaluation indicators with the most significant impact on land reclamation were the degree of integration and the economic and social benefits and (2) among the 20 sets of samples selected, the predicted conclusions of 17 sets were consistent with the actual engineering situations, which led to an accuracy of 85%. In other words, the CW-FMEA model showed good reliability for evaluating the control effect of subsiding land, which can provide scientific references for control and quality evaluations of land subsidence due to coal mining.",
+    "abstract_kind": "original",
+    "abstract_source": "https://api.crossref.org/works/10.1021/acsomega.1c04970",
+    "abstract_reuse_basis": "Publisher-deposited abstract; Version of Record license recorded in Crossref: https://creativecommons.org/licenses/by-nc-nd/4.0/",
+    "group_year_status": "verified"
+  },
+  {
+    "id": 37,
+    "slug": "strip-load-on-transversely-isotropic-elastic-double-porosity-media-with",
+    "title": "Strip load on transversely isotropic elastic double porosity media with strong permeability contrast",
+    "citation_year": 2021,
+    "doi": "10.46690/ager.2021.04.02",
+    "manuscript_url": "https://doi.org/10.46690/ager.2021.04.02",
+    "extra_links": [],
+    "equal_contributors": [],
+    "authors": [
+      "Q. Zhang"
+    ],
+    "online_date": "2021-08-20",
+    "online_date_source": "https://api.crossref.org/works/10.46690/ager.2021.04.02 (published-online)",
+    "group_year": 2021,
+    "journal": "Advances in Geo-Energy Research",
+    "volume": "5",
+    "issue": "4",
+    "pages": "353 - 364",
+    "notes": [],
+    "sources": [
+      "https://api.crossref.org/works/10.46690/ager.2021.04.02",
+      "https://www.sciopen.com/article/10.46690/ager.2021.04.02",
+      "https://www.yandy-ager.com/index.php/ager/article/view/360"
+    ],
+    "abstract_text": "In double porosity media, fluid could flow through the distributed micro-fractures at a larger scale as well as through the nanopores of the organic matrix at a smaller scale, while fluid mass could be transferred between them. Besides, the solid deformation acts as an important coupling term and leads to the two-way coupled process. However, these processes are not well presented in previous studies. In this work, a new coupled modeling approach was proposed for saturated double porosity media with strong permeability contrast. Specifically, the transversely isotropic equivalent fracture permeability is considered for the preferentially oriented micro-fractures at the micro-scale or meso-scale; while at the nano-scale, the non-Darcy flow and mass transfer equations are employed to consider the interaction between fluid particles and the solid pore wall. Finally, the stabilized finite element method is developed to investigate the settlement and pressure dissipation behaviors of the strip load problem.",
+    "abstract_kind": "original",
+    "abstract_source": "https://www.yandy-ager.com/index.php/ager/article/view/360",
+    "abstract_reuse_basis": "Publisher article page gives license: https://creativecommons.org/licenses/by-nc-nd/4.0/, https://creativecommons.org/licenses/by-nc-nd/4.0/",
+    "group_year_status": "verified"
+  },
+  {
+    "id": 38,
+    "slug": "spatial-prediction-of-loose-aquifer-water-abundance-mapping-based-on",
+    "title": "Spatial prediction of loose aquifer water abundance mapping based on a hybrid statistical learning approach",
+    "citation_year": 2021,
+    "doi": "10.1007/s12145-021-00640-3",
+    "manuscript_url": "https://doi.org/10.1007/s12145-021-00640-3",
+    "extra_links": [],
+    "equal_contributors": [],
+    "authors": [
+      "Q. Zhang",
+      "Z. Wang"
+    ],
+    "online_date": "2021-07-06",
+    "online_date_source": "https://api.crossref.org/works/10.1007/s12145-021-00640-3 (published-online)",
+    "group_year": 2021,
+    "journal": "Earth Science Informatics",
+    "volume": "14",
+    "issue": "3",
+    "pages": "1349 - 1365",
+    "notes": [],
+    "sources": [
+      "https://api.crossref.org/works/10.1007/s12145-021-00640-3",
+      "https://link.springer.com/article/10.1007/s12145-021-00640-3"
+    ],
+    "abstract_text": "This paper develops a method for mapping the water abundance of loose aquifers where borehole observations are sparse. Five indicators describe the aquifer and its investigation: thickness, the relative thickness of sand and clay, drilling-fluid consumption, core recovery, and hydraulic conductivity. Kriging is used to estimate how these quantities vary between observations. The assessment then proceeds in two stages. Fisher discriminant analysis first converts the normalized measurements into a smaller set of informative coordinates suitable for visualization. Three classifiers subsequently predict water-abundance categories from those coordinates, with leave-one-out validation used to make efficient use of the limited data. A case study at the Baodian coal mine illustrates the complete procedure and identifies the areas with the greatest water abundance. The resulting zoning map is intended to support mining decisions and the management of mine-water hazards.",
+    "abstract_kind": "summary",
+    "abstract_source": "https://link.springer.com/article/10.1007/s12145-021-00640-3",
+    "abstract_reuse_basis": "Original English paraphrase of the accessible publisher/institutional abstract; source does not provide a verified license allowing reproduction of the full abstract. Must be presented as a summary, not the original abstract.",
+    "group_year_status": "verified"
+  },
+  {
+    "id": 39,
+    "slug": "fluid-flow-through-anisotropic-and-deformable-double-porosity-media-with",
+    "title": "Fluid flow through anisotropic and deformable double porosity media with ultra-low matrix permeability: A continuum framework",
+    "citation_year": 2021,
+    "doi": "10.1016/j.petrol.2021.108349",
+    "manuscript_url": "https://doi.org/10.1016/j.petrol.2021.108349",
+    "extra_links": [],
+    "equal_contributors": [],
+    "authors": [
+      "Q. Zhang",
+      "X. Yan",
+      "J. Shao"
+    ],
+    "online_date": "2021",
+    "online_date_source": "Crossref publisher-deposited citation and DOI creation year agree; exact online day not verified.",
+    "group_year": 2021,
+    "journal": "Journal of Petroleum Science and Engineering",
+    "volume": "200",
+    "issue": "",
+    "pages": "108349",
+    "abstract_text": "A coupled continuum model is developed for fractured porous materials whose matrix and microfractures have sharply different permeabilities. The formulation combines anisotropic solid deformation with fluid transport through two interacting pore systems. Flow through the fracture network follows a generalized Darcy relation, with effective permeability obtained by upscaling geological information. In the less permeable matrix, a nonlinear low-velocity law accounts for threshold effects that conventional Darcy flow can miss. Exchange between the two systems depends on pressure difference, geometry, and interface permeability. An energy-balance argument supplies a thermodynamically consistent effective stress for the anisotropic poroelastic response. Numerical applications examine how coupling, material anisotropy, poroelastic coefficients, and the limited permeability of the matrix affect displacement and pore-pressure evolution. The framework also connects the continuum parameters to their physical origins and accommodates existing isotropic models as special cases.",
+    "abstract_source": "https://www.sciencedirect.com/science/article/abs/pii/S0920410521000085",
+    "abstract_kind": "summary",
+    "abstract_reuse_basis": "Original English paraphrase based on the source abstract/main text; no unrestricted verbatim reuse license established. Label as Summary, not verbatim Abstract.",
+    "notes": [
+      "Only the online-publication year is inferred: publisher issue year and initial DOI registration year coincide. No exact online date was confirmed. Do not treat the issue month as the online month."
+    ],
+    "sources": [
+      "https://www.sciencedirect.com/science/article/abs/pii/S0920410521000085",
+      "https://api.crossref.org/works/10.1016/j.petrol.2021.108349"
+    ],
+    "group_year_status": "verified"
+  },
+  {
+    "id": 40,
+    "slug": "poroelastic-coefficients-for-anisotropic-single-and-double-porosity-media",
+    "title": "Poroelastic coefficients for anisotropic single and double porosity media",
+    "citation_year": 2021,
+    "doi": "10.1007/s11440-021-01184-y",
+    "manuscript_url": "https://doi.org/10.1007/s11440-021-01184-y",
+    "extra_links": [],
+    "equal_contributors": [],
+    "authors": [
+      "Q. Zhang",
+      "R. I. Borja"
+    ],
+    "online_date": "2021-04-21",
+    "online_date_source": "https://api.crossref.org/works/10.1007/s11440-021-01184-y (published-online)",
+    "group_year": 2021,
+    "journal": "Acta Geotechnica",
+    "volume": "16",
+    "issue": "10",
+    "pages": "3013 - 3025",
+    "abstract_text": "This study derives explicit poroelastic coefficients for anisotropic materials with either one pore system or two interacting pore systems. Its central method is a superposition construction: a sequence of elementary loading states yields the fluid mass-balance equations and identifies the associated Biot tensor, Biot moduli, and related coefficients. For a single pore system, the resulting conservation equation agrees with an independent derivation based on continuum thermodynamics. This agreement provides a consistency check and demonstrates two complementary routes to the same governing description. Examples for granite and sandstone show how the coefficients can be evaluated using material properties reported in the literature. These calculations connect the analytical expressions to parameters needed in coupled deformation and flow simulations, helping modelers select internally consistent properties for anisotropic single- and double-porosity media.",
+    "abstract_source": "https://link.springer.com/article/10.1007/s11440-021-01184-y",
+    "abstract_kind": "summary",
+    "abstract_reuse_basis": "Original English paraphrase based on the source abstract/main text; no unrestricted verbatim reuse license established. Label as Summary, not verbatim Abstract.",
+    "notes": [],
+    "sources": [
+      "https://link.springer.com/article/10.1007/s11440-021-01184-y",
+      "https://api.crossref.org/works/10.1007/s11440-021-01184-y"
+    ],
+    "group_year_status": "verified",
+    "corrections": {
+      "heading": "Corrections",
+      "text": "Corrections will be added here."
+    }
+  },
+  {
+    "id": 41,
+    "slug": "hierarchical-modeling-of-hydromechanical-coupling-in-fractured-shale-gas-reservoirs",
+    "title": "Hierarchical Modeling of Hydromechanical Coupling in Fractured Shale Gas Reservoirs with Multiple Porosity Scales",
+    "citation_year": 2021,
+    "doi": "10.1021/acs.energyfuels.0c03757",
+    "manuscript_url": "https://doi.org/10.1021/acs.energyfuels.0c03757",
+    "extra_links": [],
+    "equal_contributors": [],
+    "authors": [
+      "X. Yan",
+      "H. Sun",
+      "Z. Huang",
+      "L. Liu",
+      "P. Wang",
+      "Q. Zhang",
+      "J. Yao"
+    ],
+    "online_date": "2021-03-12",
+    "online_date_source": "https://api.crossref.org/works/10.1021/acs.energyfuels.0c03757 (published-online)",
+    "group_year": 2021,
+    "journal": "Energy &amp; Fuels",
+    "volume": "35",
+    "issue": "7",
+    "pages": "5758 - 5776",
+    "abstract_text": "A hierarchical simulation strategy represents the different pore and fracture scales that govern gas production from shale. At the smallest scale, inorganic material and organic kerogen are homogenized into an equivalent medium. A second homogenization step incorporates natural fractures, while larger hydraulic fractures remain explicit through an embedded discrete fracture model. The resulting description combines multiple storage and transport mechanisms with deformation of the reservoir. Flow is discretized by a mimetic finite-difference method, and a stabilized extended finite-element scheme handles the mechanical problem. A sequential implicit solution procedure couples the two systems. Numerical examples first assess the method, followed by three-dimensional reservoir calculations that investigate the separate influences of inorganic matter, kerogen, natural fractures, and hydraulic fractures on gas production. The approach provides a way to retain effects of fine-scale structure without resolving every pore or natural fracture directly.",
+    "abstract_source": "https://research.polyu.edu.hk/en/publications/hierarchical-modeling-of-hydromechanical-coupling-in-fractured-sh/",
+    "abstract_kind": "summary",
+    "abstract_reuse_basis": "Original English paraphrase based on the source abstract/main text; no unrestricted verbatim reuse license established. Label as Summary, not verbatim Abstract.",
+    "notes": [],
+    "sources": [
+      "https://research.polyu.edu.hk/en/publications/hierarchical-modeling-of-hydromechanical-coupling-in-fractured-sh/",
+      "https://api.crossref.org/works/10.1021/acs.energyfuels.0c03757"
+    ],
+    "group_year_status": "verified"
+  },
+  {
+    "id": 42,
+    "slug": "effects-of-the-borehole-drainage-for-roof-aquifer-on-local",
+    "title": "Effects of the borehole drainage for roof aquifer on local stress in underground mining",
+    "citation_year": 2021,
+    "doi": "10.12989/gae.2021.24.5.479",
+    "manuscript_url": "https://doi.org/10.12989/GAE.2021.24.5.479",
+    "extra_links": [],
+    "equal_contributors": [],
+    "authors": [
+      "J. Shao",
+      "Q. Zhang",
+      "W. Zhang",
+      "Z. Wang",
+      "X. Wu"
+    ],
+    "online_date": "2021",
+    "online_date_source": "https://www.techno-press.com/papers/7193",
+    "group_year": 2021,
+    "journal": "Geomechanics and Engineering",
+    "volume": "24",
+    "issue": "5",
+    "pages": "479 - 490",
+    "abstract_text": "Draining groundwater through boreholes can reduce the danger of water entering an underground coal mine, but it also changes stresses in the surrounding strata. This study examines that interaction using theoretical analysis and numerical simulations informed by drainage above the 1303 mining face at Longyun Coal Mine. As water levels fall, three stress regions develop outward from a borehole: a relaxed inner region, an elevated-stress region, and an outer region where stresses recover toward their original state. The peak stress moves outward as the drainage influence expands, then stabilizes when that influence reaches its maximum extent. An advancing mining face can bring its abutment pressure into the same area, increasing stress concentration through superposition. The results identify a mechanical consequence of groundwater control that should be considered when planning the arrangement of drainage boreholes.",
+    "abstract_source": "https://www.techno-press.com/papers/7193",
+    "abstract_kind": "summary",
+    "abstract_reuse_basis": "Original English paraphrase based on the source abstract/main text; no unrestricted verbatim reuse license established. Label as Summary, not verbatim Abstract.",
+    "notes": [
+      "Publisher verifies article and year, but does not expose an exact online date in retrieved data. Crossref returns 404 for both lowercase and uppercase DOI; publisher identifies DOI as 10.12989/gae.2021.24.5.479."
+    ],
+    "sources": [
+      "https://www.techno-press.com/papers/7193"
+    ],
+    "group_year_status": "verified"
+  },
+  {
+    "id": 43,
+    "slug": "multi-constitutive-neural-network-for-large-deformation-poromechanics-problem",
+    "title": "Multi-Constitutive Neural Network for Large Deformation Poromechanics Problem",
+    "citation_year": 2020,
+    "doi": null,
+    "manuscript_url": "https://ml4physicalsciences.github.io/2020/files/NeurIPS_ML4PS_2020_96.pdf",
+    "extra_links": [
+      {
+        "label": "Poster",
+        "url": "https://ml4physicalsciences.github.io/2020/files/NeurIPS_ML4PS_2020_96_poster.pdf"
+      }
+    ],
+    "equal_contributors": [
+      "Q. Zhang",
+      "Y. Chen",
+      "Z. Yang"
+    ],
+    "authors": [
+      "Q. Zhang",
+      "Y. Chen",
+      "Z. Yang",
+      "E. Darve"
+    ],
+    "online_date": "2020",
+    "online_date_source": "https://ml4physicalsciences.github.io/2020/files/NeurIPS_ML4PS_2020_96.pdf",
+    "group_year": 2020,
+    "journal": "Proceedings of the Machine Learning and the Physical Sciences Workshop, 34th Conference on Neural Information Processing Systems (NeurIPS), Virtual (Online)",
+    "volume": "",
+    "issue": "",
+    "pages": "",
+    "abstract_text": "The multi-constitutive neural network (MCNN) addresses large-strain consolidation while allowing a single trained model to represent several constitutive laws. Instead of training a separate solver for each material law, the method adds a one-hot constitutive-law label to the dimensionless spatial and temporal coordinates supplied to a deep neural network. The label selects the relevant governing equation during training and prediction. Demonstrations use three hyperelastic laws and compare the learned responses with finite-difference reference solutions and independently trained physics-informed networks. The shared model gives accurate consolidation and settlement predictions across the tested laws. In two of the three benchmark cases, it also achieves lower errors than the corresponding independent networks. These results suggest that jointly learning related governing equations can improve data efficiency and generalization while reducing the need for separate models.",
+    "abstract_source": "https://ml4physicalsciences.github.io/2020/files/NeurIPS_ML4PS_2020_96.pdf",
+    "abstract_kind": "summary",
+    "abstract_reuse_basis": "Original English paraphrase based on the source abstract/main text; no unrestricted verbatim reuse license established. Label as Summary, not verbatim Abstract.",
+    "notes": [
+      "Official 2020 workshop/project PDF; no more precise first-posted or submission date verified.",
+      "Official paper marks Qi Zhang, Yilin Chen, and Ziyi Yang as equal contributors, although Word has no # marks for this entry. Ask user before adding any new equal-contribution footnote."
+    ],
+    "sources": [
+      "https://ml4physicalsciences.github.io/2020/files/NeurIPS_ML4PS_2020_96.pdf"
+    ],
+    "latex_suggestion": {
+      "replace": "dimensionless spatial and temporal coordinates",
+      "with": "dimensionless spatial and temporal coordinates \\(\\hat{X}\\) and \\(\\hat{t}\\)",
+      "source": "Official PDF p1 abstract uses the same variables; safe typography-only test."
+    },
+    "group_year_status": "verified",
+    "abstract_latex": "The multi-constitutive neural network (MCNN) addresses large-strain consolidation while allowing a single trained model to represent several constitutive laws. Instead of training a separate solver for each material law, the method adds a one-hot constitutive-law label to the dimensionless spatial and temporal coordinates $\\hat{X}$ and $\\hat{t}$ supplied to a deep neural network. The label selects the relevant governing equation during training and prediction. Demonstrations use three hyperelastic laws and compare the learned responses with finite-difference reference solutions and independently trained physics-informed networks. The shared model gives accurate consolidation and settlement predictions across the tested laws. In two of the three benchmark cases, it also achieves lower errors than the corresponding independent networks. These results suggest that jointly learning related governing equations can improve data efficiency and generalization while reducing the need for separate models.",
+    "latex_test_note": "Dimensionless coordinates from the official manuscript: X-hat and t-hat."
+  },
+  {
+    "id": 44,
+    "slug": "new-type-of-similar-material-for-simulating-the-processes-of",
+    "title": "New Type of Similar Material for Simulating the Processes of Water Inrush from Roof Bed Separation",
+    "citation_year": 2020,
+    "doi": "10.1021/acsomega.0c03535",
+    "manuscript_url": "https://doi.org/10.1021/acsomega.0c03535",
+    "extra_links": [],
+    "equal_contributors": [],
+    "authors": [
+      "Z. Wang",
+      "Q. Zhang",
+      "J. Shao",
+      "W. Zhang",
+      "X. Wu",
+      "X. Zhu"
+    ],
+    "online_date": "2020-11-18",
+    "online_date_source": "https://api.crossref.org/works/10.1021/acsomega.0c03535 (published-online)",
+    "group_year": 2020,
+    "journal": "ACS Omega",
+    "volume": "5",
+    "issue": "47",
+    "pages": "30405 - 30415",
+    "abstract_text": "This study develops a laboratory analogue material for investigating water accumulation and inrush associated with roof-bed separation above coal workings. The mixture uses river sand as its main granular skeleton, with nanoscale calcium carbonate, calcium bentonite, gypsum, and emulsified wax as additives. Its suitability is assessed through tests of compressive strength, water permeation height, structural stability, and microscopic characteristics. A physical simulation then examines whether the material can reproduce the relevant separation and seepage processes. The purpose is to provide experimental conditions in which the development of separated strata and the movement of water can be studied together. Such analogue experiments complement theoretical and numerical investigations of mining-related water hazards and support efforts to understand, predict, and control water accidents involving roof-bed separation.",
+    "abstract_source": "https://api.crossref.org/works/10.1021/acsomega.0c03535",
+    "abstract_kind": "summary",
+    "abstract_reuse_basis": "Original English paraphrase based on the source abstract/main text; no unrestricted verbatim reuse license established. Label as Summary, not verbatim Abstract.",
+    "notes": [],
+    "sources": [
+      "https://api.crossref.org/works/10.1021/acsomega.0c03535",
+      "https://api.crossref.org/works/10.1021/acsomega.0c03535"
+    ],
+    "group_year_status": "verified"
+  },
+  {
+    "id": 45,
+    "slug": "hydromechanical-modeling-of-solid-deformation-and-fluid-flow-in-the",
+    "title": "Hydromechanical modeling of solid deformation and fluid flow in the transversely isotropic fissured rocks",
+    "citation_year": 2020,
+    "doi": "10.1016/j.compgeo.2020.103812",
+    "manuscript_url": "https://doi.org/10.1016/j.compgeo.2020.103812",
+    "extra_links": [],
+    "equal_contributors": [],
+    "authors": [
+      "Q. Zhang"
+    ],
+    "online_date": "2020",
+    "online_date_source": "Crossref publisher-deposited citation and DOI creation year agree; exact online day not verified.",
+    "group_year": 2020,
+    "journal": "Computers and Geotechnics",
+    "volume": "128",
+    "issue": "",
+    "pages": "103812",
+    "abstract_text": "An anisotropic double-porosity elastoplastic formulation is presented for sedimentary rocks that contain both matrix pores and fissures. The model couples deformation of the solid skeleton with fluid movement through the two pore systems, while accounting for the directional behavior associated with bedding. A new implicit stress-update algorithm handles the loss of coaxiality between trial and corrected stress states and computes the updated effective stress, internal variables, and consistent tangent operator. A uniaxial-strain calculation supplies a benchmark for this procedure. Three-dimensional material-point simulations then use triaxial test data to calibrate the constitutive parameters and illustrate strain softening. Finally, boundary-value examples examine how the assumed flow behavior and solid constitutive response influence the overall hydromechanical solution. The work provides a numerical framework for studying coupled processes in transversely isotropic fissured rocks.",
+    "abstract_source": "https://www.sciencedirect.com/science/article/abs/pii/S0266352X2030375X",
+    "abstract_kind": "summary",
+    "abstract_reuse_basis": "Original English paraphrase based on the source abstract/main text; no unrestricted verbatim reuse license established. Label as Summary, not verbatim Abstract.",
+    "notes": [
+      "Only the online-publication year is inferred: publisher issue year and initial DOI registration year coincide. No exact online date was confirmed. Do not treat the issue month as the online month."
+    ],
+    "sources": [
+      "https://www.sciencedirect.com/science/article/abs/pii/S0266352X2030375X",
+      "https://api.crossref.org/works/10.1016/j.compgeo.2020.103812"
+    ],
+    "group_year_status": "verified"
+  },
+  {
+    "id": 46,
+    "slug": "investigation-on-the-water-flow-evolution-in-a-filled-fracture",
+    "title": "Investigation on the Water Flow Evolution in a Filled Fracture under Seepage-Induced Erosion",
+    "citation_year": 2020,
+    "doi": "10.3390/w12113188",
+    "manuscript_url": "https://doi.org/10.3390/w12113188",
+    "extra_links": [],
+    "equal_contributors": [],
+    "authors": [
+      "J. Shao",
+      "Q. Zhang",
+      "X. Wu",
+      "Y. Lei",
+      "X. Wu",
+      "Z. Wang"
+    ],
+    "online_date": "2020-11-14",
+    "online_date_source": "https://api.crossref.org/works/10.3390/w12113188 (published-online)",
+    "group_year": 2020,
+    "journal": "Water",
+    "volume": "12",
+    "issue": "11",
+    "pages": "3188",
+    "abstract_text": "Water inrush is a major geological hazard for safe mining and tunnel construction. For the water inrush channel containing mud, sand, and other sediments, it is difficult to predict the change of permeability and water surge, which makes disaster prevention difficult. As a typical water inrush channel, a filled fracture under seepage-induced erosion needs to be focused. In this work, a numerical model for the evolution of flow in a filled fracture under seepage-induced erosion was established, which included the seepage velocity, hydraulic erosion, and permeability of the filling medium. The effects of joint roughness coefficient (JRC) and homogeneity of the filling medium on the seepage evolution are discussed. The results showed that the fracture seepage properties experienced a non-linear change process, and the evolution can be divided into three phases: the slowly varying phase, the rapidly varying phase, and the stable phase. The increase of the JRC hindered the development in flow velocity and erosion. Compared with low homogeneous filling medium, pores in the high homogeneous filling medium were easier to expand and connect, and the seepage characteristics evolved faster. The model established in this study will help to understand the seepage evolution of filled fractures, and can be used to predict the permeability of filled fractures in engineering geology.",
+    "abstract_source": "https://www.mdpi.com/2073-4441/12/11/3188",
+    "abstract_kind": "original",
+    "abstract_reuse_basis": "Publisher-deposited Crossref license explicitly CC BY 4.0: https://creativecommons.org/licenses/by/4.0/",
+    "notes": [],
+    "sources": [
+      "https://www.mdpi.com/2073-4441/12/11/3188",
+      "https://api.crossref.org/works/10.3390/w12113188"
+    ],
+    "group_year_status": "verified"
+  },
+  {
+    "id": 47,
+    "slug": "numerical-investigation-of-the-effect-of-partially-propped-fracture-closure",
+    "title": "Numerical Investigation of the Effect of Partially Propped Fracture Closure on Gas Production in Fractured Shale Reservoirs",
+    "citation_year": 2020,
+    "doi": "10.3390/en13205339",
+    "manuscript_url": "https://doi.org/10.3390/en13205339",
+    "extra_links": [],
+    "equal_contributors": [],
+    "authors": [
+      "X. Yan",
+      "Z. Huang",
+      "Q. Zhang",
+      "D. Fan",
+      "J. Yao"
+    ],
+    "online_date": "2020-10-13",
+    "online_date_source": "https://api.crossref.org/works/10.3390/en13205339 (published-online)",
+    "group_year": 2020,
+    "journal": "Energies",
+    "volume": "13",
+    "issue": "20",
+    "pages": "5339",
+    "abstract_text": "Nonuniform proppant distribution is fairly common in hydraulic fractures, and different closure behaviors of the propped and unpropped fractures have been observed in lots of physical experiments. However, the modeling of partially propped fracture closure is rarely performed, and its effect on gas production is not well understood as a result of previous studies. In this paper, a fully coupled fluid flow and geomechanics model is developed to simulate partially propped fracture closure, and to examine its effect on gas production in fractured shale reservoirs. Specifically, an efficient hybrid model, which consists of a single porosity model, a multiple porosity model and the embedded discrete fracture model (EDFM), is adopted to model the hydro-mechanical coupling process in fractured shale reservoirs. In flow equations, the Klinkenberg effect is considered in gas apparent permeability, and adsorption/desorption is treated as an additional source term. In the geomechanical domain, the closure behaviors of propped and unpropped fractures are described through two different constitutive models. Then, a stabilized extended finite element method (XFEM) iterative formulation, which is based on the polynomial pressure projection (PPP) technique, is developed to simulate a partially propped fracture closure with the consideration of displacement discontinuity at the fracture interfaces. After that, the sequential implicit method is applied to solve the coupled problem, in which the finite volume method (FVM) and stabilized XFEM are applied to discretize the flow and geomechanics equations, respectively. Finally, the proposed method is validated through some numerical examples, and then it is further used to study the effect of partially propped fracture closures on gas production in 3D fractured shale reservoir simulation models. This work will contribute to a better understanding of the dynamic behaviors of fractured shale reservoirs during gas production, and will provide more realistic production forecasts.",
+    "abstract_source": "https://www.mdpi.com/1996-1073/13/20/5339",
+    "abstract_kind": "original",
+    "abstract_reuse_basis": "Publisher-deposited Crossref license explicitly CC BY 4.0: https://creativecommons.org/licenses/by/4.0/",
+    "notes": [],
+    "sources": [
+      "https://www.mdpi.com/1996-1073/13/20/5339",
+      "https://api.crossref.org/works/10.3390/en13205339"
+    ],
+    "group_year_status": "verified"
+  },
+  {
+    "id": 48,
+    "slug": "experimental-study-on-the-basic-properties-of-a-green-new",
+    "title": "Experimental Study on the Basic Properties of a Green New Coal Mine Grouting Reinforcement Material",
+    "citation_year": 2020,
+    "doi": "10.1021/acsomega.0c01626",
+    "manuscript_url": "https://doi.org/10.1021/acsomega.0c01626",
+    "extra_links": [],
+    "equal_contributors": [],
+    "authors": [
+      "X. Zhu",
+      "Q. Zhang",
+      "W. Zhang",
+      "J. Shao",
+      "Z. Wang",
+      "X. Wu"
+    ],
+    "online_date": "2020-06-28",
+    "online_date_source": "https://api.crossref.org/works/10.1021/acsomega.0c01626 (published-online)",
+    "group_year": 2020,
+    "journal": "ACS Omega",
+    "volume": "5",
+    "issue": "27",
+    "pages": "16722 - 16732",
+    "abstract_text": "A grouting material for reinforcing coal-mine floors is developed from waste tire rubber, fly ash, clay, and additives. The study links reuse of solid waste with the need to limit water inrush through fractured or weakened floor strata. Laboratory investigations evaluate mixture proportions, uniaxial compressive strength, permeability, stability in mine-water conditions, and microstructure. Scanning electron microscopy complements the bulk measurements by examining the internal fabric of the hardened grout. The reported optimized mixture contains 20% rubber particles, 65% fly ash, and 15% clay, with 1% nanosilica as an additive. Selection balances material cost, bonding, and dense filling while making extensive use of waste products. The experimental results provide a basis for assessing this material in floor-grouting applications and for considering larger-scale use of these industrial wastes.",
+    "abstract_source": "https://api.crossref.org/works/10.1021/acsomega.0c01626",
+    "abstract_kind": "summary",
+    "abstract_reuse_basis": "Original English paraphrase based on the source abstract/main text; no unrestricted verbatim reuse license established. Label as Summary, not verbatim Abstract.",
+    "notes": [],
+    "sources": [
+      "https://api.crossref.org/works/10.1021/acsomega.0c01626",
+      "https://api.crossref.org/works/10.1021/acsomega.0c01626"
+    ],
+    "group_year_status": "verified"
+  },
+  {
+    "id": 49,
+    "slug": "numerical-simulation-on-non-darcy-flow-in-a-single-rock",
+    "title": "Numerical Simulation on Non-Darcy Flow in a Single Rock Fracture Domain Inverted by Digital Images",
+    "citation_year": 2020,
+    "doi": "10.1155/2020/8814327",
+    "manuscript_url": "https://doi.org/10.1155/2020/8814327",
+    "extra_links": [],
+    "equal_contributors": [],
+    "authors": [
+      "J. Shao",
+      "Q. Zhang",
+      "W. Sun",
+      "Z. Wang",
+      "X. Zhu"
+    ],
+    "online_date": "2020-06-27",
+    "online_date_source": "https://onlinelibrary.wiley.com/doi/10.1155/2020/8814327 (First published: 27 June 2020)",
+    "group_year": 2020,
+    "journal": "Geofluids",
+    "volume": "2020",
+    "issue": "",
+    "pages": "8814327",
+    "abstract_text": "The influence of rock seepage must be considered in geotechnical engineering, and understanding the fluid flow in rock fractures is of great concern in the seepage effect investigation. This study is aimed at developing a model for inversion of rock fracture domains based on digital images and further study of non-Darcy flow. The visualization model of single rock fracture domain is realized by digital images, which is further used in flow numerical simulation. We further discuss the influence of fracture domain geometry on non-Darcy flow. The results show that it is feasible to study non-Darcy flow in rock fracture domains by inversion based on digital images. In addition, as the joint roughness coefficient (JRC) increases or the fracture aperture decreases, distortion of the fluid flow path increases, and the pressure gradient loss caused by the inertial force increases. Both coefficients of the Forchheimer equation decrease with increasing fracture aperture and increase with increasing JRC. Meanwhile, the critical Reynolds number tends to decrease when JRC increases or the fracture aperture decreases, indicating that the fluid tends to non-Darcy flow. This work provides a reference for the study of non-Darcy flow through rock fractures.",
+    "abstract_source": "https://onlinelibrary.wiley.com/doi/10.1155/2020/8814327",
+    "abstract_kind": "original",
+    "abstract_reuse_basis": "Publisher-deposited Crossref license explicitly CC BY 4.0: https://creativecommons.org/licenses/by/4.0/",
+    "notes": [
+      "Use the publisher article number 8814327 rather than Crossref internal page range 1-13."
+    ],
+    "sources": [
+      "https://onlinelibrary.wiley.com/doi/10.1155/2020/8814327",
+      "https://api.crossref.org/works/10.1155/2020/8814327"
+    ],
+    "group_year_status": "verified"
+  },
+  {
+    "id": 50,
+    "slug": "data-driven-solutions-and-discoveries-in-mechanics-using-physics-informed",
+    "title": "Data Driven Solutions and Discoveries in Mechanics Using Physics Informed Neural Network",
+    "citation_year": 2020,
+    "doi": null,
+    "manuscript_url": "https://cs229.stanford.edu/proj2020spr/report/Zhang_Chen_Yang.pdf",
+    "extra_links": [],
+    "equal_contributors": [],
+    "authors": [
+      "Q. Zhang",
+      "Y. Chen",
+      "Z. Yang"
+    ],
+    "online_date": "2020",
+    "online_date_source": "https://cs229.stanford.edu/proj2020spr/report/Zhang_Chen_Yang.pdf",
+    "group_year": 2020,
+    "journal": "Stanford University CS 229 Project, Spring",
+    "volume": "",
+    "issue": "",
+    "pages": "",
+    "abstract_text": "This project investigates physics-informed neural networks as solvers and inference tools for mechanics problems described by differential equations. Automatic differentiation evaluates derivatives of the network output, allowing residuals of the governing equations to enter the training objective alongside boundary conditions and observed data. The report considers both forward problems, where the solution is sought for specified model parameters, and inverse problems, where unknown parameters are inferred from observations. Predictions are compared with analytical results or finite-element calculations. The framework produces a smooth surrogate that can be differentiated with respect to coordinates and model parameters, making the same basic implementation useful for both solution and discovery tasks. The examples illustrate the potential of combining physical equations with data in neural-network models, while exploring their use as alternatives to established numerical methods for engineering mechanics.",
+    "abstract_source": "https://cs229.stanford.edu/proj2020spr/report/Zhang_Chen_Yang.pdf",
+    "abstract_kind": "summary",
+    "abstract_reuse_basis": "Original English paraphrase based on the source abstract/main text; no unrestricted verbatim reuse license established. Label as Summary, not verbatim Abstract.",
+    "notes": [
+      "Official 2020 workshop/project PDF; no more precise first-posted or submission date verified.",
+      "No poster link, as requested."
+    ],
+    "sources": [
+      "https://cs229.stanford.edu/proj2020spr/report/Zhang_Chen_Yang.pdf"
+    ],
+    "group_year_status": "verified"
+  },
+  {
+    "id": 51,
+    "slug": "on-the-preferential-flow-patterns-induced-by-transverse-isotropy-and",
+    "title": "On the preferential flow patterns induced by transverse isotropy and non-Darcy flow in double porosity media",
+    "citation_year": 2019,
+    "doi": "10.1016/j.cma.2019.04.037",
+    "manuscript_url": "https://doi.org/10.1016/j.cma.2019.04.037",
+    "extra_links": [],
+    "equal_contributors": [],
+    "authors": [
+      "Q. Zhang",
+      "J. Choo",
+      "R. I. Borja"
+    ],
+    "online_date": "2019-06-06",
+    "online_date_source": "https://web.stanford.edu/~borja/pub/cmame2019(1).pdf (page 1: Available online 6 June 2019)",
+    "group_year": 2019,
+    "journal": "Computer Methods in Applied Mechanics and Engineering",
+    "volume": "353",
+    "issue": "",
+    "pages": "570 - 592",
+    "abstract_text": "This paper examines fluid transport in deformable materials containing two pore scales with a strong contrast in permeability. Sedimentary rocks motivate the formulation: fluid can move along larger microfractures as well as through much smaller matrix nanopores. Preferred fracture orientations create directional permeability at the larger scale, while the small matrix pores can produce departures from Darcy behavior. A coupled hydromechanical model incorporates both effects by representing the fracture system as transversely isotropic and allowing non-Darcy transport within the matrix. Although shale provides the physical motivation, the model is formulated for a more general class of double-porosity materials with similar transport characteristics. The analysis focuses on how anisotropy and the matrix flow law jointly shape preferential flow patterns, highlighting processes that cannot be captured by a conventional isotropic, single-porosity description.",
+    "abstract_source": "https://web.stanford.edu/~borja/pub/cmame2019(1).pdf",
+    "abstract_kind": "summary",
+    "abstract_reuse_basis": "Original English paraphrase based on the source abstract/main text; no unrestricted verbatim reuse license established. Label as Summary, not verbatim Abstract.",
+    "notes": [],
+    "sources": [
+      "https://web.stanford.edu/~borja/pub/cmame2019(1).pdf",
+      "https://api.crossref.org/works/10.1016/j.cma.2019.04.037"
+    ],
+    "group_year_status": "verified"
+  },
+  {
+    "id": 52,
+    "slug": "collaborative-3d-geological-modeling-analysis-based-on-multi-source-data",
+    "title": "Collaborative 3D geological modeling analysis based on multi-source data standard",
+    "citation_year": 2018,
+    "doi": "10.1016/j.enggeo.2018.10.001",
+    "manuscript_url": "https://doi.org/10.1016/j.enggeo.2018.10.001",
+    "extra_links": [],
+    "equal_contributors": [],
+    "authors": [
+      "Q. Zhang",
+      "H. Zhu"
+    ],
+    "online_date": "2018",
+    "online_date_source": "Crossref publisher-deposited citation and DOI creation year agree; exact online day not verified.",
+    "group_year": 2018,
+    "journal": "Engineering Geology",
+    "volume": "246",
+    "issue": "",
+    "pages": "233 - 244",
+    "abstract_text": "A collaborative workflow is proposed for constructing and using three-dimensional geological models from heterogeneous information. A common data standard brings borehole records, geological mapping, and rock-property measurements into a coordinated database. A combined Kriging procedure processes the available observations, after which geological modeling algorithms construct, display, and support further analysis of the resulting model. The framework emphasizes the sequence of data preparation and modeling operations so that information collected at different places or stages can contribute to a consistent geological representation. It also supports collaboration between different software tools used for modeling and visualization. Application to the Ma-luan mountain tunnel project in Guangdong, China, demonstrates the approach. The work addresses practical difficulties in integrating geological evidence for tunnel projects and aims to make the resulting models easier to interpret and update.",
+    "abstract_source": "https://www.sciencedirect.com/science/article/pii/S0013795217314734",
+    "abstract_kind": "summary",
+    "abstract_reuse_basis": "Original English paraphrase based on the source abstract/main text; no unrestricted verbatim reuse license established. Label as Summary, not verbatim Abstract.",
+    "notes": [
+      "Only the online-publication year is inferred: publisher issue year and initial DOI registration year coincide. No exact online date was confirmed. Do not treat the issue month as the online month."
+    ],
+    "sources": [
+      "https://www.sciencedirect.com/science/article/pii/S0013795217314734",
+      "https://api.crossref.org/works/10.1016/j.enggeo.2018.10.001"
+    ],
+    "group_year_status": "verified"
+  }
+]

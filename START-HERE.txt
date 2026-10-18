@@ -13,11 +13,16 @@
 2. 修改文字
 用记事本或代码编辑器打开 site 文件夹里的 .jemdoc 文件，以 UTF-8 保存。
 index.jemdoc 是首页，biography.jemdoc 是简介，research.jemdoc 是研究与公式示例，
-publications.jemdoc 是论文入口，software.jemdoc 是软件，MENU 控制左侧导航。
-菜单用 Code 显示软件页；teaching.jemdoc 和 people.jemdoc 暂留占位内容。
+software.jemdoc 是软件，MENU 控制左侧导航。
+论文内容集中保存在 site/publications.json：包含标题、作者、首次在线年份、
+期刊信息、Manuscript 和附加链接，以及摘要或标注为 Summary 的英文概述。
+generate_papers.py 会在构建时生成 publications.jemdoc 和 site/papers/*.jemdoc，
+请修改 JSON 而不是这些自动生成的 jemdoc 文件。每篇保留来源和待核实记录。
+菜单用 Code 显示软件页；Teaching 已加入课程与参与授课说明。
 不要直接改 docs 内的 HTML；下次生成时会覆盖它们。
 照片放在 site/images，论文 PDF 放在 site/papers，简历放在 site/files。
-把文件放入文件夹后，还需要在 .jemdoc 中添加对应链接。
+把文件放入文件夹后，还需要添加对应链接；论文的 Manuscript 链接可在 JSON
+的 manuscript_url 中改为 PDF 文件名（与该论文 HTML 同在 papers 文件夹）。
 首页头像暂时是浅灰空白占位；换照片时，把新照片放到 site/images，
 并将 index.jemdoc 中 images/portrait-placeholder.svg 改成新照片路径。
 
@@ -76,6 +81,7 @@ https://github.com/cvxgrp/jemdoc-cvx/releases/tag/v1.0.0
 保留原始 LICENSE、README 和下载包。
 对 tools/jemdoc-cvx-1.0.0/jemdoc 做了 Windows 兼容调整：
 通过 Node 直接调用 KaTeX CLI，并明确使用 UTF-8 读取公式输出。
+同时修复 Windows CRLF 段落识别及链接 target 属性转义，外部内容在新标签页打开。
 site/site.conf 增加手机视口，并改为使用本地 KaTeX 样式和字体。
 
 官方参考

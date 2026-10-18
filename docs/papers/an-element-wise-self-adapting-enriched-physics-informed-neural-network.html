@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="generator" content="jemdoc-cvx">
+<link rel="stylesheet" href="../boyd-base.css">
+<link rel="stylesheet" href="../custom.css">
+<title>An Element-Wise Self-Adapting Enriched Physics-Informed Neural Network for Solving Parameter-Varying Two-Phase Flow Problems in Heterogeneous Porous Media</title>
+</head>
+<body class="paper-page">
+<div id="tlayout">
+<nav id="layout-menu">
+<div class="menu-category">ZHANG, Qi</div>
+<div class="menu-item"><a href="../index.html">Home</a></div>
+<div class="menu-item"><a href="../teaching.html">Teaching</a></div>
+<div class="menu-item"><a href="../biography.html">Biography</a></div>
+<div class="menu-category">Research</div>
+<div class="menu-item"><a href="../publications.html" class="current">Papers</a></div>
+<div class="menu-item"><a href="../software.html">Code</a></div>
+<div class="menu-item"><a href="../people.html">People</a></div>
+</nav>
+<main id="layout-content">
+<div id="toptitle">
+<h1>An Element-Wise Self-Adapting Enriched Physics-Informed Neural Network for Solving Parameter-Varying Two-Phase Flow Problems in Heterogeneous Porous Media</h1>
+<div id="subtitle"><i>J. Lin, X. Yan, K. Zhang, L. Zhang, Z. Zhang, P. Liu, S. Sun, and Q. Zhang</i>
+</div>
+</div>
+<p><i>Journal of Computational Physics</i>, 565:115180, 2026.
+</p>
+<ul>
+<li><p><a href="https://doi.org/10.1016/j.jcp.2026.115180" target="_blank" rel="noopener noreferrer">Manuscript</a>
+</p>
+</li>
+</ul>
+<h2>Summary</h2>
+<p>The paper examines why strong spatial heterogeneity and changing parameters make enriched physics-informed neural networks difficult to train for transient two-phase flow. A response-function analysis links these difficulties to localized perturbations in the learning process. The proposed Attune mechanism introduces element-level adaptation that follows the numerical discretization, producing an Attuned Enriched Physics-Informed Neural Network. Its updates work with AdaGrad to give different elements different learning rates and strengthen gradients associated with parameters that are harder to optimize. Numerical experiments compare the method with the earlier EPINN under heterogeneous and time-dependent conditions. Reported convergence improvements range from threefold to twentyfold, alongside improved solution accuracy. Diagnostic analyses associate these gains with more stable gradients and a more even distribution of equation residuals. Additional examples explore inverse modeling and data assimilation, while retaining the limitations of the tested problem sizes.
+</p>
+<div id="footer">
+<div id="footer-text">
+Built with <a href="https://github.com/cvxgrp/jemdoc-cvx" target="_blank" rel="noopener noreferrer">jemdoc-cvx</a>.
+</div>
+</div>
+</main>
+</div>
+</body>
+</html>
