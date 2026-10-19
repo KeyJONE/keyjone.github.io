@@ -1,5 +1,83 @@
 [
   {
+    "id": 58,
+    "slug": "an-axisymmetric-stabilized-smoothed-finite-element-method-for-thm-coupling",
+    "title": "An axisymmetric stabilized smoothed finite element method for analysis of thermo-hydro-mechanical coupling in porous media",
+    "authors": [
+      "X. Sheng",
+      "Z.-Q. Tang",
+      "Q. Zhang"
+    ],
+    "group_year": 2026,
+    "detail_page": false
+  },
+  {
+    "id": 53,
+    "slug": "multiscale-modeling-of-hydrate-extraction-by-thermal-stimulation",
+    "title": "Multiscale modeling of hydrate extraction by thermal stimulation: From pore-scale mechanisms to Darcy-scale simulations",
+    "authors": [
+      "J. Tang",
+      "G. Lei",
+      "Q. Zhang",
+      "X. Li"
+    ],
+    "group_year": 2026,
+    "detail_page": false
+  },
+  {
+    "id": 54,
+    "slug": "consistent-formulation-and-discretization-of-energy-equations-for-methane-hydrate-dissociation",
+    "title": "Consistent formulation and discretization of energy equations for methane hydrate dissociation: A modular iterative finite volume framework",
+    "authors": [
+      "Z.-Q. Tang",
+      "Q. Zhang"
+    ],
+    "group_year": 2026,
+    "detail_page": false
+  },
+  {
+    "id": 55,
+    "slug": "fe-winn-a-finite-element-weak-form-informed-neural-network",
+    "title": "FE-WINN: A finite element weak-form-informed neural network for solid mechanics with high-fidelity stress recovery",
+    "authors": [
+      "Z. Zhang",
+      "Q. Zhang",
+      "Y. Zhang",
+      "X. Song",
+      "T. Rabczuk"
+    ],
+    "group_year": 2026,
+    "detail_page": false
+  },
+  {
+    "id": 56,
+    "slug": "a-finite-element-residual-driven-physics-informed-neural-network",
+    "title": "A finite element residual-driven physics-informed neural network framework for forward and inverse analyses in solid mechanics",
+    "authors": [
+      "H. Zhang",
+      "Q. Zhang",
+      "Z. Zhang",
+      "G. Liu",
+      "L. Weng"
+    ],
+    "group_year": 2026,
+    "detail_page": false
+  },
+  {
+    "id": 57,
+    "slug": "probabilistic-identification-of-geotechnical-parameters-from-tunnelling-induced-deformation",
+    "title": "Probabilistic identification of geotechnical parameters from tunnelling-induced deformation using Bayesian physics-informed frameworks",
+    "authors": [
+      "J. Zhou",
+      "S. Wei",
+      "D. Zhang",
+      "Z. Zhang",
+      "Q. Zhang"
+    ],
+    "group_year": 2026,
+    "detail_page": false
+  },
+  {
     "id": 10,
     "slug": "a-unified-finite-element-upper-bound-framework-for-the-lateral",
     "title": "A unified finite element upper-bound framework for the lateral bearing capacity of monopiles in undrained clays considering different failure mechanisms",
@@ -289,11 +367,15 @@
     "title": "Hybrid Explicit-Implicit FEM for Porous Media Multiphase Flow with Possible Solid-Phase Decomposition",
     "citation_year": 2026,
     "doi": "10.3390/jmse14020217",
-    "manuscript_url": "https://doi.org/10.3390/jmse14020217",
+    "manuscript_url": "zhang-sheng-2026-hybrid-explicit-implicit-fem.pdf",
     "extra_links": [
       {
         "label": "Supplementary material",
         "url": "https://drive.google.com/file/d/1ByEGXkt0bO2c0BupgWyNJQ-zrIA9GraS/view?usp=sharing"
+      },
+      {
+        "label": "WeChat post",
+        "url": "https://mp.weixin.qq.com/s/V4ai5TjZdXOLoOssdmw-WA"
       }
     ],
     "equal_contributors": [],
@@ -312,12 +394,24 @@
     "abstract_source": "https://doi.org/10.3390/jmse14020217",
     "abstract_kind": "original",
     "abstract_reuse_basis": "Publisher metadata explicitly licenses this article CC BY 4.0; attribution and DOI must be retained.",
-    "notes": [],
+    "notes": [
+      "The author supplied a Table 2 correction and annotated image on 2026-10-19: chi_nw = 0.12923 and chi_w = 1 - chi_nw = 0.87077.",
+      "Author supplied the manuscript PDF and WeChat post link on 2026-10-19; Manuscript links directly to the supplied PDF."
+    ],
     "sources": [
       "https://api.crossref.org/works/10.3390/jmse14020217",
       "https://www.mdpi.com/2077-1312/14/2/217"
     ],
-    "group_year_status": "verified"
+    "group_year_status": "verified",
+    "corrections": {
+      "heading": "Correction",
+      "text": "In Table 2, the subscripts in the production fraction entry are interchanged: $\\chi_w$ should read $\\chi_{nw}$, and vice versa. The correct values are $\\chi_{nw} = 0.12923$ and $\\chi_w = 1 - \\chi_{nw} = 0.87077$.",
+      "image": {
+        "src": "../images/hybrid-fem-table-2-correction.png",
+        "alt": "Original Table 2 with the incorrect production fraction subscripts outlined in red.",
+        "caption": "Original Table 2, with the incorrect subscripts highlighted in red. Click the image to view it at full size."
+      }
+    }
   },
   {
     "id": 18,
@@ -1159,7 +1253,7 @@
     "group_year_status": "verified",
     "corrections": {
       "heading": "Corrections",
-      "text": "Corrections will be added here."
+      "text": "In Section 4.2 (p. 3021, right column), the phrase \"ignoring the $\\varphi^m$ and $\\varphi^M$ terms\" should read \"ignoring the $\\omega^m$ and $\\omega^M$ terms\", consistent with the approximation in Eqs. (72) and (73).\n\nOn p. 3015 (right column), \"depends on solely on\" should read \"depends solely on\".\n\nOn p. 3017 (right column), \"at the rates if\" should read \"at the rates of\"."
     }
   },
   {

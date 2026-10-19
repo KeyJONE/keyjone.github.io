@@ -18,6 +18,8 @@ software.jemdoc 是软件，MENU 控制左侧导航。
 期刊信息、Manuscript 和附加链接，以及摘要或标注为 Summary 的英文概述。
 generate_papers.py 会在构建时生成 publications.jemdoc 和 site/papers/*.jemdoc，
 请修改 JSON 而不是这些自动生成的 jemdoc 文件。每篇保留来源和待核实记录。
+detail_page 为 false 的条目只在列表显示题目和作者，不加链接或状态标签；
+以后需要详情页时，补齐期刊等资料并将此项改为 true。
 菜单用 Code 显示软件页；Teaching 已加入课程与参与授课说明。
 不要直接改 docs 内的 HTML；下次生成时会覆盖它们。
 照片放在 site/images，论文 PDF 放在 site/papers，简历放在 site/files。
