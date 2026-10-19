@@ -246,7 +246,16 @@
     "citation_year": 2026,
     "doi": "10.1016/j.advwatres.2026.105297",
     "manuscript_url": "zhou-zhang-2026-lower-bound-slope-stability.pdf",
-    "extra_links": [],
+    "extra_links": [
+      {
+        "label": "Disciplined Convex Programming",
+        "url": "https://dcp.stanford.edu/"
+      },
+      {
+        "label": "Convex Optimization – Boyd and Vandenberghe",
+        "url": "https://web.stanford.edu/~boyd/cvxbook/"
+      }
+    ],
     "equal_contributors": [
       "J. Zhou",
       "Q. Zhang"
@@ -762,7 +771,11 @@
     "abstract_kind": "original",
     "abstract_source": "C:\\Users\\zq112\\Zotero\\storage\\2YERX48X\\MS110087_corrected.pdf",
     "abstract_reuse_basis": "User-provided PDF, page 1; extracted and visually checked against rendered first page. Line breaks normalized.",
-    "group_year_status": "verified"
+    "group_year_status": "verified",
+    "corrections": {
+      "heading": "Corrections",
+      "text": "In the caption of Fig. 7 (p. 10), the following clarification is added: \"For (c), the time level $t=t_{\\max}$ must be specified.\"\n\nIn Appendix B (p. 18, first paragraph), the fluid thermal expansion coefficient used in this benchmark is $\\beta_f=9\\times10^{-7}\\,\\mathrm{K}^{-1}$. This change was omitted from the original description. The coefficient $\\beta_{\\mathrm{ave}}$ must also be updated accordingly."
+    }
   },
   {
     "id": 27,
