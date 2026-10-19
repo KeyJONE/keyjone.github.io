@@ -26,6 +26,17 @@ def link(url,label):
     return '['+url.replace('#','\\#')+' '+text(label)+']'
 
 
+def linked_text(value,links):
+    """Link selected phrases while escaping the surrounding prose."""
+    if not links:
+        return text(value)
+    targets={item['label']:item['url'] for item in links}
+    labels=sorted(targets,key=len,reverse=True)
+    pattern=r'(?<!\w)('+'|'.join(re.escape(label) for label in labels)+r')(?!\w)'
+    return ''.join(link(targets[piece],piece) if piece in targets else text(piece)
+                   for piece in re.split(pattern,value))
+
+
 def citation(paper):
     if paper.get('citation_override'):
         return text(paper['citation_override'])
@@ -53,14 +64,15 @@ def abstract_content(paper):
     content=paper.get('abstract_latex') or paper.get('abstract_text') or ''
     if not content:
         return ['Abstract will be added here.','']
+    inline_links=paper.get('abstract_links',[])
     result=['== Summary',''] if paper.get('abstract_kind')=='summary' else []
     for paragraph in content.strip().split('\n\n'):
         if paper.get('abstract_latex'):
             # Only explicitly reviewed LaTeX fragments bypass prose escaping.
             pieces=re.split(r'(\$[^$]+\$)',paragraph)
-            result.append(''.join(piece if piece.startswith('$') else text(piece) for piece in pieces))
+            result.append(''.join(piece if piece.startswith('$') else linked_text(piece,inline_links) for piece in pieces))
         else:
-            result.append(text(paragraph))
+            result.append(linked_text(paragraph,inline_links))
         result.append('')
     return result
 
