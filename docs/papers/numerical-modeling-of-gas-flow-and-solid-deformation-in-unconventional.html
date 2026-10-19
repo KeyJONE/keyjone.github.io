@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="generator" content="jemdoc-cvx">
 <link rel="stylesheet" href="../boyd-base.css">
+<link rel="stylesheet" href="../katex/katex.min.css">
 <link rel="stylesheet" href="../custom.css?v=515776595fd6">
 <title>Numerical modeling of gas flow and solid deformation in unconventional anisotropic shale</title>
 </head>
@@ -29,12 +30,11 @@
 <p><i>Computers and Geotechnics</i>, 187:107441, 2025.
 </p>
 <ul>
-<li><p><a href="https://doi.org/10.1016/j.compgeo.2025.107441" target="_blank" rel="noopener noreferrer">Manuscript</a>
+<li><p><a href="zhang-2025-gas-flow-anisotropic-shale.pdf" target="_blank" rel="noopener noreferrer">Manuscript</a>
 </p>
 </li>
 </ul>
-<h2>Summary</h2>
-<p>This work develops a coupled simulator for gas flow and deformation in anisotropic shale, including elastoplastic behavior and fractures. The formulation combines mixed displacement–pressure finite elements with a one-dimensional finite element description of fracture flow. Compressible gas is represented explicitly, allowing the study to distinguish its response from that of a slightly compressible pore fluid. The simulations address an apparent tension between production losses associated with reduced permeability and additional gas release caused by pore compaction. Validated examples include intact shale specimens and fractured reservoirs at field scale. They examine bedding orientation, mechanical anisotropy, plastic strain development, and the role of fluid compressibility. The results distinguish ultimate recovery from production over a limited operating period: deformation-related permeability reduction can inhibit short-term output even when compaction increases ultimate recovery. Bedding-dependent permeability evolution is identified as an important production control.
+<p>Since coupled flow and solid deformation were introduced into shale gas reservoir simulations, the geomechanical effects on gas production have become a frequently studied topic. While numerous studies suggest that geomechanical effects tend to reduce cumulative gas production, an apparent contradiction arises when considering that elastoplastic deformation could cause additional pore compaction during production, compared to a rigid porous matrix. Specifically, assuming identical initial and final gas pressures, an isothermal process, and ideal gas behavior, such additional compaction should theoretically enhance ultimate gas production. Furthermore, widely used shale gas reservoir simulation approaches have limitations in simultaneously modeling mechanical anisotropy and elastoplastic deformation. To address these contradictions and challenges, this work develops an in-house simulator based on a rigorous mixed <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi mathvariant="bold-italic">u</mi><mi mathvariant="normal">/</mi><mi>p</mi></mrow><annotation encoding="application/x-tex">\boldsymbol{u}/p</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord"><span class="mord boldsymbol">u</span></span></span><span class="mord">/</span><span class="mord mathnormal">p</span></span></span></span> formulation coupled with a one-dimensional finite element discretization of the fracture gas flow equation, which has been validated rigorously and demonstrates satisfactory performance. A main improvement lies in the incorporation of a compressible gas in the pores rather than a slightly compressible fluid such as water, together with the associated numerical ramifications. Numerical simulations performed on intact shale samples and field-scale fractured shale reservoirs not only address the contradictions mentioned above but also uncover an unreported trend in the plastic strain distribution during gas production associated with different bedding plane orientations. The impact of the fluid type is also highlighted.
 </p>
 <div id="footer">
 <div id="footer-text">

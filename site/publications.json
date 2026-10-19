@@ -672,7 +672,7 @@
     "title": "Numerical modeling of gas flow and solid deformation in unconventional anisotropic shale",
     "citation_year": 2025,
     "doi": "10.1016/j.compgeo.2025.107441",
-    "manuscript_url": "https://doi.org/10.1016/j.compgeo.2025.107441",
+    "manuscript_url": "zhang-2025-gas-flow-anisotropic-shale.pdf",
     "extra_links": [],
     "equal_contributors": [],
     "authors": [
@@ -680,27 +680,29 @@
       "X. Yan",
       "X. Wang"
     ],
-    "online_date": null,
-    "online_date_source": null,
+    "online_date": "2025-06-30",
+    "online_date_source": "site/papers/zhang-2025-gas-flow-anisotropic-shale.pdf (page 1, online publication date)",
     "group_year": 2025,
     "journal": "Computers and Geotechnics",
     "volume": "187",
     "issue": null,
     "pages": "107441",
-    "abstract_text": "This work develops a coupled simulator for gas flow and deformation in anisotropic shale, including elastoplastic behavior and fractures. The formulation combines mixed displacement–pressure finite elements with a one-dimensional finite element description of fracture flow. Compressible gas is represented explicitly, allowing the study to distinguish its response from that of a slightly compressible pore fluid. The simulations address an apparent tension between production losses associated with reduced permeability and additional gas release caused by pore compaction. Validated examples include intact shale specimens and fractured reservoirs at field scale. They examine bedding orientation, mechanical anisotropy, plastic strain development, and the role of fluid compressibility. The results distinguish ultimate recovery from production over a limited operating period: deformation-related permeability reduction can inhibit short-term output even when compaction increases ultimate recovery. Bedding-dependent permeability evolution is identified as an important production control.",
-    "abstract_source": "https://www.sciencedirect.com/science/article/pii/S0266352X25003908",
-    "abstract_kind": "summary",
-    "abstract_reuse_basis": "Original English paraphrase based on publisher/author-source abstract or article description; not the published abstract. Under 200 words.",
+    "abstract_text": "Since coupled flow and solid deformation were introduced into shale gas reservoir simulations, the geomechanical effects on gas production have become a frequently studied topic. While numerous studies suggest that geomechanical effects tend to reduce cumulative gas production, an apparent contradiction arises when considering that elastoplastic deformation could cause additional pore compaction during production, compared to a rigid porous matrix. Specifically, assuming identical initial and final gas pressures, an isothermal process, and ideal gas behavior, such additional compaction should theoretically enhance ultimate gas production. Furthermore, widely used shale gas reservoir simulation approaches have limitations in simultaneously modeling mechanical anisotropy and elastoplastic deformation. To address these contradictions and challenges, this work develops an in-house simulator based on a rigorous mixed u/p formulation coupled with a one-dimensional finite element discretization of the fracture gas flow equation, which has been validated rigorously and demonstrates satisfactory performance. A main improvement lies in the incorporation of a compressible gas in the pores rather than a slightly compressible fluid such as water, together with the associated numerical ramifications. Numerical simulations performed on intact shale samples and field-scale fractured shale reservoirs not only address the contradictions mentioned above but also uncover an unreported trend in the plastic strain distribution during gas production associated with different bedding plane orientations. The impact of the fluid type is also highlighted.",
+    "abstract_source": "site/papers/zhang-2025-gas-flow-anisotropic-shale.pdf (page 1)",
+    "abstract_kind": "original",
+    "abstract_reuse_basis": "Original abstract from the PDF supplied by the user, visually checked against page 1. Layout line breaks and line-end word splitting normalized; original wording retained.",
     "notes": [
-      "First online date not yet verified; Crossref has only issue publication dates. DOI creation/deposit dates are not used as online dates.",
-      "Provisional grouping year 2025; first-online date requires publisher-history or PDF confirmation. Do not use issue date as online date."
+      "Author requested direct PDF access and replacement of Summary with the original abstract on 2026-10-19."
     ],
     "sources": [
       "https://api.crossref.org/works/10.1016/j.compgeo.2025.107441",
       "https://linkinghub.elsevier.com/retrieve/pii/S0266352X25003908",
-      "https://www.sciencedirect.com/science/article/pii/S0266352X25003908"
+      "https://www.sciencedirect.com/science/article/pii/S0266352X25003908",
+      "site/papers/zhang-2025-gas-flow-anisotropic-shale.pdf"
     ],
-    "group_year_status": "year-only; see research notes"
+    "group_year_status": "verified",
+    "abstract_latex": "Since coupled flow and solid deformation were introduced into shale gas reservoir simulations, the geomechanical effects on gas production have become a frequently studied topic. While numerous studies suggest that geomechanical effects tend to reduce cumulative gas production, an apparent contradiction arises when considering that elastoplastic deformation could cause additional pore compaction during production, compared to a rigid porous matrix. Specifically, assuming identical initial and final gas pressures, an isothermal process, and ideal gas behavior, such additional compaction should theoretically enhance ultimate gas production. Furthermore, widely used shale gas reservoir simulation approaches have limitations in simultaneously modeling mechanical anisotropy and elastoplastic deformation. To address these contradictions and challenges, this work develops an in-house simulator based on a rigorous mixed $\\boldsymbol{u}/p$ formulation coupled with a one-dimensional finite element discretization of the fracture gas flow equation, which has been validated rigorously and demonstrates satisfactory performance. A main improvement lies in the incorporation of a compressible gas in the pores rather than a slightly compressible fluid such as water, together with the associated numerical ramifications. Numerical simulations performed on intact shale samples and field-scale fractured shale reservoirs not only address the contradictions mentioned above but also uncover an unreported trend in the plastic strain distribution during gas production associated with different bedding plane orientations. The impact of the fluid type is also highlighted.",
+    "latex_test_note": "The mixed displacement-pressure notation is typeset as bold italic u over p, matching the PDF abstract."
   },
   {
     "id": 25,
@@ -1039,7 +1041,7 @@
     "title": "A novel stabilized NS-FEM formulation for anisotropic double porosity media",
     "citation_year": 2022,
     "doi": "10.1016/j.cma.2022.115666",
-    "manuscript_url": "https://doi.org/10.1016/j.cma.2022.115666",
+    "manuscript_url": "zhang-2022-stabilized-ns-fem-double-porosity.pdf",
     "extra_links": [],
     "equal_contributors": [],
     "authors": [
@@ -1048,25 +1050,26 @@
       "Z.-Y. Yin",
       "Y.-F. Jin"
     ],
-    "online_date": null,
-    "online_date_source": null,
+    "online_date": "2022-10-12",
+    "online_date_source": "site/papers/zhang-2022-stabilized-ns-fem-double-porosity.pdf (page 1, online publication date)",
     "group_year": 2022,
     "journal": "Computer Methods in Applied Mechanics and Engineering",
     "volume": "401",
     "issue": "",
     "pages": "115666",
     "notes": [
-      "Exact online publication date not confirmed; Crossref provides issue date only. Group year is supported by the same-year publication and DOI registration; DOI registration is not represented as the online publication date."
+      "Author requested direct PDF access and replacement of Summary with the original abstract on 2026-10-19."
     ],
     "sources": [
       "https://api.crossref.org/works/10.1016/j.cma.2022.115666",
-      "https://www.sciencedirect.com/science/article/abs/pii/S0045782522006211"
+      "https://www.sciencedirect.com/science/article/abs/pii/S0045782522006211",
+      "site/papers/zhang-2022-stabilized-ns-fem-double-porosity.pdf"
     ],
-    "abstract_text": "The paper develops a coupled description of deformation and fluid transport in anisotropic materials with two interacting pore systems. Macroscopic poroelastic coefficients are derived from the intrinsic properties of the constituent single-porosity materials, and the momentum contribution associated with fluid exchange is evaluated. Calculations for sandstone provide a comparison with established parameter estimates. The resulting equations are implemented using a node-based smoothed finite element formulation. Numerical stability is improved by distributing several stress points across each smoothing domain and applying polynomial pressure projection. Four benchmark problems are used to check the implementation against reference solutions and assess the scope of the anisotropic formulation. Further simulations examine elastoplastic behavior, focusing on permeability directionality, differences in permeability between the pore systems, and strain softening. The combined theoretical and computational framework offers a means of representing both material anisotropy and the interaction of distinct storage and transport networks.",
-    "abstract_kind": "summary",
-    "abstract_source": "https://www.sciencedirect.com/science/article/abs/pii/S0045782522006211",
-    "abstract_reuse_basis": "Original English paraphrase of the accessible publisher/institutional abstract; source does not provide a verified license allowing reproduction of the full abstract. Must be presented as a summary, not the original abstract.",
-    "group_year_status": "year-only; see research notes"
+    "abstract_text": "Self-consistent extension of linear poroelasticity to overlapping scales of porosity within fluid-saturated anisotropic materials is developed. The coefficient matrix of poromechanical properties considering anisotropy is firstly derived from the corresponding intrinsic properties of its single porosity constituents. The momentum supply term arising from the mass transfer is also quantitatively analyzed. To provide further insight into the theory, numerical values of the poroelastic coefficients are calculated for sandstone that are consistent with the material parameters reported by prominent authors. Then, the node-based smoothed finite element method (NS-FEM) is extended to implement the coupled double porosity flow and deformation formulation. In order to provide numerical stability and accuracy, a modified nodal integration scheme based on multiple stress points over the smoothing domain (SD) and the polynomial pressure projection (PPP) scheme are further implemented in the NS-FEM. Next, four benchmark tests are simulated and compared with reference solutions, based on which the correctness of the proposed NS-FEM formulation is verified and the generalizability of the derived anisotropic double porosity model is confirmed. Finally, the elastoplastic response of double porosity media is investigated, including the impact of permeability anisotropy, the impact of permeability contrast, and the impact of strain-softening.",
+    "abstract_kind": "original",
+    "abstract_source": "site/papers/zhang-2022-stabilized-ns-fem-double-porosity.pdf (page 1)",
+    "abstract_reuse_basis": "Original abstract from the PDF supplied by the user, visually checked against page 1. Layout line breaks and line-end word splitting normalized; original wording retained.",
+    "group_year_status": "verified"
   },
   {
     "id": 35,
@@ -1250,7 +1253,7 @@
     "title": "Poroelastic coefficients for anisotropic single and double porosity media",
     "citation_year": 2021,
     "doi": "10.1007/s11440-021-01184-y",
-    "manuscript_url": "https://doi.org/10.1007/s11440-021-01184-y",
+    "manuscript_url": "zhang-borja-2021-poroelastic-coefficients.pdf",
     "extra_links": [],
     "equal_contributors": [],
     "authors": [
@@ -1258,20 +1261,23 @@
       "R. I. Borja"
     ],
     "online_date": "2021-04-21",
-    "online_date_source": "https://api.crossref.org/works/10.1007/s11440-021-01184-y (published-online)",
+    "online_date_source": "site/papers/zhang-borja-2021-poroelastic-coefficients.pdf (page 1, online publication date)",
     "group_year": 2021,
     "journal": "Acta Geotechnica",
     "volume": "16",
     "issue": "10",
     "pages": "3013 - 3025",
-    "abstract_text": "This study derives explicit poroelastic coefficients for anisotropic materials with either one pore system or two interacting pore systems. Its central method is a superposition construction: a sequence of elementary loading states yields the fluid mass-balance equations and identifies the associated Biot tensor, Biot moduli, and related coefficients. For a single pore system, the resulting conservation equation agrees with an independent derivation based on continuum thermodynamics. This agreement provides a consistency check and demonstrates two complementary routes to the same governing description. Examples for granite and sandstone show how the coefficients can be evaluated using material properties reported in the literature. These calculations connect the analytical expressions to parameters needed in coupled deformation and flow simulations, helping modelers select internally consistent properties for anisotropic single- and double-porosity media.",
-    "abstract_source": "https://link.springer.com/article/10.1007/s11440-021-01184-y",
-    "abstract_kind": "summary",
-    "abstract_reuse_basis": "Original English paraphrase based on the source abstract/main text; no unrestricted verbatim reuse license established. Label as Summary, not verbatim Abstract.",
-    "notes": [],
+    "abstract_text": "Closed-form expressions for poroelastic coefficients are derived for anisotropic materials exhibiting single and double porosity. A novel feature of the formulation is the use of the principle of superposition to derive the governing mass conservation equations from which analytical expressions for the Biot tensor and Biot moduli, among others, are derived. For single-porosity media, the mass conservation equation derived from the principle of superposition is shown to be identical to the one derived from continuum principle of thermodynamics, thus confirming the veracity of both formulations and suggesting that this conservation equation can be derived in more than one way. To provide further insight into the theory, numerical values of the poroelastic coefficients are calculated for granite and sandstone that are consistent with the material parameters reported by prominent authors. In this way, modelers are guided on how to determine these coefficients in the event that they use the theory for full-scale modeling and simulations.",
+    "abstract_source": "site/papers/zhang-borja-2021-poroelastic-coefficients.pdf (page 1)",
+    "abstract_kind": "original",
+    "abstract_reuse_basis": "Original abstract from the PDF supplied by the user, visually checked against page 1. Layout line breaks and line-end word splitting normalized; original wording retained.",
+    "notes": [
+      "Author requested direct PDF access and replacement of Summary with the original abstract on 2026-10-19."
+    ],
     "sources": [
       "https://link.springer.com/article/10.1007/s11440-021-01184-y",
-      "https://api.crossref.org/works/10.1007/s11440-021-01184-y"
+      "https://api.crossref.org/works/10.1007/s11440-021-01184-y",
+      "site/papers/zhang-borja-2021-poroelastic-coefficients.pdf"
     ],
     "group_year_status": "verified",
     "corrections": {
