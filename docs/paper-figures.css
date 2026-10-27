@@ -1,0 +1,28 @@
+.paper-figure {
+  width: 850px;
+  max-width: 100%;
+  margin: 1.5em 0;
+}
+
+.paper-abstract {
+  width: 850px;
+  max-width: 100%;
+  margin: 1em 0 0;
+}
+
+.paper-abstract + .paper-figure {
+  margin-top: 4em;
+}
+
+.paper-figure a,
+.paper-abstract a {
+  display: block;
+  border-bottom: none;
+}
+
+.paper-figure img,
+.paper-abstract img {
+  display: block;
+  width: 100%;
+  height: auto;
+}

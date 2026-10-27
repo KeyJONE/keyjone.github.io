@@ -7,9 +7,9 @@ Papers are listed below by year of submission before they are published, or year
 
 == 2026
 
-: {An axisymmetric stabilized smoothed finite element method for analysis of thermo-hydro-mechanical coupling in porous media} X. Sheng, Z.-Q. Tang, and Q. Zhang
+: {An axisymmetric stabilized smoothed finite element method for coupled thermo-hydro-mechanical analysis of porous media} X. Sheng, Z.-Q. Tang, and Q. Zhang
 : {Multiscale modeling of hydrate extraction by thermal stimulation: From pore-scale mechanisms to Darcy-scale simulations} J. Tang, G. Lei, Q. Zhang, and X. Li
-: {Consistent formulation and discretization of energy equations for methane hydrate dissociation: A modular iterative finite volume framework} Z.-Q. Tang and Q. Zhang
+: {[papers/consistent-formulation-and-discretization-of-energy-equations-for-methane-hydrate-dissociation.html Consistent formulation and discretization of energy equations for methane hydrate dissociation: A modular iterative finite volume framework]} Z.-Q. Tang and Q. Zhang
 : {FE-WINN: A finite element weak-form-informed neural network for solid mechanics with high-fidelity stress recovery} Z. Zhang, Q. Zhang, Y. Zhang, X. Song, and T. Rabczuk
 : {A finite element residual-driven physics-informed neural network framework for forward and inverse analyses in solid mechanics} H. Zhang, Q. Zhang, Z. Zhang, G. Liu, and L. Weng
 : {Probabilistic identification of geotechnical parameters from tunnelling-induced deformation using Bayesian physics-informed frameworks} J. Zhou, S. Wei, D. Zhang, Z. Zhang, and Q. Zhang

@@ -2,7 +2,7 @@
   {
     "id": 58,
     "slug": "an-axisymmetric-stabilized-smoothed-finite-element-method-for-thm-coupling",
-    "title": "An axisymmetric stabilized smoothed finite element method for analysis of thermo-hydro-mechanical coupling in porous media",
+    "title": "An axisymmetric stabilized smoothed finite element method for coupled thermo-hydro-mechanical analysis of porous media",
     "authors": [
       "X. Sheng",
       "Z.-Q. Tang",
@@ -33,7 +33,25 @@
       "Q. Zhang"
     ],
     "group_year": 2026,
-    "detail_page": false
+    "detail_page": true,
+    "journal": "Acta Geotechnica",
+    "publication_status": "accepted for publication",
+    "manuscript_url": "https://drive.google.com/file/d/11OZg_itUN5LxeXQOLbI-f3fbWOib_y9y/view?usp=sharing",
+    "abstract_kind": "image",
+    "figures": [
+      {
+        "src": "../images/tang-zhang-energy-equations-figure-7.png",
+        "alt": "Figure 7: Three-days comparison of the Form I and Form II predictions against submissions from other research groups in the IGHCCS1 benchmark [47].",
+        "width": 1773,
+        "height": 2246
+      }
+    ],
+    "abstract_image": {
+      "src": "../images/tang-zhang-energy-equations-abstract.png",
+      "alt": "Abstract of the paper on energy equation formulation and discretization for methane hydrate dissociation.",
+      "width": 2217,
+      "height": 1102
+    }
   },
   {
     "id": 55,
