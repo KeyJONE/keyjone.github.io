@@ -1,0 +1,96 @@
+.note-page #layout-content {
+  line-height: 1.75;
+}
+
+.note-article {
+  max-width: 1200px;
+}
+
+.note-article h2,
+.note-article h3,
+.note-article h4 {
+  scroll-margin-top: 1em;
+  line-height: 1.45;
+}
+
+.note-article h2 {
+  margin-top: 2em;
+}
+
+.note-article h4 {
+  color: #527bbd;
+  margin: 1.6em 0 0.6em;
+}
+
+.note-article p {
+  margin: 0.8em 0;
+}
+
+.note-article .katex {
+  font-size: 1.06em;
+}
+
+.note-article .katex-display {
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding: 0.4em 0;
+  margin: 1em 0;
+}
+
+.note-table-scroll {
+  max-width: 100%;
+  overflow-x: auto;
+  margin: 1em 0;
+}
+
+.note-article table {
+  width: 100%;
+  border-collapse: collapse;
+  border: 1px solid #bbb;
+}
+
+.note-article th,
+.note-article td {
+  border: 1px solid #ccc;
+  padding: 0.5em 0.7em;
+  vertical-align: top;
+  text-align: left;
+}
+
+.note-article th {
+  background: #f4f4f4;
+}
+
+.note-article img {
+  display: block;
+  width: auto;
+  max-width: min(100%, 950px);
+  height: auto;
+  margin: 1.4em 0;
+}
+
+.note-image-link {
+  border-bottom: none;
+}
+
+.note-article code {
+  font-size: 0.9em;
+  overflow-wrap: anywhere;
+}
+
+.note-toc {
+  border: 1px solid #ddd;
+  background: #fafafa;
+  padding: 0.6em 1em;
+  margin: 1em 0 1.5em;
+}
+
+.note-toc summary {
+  cursor: pointer;
+  color: #224b8d;
+}
+
+.note-toc ul {
+  max-height: 24em;
+  overflow-y: auto;
+}

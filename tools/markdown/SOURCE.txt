@@ -1,0 +1,4 @@
+Marked 17.0.5, MIT license.
+Vendored marked.esm.js and LICENSE.md from the installed Codex document runtime.
+Upstream: https://github.com/markedjs/marked
+Used only at build time to render the Markdown notes.

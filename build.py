@@ -43,6 +43,7 @@ def main():
     if not (katex / "cli.js").is_file():
         raise RuntimeError("KaTeX is missing. Run npm install inside tools/jemdoc-cvx-1.0.0 first.")
     generate_papers()
+    subprocess.run([node, str(ROOT / "generate_notes.mjs")], cwd=ROOT, check=True)
     sources = sorted(p.name for p in SITE.glob("*.jemdoc"))
     if "index.jemdoc" not in sources:
         raise RuntimeError("site/index.jemdoc is required.")
@@ -63,6 +64,14 @@ def main():
              "-o", str(OUT / "papers") + os.sep, *[p.name for p in paper_sources]],
             cwd=SITE / "papers", env=env, check=True,
         )
+    note_sources = sorted((SITE / "notes").glob("*.jemdoc"))
+    if note_sources:
+        (OUT / "notes").mkdir(exist_ok=True)
+        subprocess.run(
+            [sys.executable, "-X", "utf8", str(TOOL / "jemdoc"), "-c", "../notes.conf",
+             "-o", str(OUT / "notes") + os.sep, *[p.name for p in note_sources]],
+            cwd=SITE / "notes", env=env, check=True,
+        )
     shutil.copy2(TOOL / "css" / "jemdoc-cvx.css", OUT)
     shutil.copytree(TOOL / "css" / "fonts", OUT / "fonts", dirs_exist_ok=True)
     (OUT / "katex").mkdir(exist_ok=True)
@@ -76,7 +85,7 @@ def main():
             shutil.copytree(SITE / directory, OUT / directory, dirs_exist_ok=True,
                             ignore=shutil.ignore_patterns("*.jemdoc", "*.conf", "katexcache", "__pycache__"))
     (OUT / ".nojekyll").touch()
-    all_sources = [SITE / source for source in sources] + paper_sources
+    all_sources = [SITE / source for source in sources] + paper_sources + note_sources
     for source in all_sources:
         page = OUT / source.relative_to(SITE).with_suffix(".html")
         markup = page.read_text(encoding="utf-8")

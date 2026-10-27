@@ -1,0 +1,8 @@
+# jemdoc: menu{MENU}{notes.html}, addcss{custom.css}
+= ZHANG, Qi -- Notes
+[https://feg.um.edu.mo/cee/ Department of Civil and Environmental Engineering], [https://www.um.edu.mo/ University of Macau]
+
+- [notes/axisymmetric-sns-fem.html Axisymmetric SNS-FEM formulation]
+- B-bar formulation for CPE4 element
+- Drucker-Prager and Mohr-Coulomb yield surfaces
+- Drucker-Prager return mapping in ALL cases

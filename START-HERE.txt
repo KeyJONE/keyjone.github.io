@@ -21,6 +21,9 @@ generate_papers.py 会在构建时生成 publications.jemdoc 和 site/papers/*.j
 detail_page 为 false 的条目只在列表显示题目和作者，不加链接或状态标签；
 以后需要详情页时，补齐期刊等资料并将此项改为 true。
 菜单用 Code 显示软件页；Teaching 已加入课程与参与授课说明。
+Notes 列表在 site/notes.jemdoc；笔记正文编辑 site/notes/*.md。
+generate_notes.mjs 会把 Markdown 和公式转换成静态页面，公式使用同一套 KaTeX。
+笔记配图放在 site/images/notes；无需修改自动生成的笔记 .jemdoc 文件。
 不要直接改 docs 内的 HTML；下次生成时会覆盖它们。
 照片放在 site/images，论文 PDF 放在 site/papers，简历放在 site/files。
 把文件放入文件夹后，还需要添加对应链接；论文的 Manuscript 链接可在 JSON
@@ -59,7 +62,7 @@ docs/.nojekyll 已准备好，GitHub 将直接发布生成的静态网页。
 以及一直位于左侧的浅灰导航。已取消最初的手机顶部导航切换。
 窄窗口会保留桌面结构，可能需要横向滚动；放大窗口可看到完整布局。
 照片区与 Boyd 主页一样，暂按 300×200 的横向比例留白。
-当前菜单是 Home、Teaching、Biography，以及 Research 下的 Papers、Code、People。
+当前菜单是 Home、Teaching、Biography，以及 Research 下的 Papers、Code、Notes、People。
 不包含 Books、Classes、MOOC 及其课程链接；正文内容留待之后继续完善。
 外观参考：https://web.stanford.edu/~boyd/index.html
 site/boyd-base.css 保存参考页面公开的 jemdoc.css；custom.css 是本地补充样式。
