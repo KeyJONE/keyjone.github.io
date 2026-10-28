@@ -139,7 +139,7 @@ $r$ 是到旋转轴的距离，$A_k$ 是二维面积，$V_k$ 是旋转一周后�
 | 波浪线：$\widetilde B_{kg},\widetilde N_{kg},\widetilde E_{kg}$ | **SNS 虚拟点矩阵**，由平均矩阵加减相应方向的梯度项构造；$g$ 标记四个虚拟点。 |
 | 帽号：$\widehat B,\widehat E$ | **光滑梯度积分的输入矩阵**。每个母三角形内取 $\widehat B=B_e$（母单元中心的 B）、$\widehat E=E_e$（原始 T3 型函数梯度），节点列按光滑域顺序对齐；见[第 5.2 节](#section-18)、[第 7.3 节](#section-27)。 |
 
-边界条件中的 $\overline{\boldsymbol t}$、$\overline q_{\mathrm{in}}$ 则表示**给定的面力、入流通量**，这里的横线不表示平均。
+边界条件中的 $\overline{\boldsymbol t}$、$\overline q_{\mathrm{in}}$、$\overline h_{\mathrm{in}}$ 分别表示**给定的面力、流体入流通量、传导热流入流通量**，这里的横线不表示平均。
 
 其余索引与记号如下：
 
@@ -153,7 +153,6 @@ $r$ 是到旋转轴的距离，$A_k$ 是二维面积，$V_k$ 是旋转一周后�
 | $N_I$、$N_e$ | $N_I$ 是节点 $I$ 的原始 T3 型函数；$N_e$ 是母三角形三个型函数组成的行向量。省略下标的 $N$ 按上下文表示型函数或该行向量。 |
 | $\boldsymbol U,\boldsymbol P,\boldsymbol T$ | 分别为节点位移、孔压、温度组成的列向量。加下标 $k$ 时，只取光滑域 $k$ 涉及的节点；局部矩阵也按这组节点排列。 |
 | $\Delta$ | 相对于上一个已收敛时间步的增量，例如 $\Delta\boldsymbol T$ 是当前时间步的试算温度总增量；$\Delta t$ 是时间步长。 |
-| $\delta\boldsymbol P,\delta\boldsymbol T$ | 第 8.1 节 Newton 线性化时，对当前试算孔压、温度施加的独立小扰动；不是从上一步收敛状态算起的 $\Delta\boldsymbol P,\Delta\boldsymbol T$。 |
 
 矩阵块 $K_{ab}^{k}$ 的上标 $k$ 表示光滑域 $k$ 的局部贡献；不带这个上标的 $K_{ab}$ 表示组装后的全局矩阵。下标 $a,b$ 标记方程和未知量，具体对应见第 8 节。正文中的向量用粗体表示；B、N、E 等矩阵则保留与代码接近的字母写法。
 
@@ -463,7 +462,7 @@ $W_{kg}$ 是第 $g$ 个虚拟点的体积积分权重，单位是体积。点 1�
 
 如果希望四个点精确计算随位置变化的 B 所产生的积分，仅让四个权重之和等于 $V_k$ 还不够。例如，计算刚度时，B 的分量会两两相乘，会出现位置偏移量的平方，因此还要检查这些平方项的积分是否正确。以面积为 $A_k$、半径为 $\ell_k$ 的均匀二维圆盘为例，$\delta r_g$ 表示第 $g$ 点相对圆盘中心的径向坐标差，$\delta r$ 表示盘内一般位置的同类坐标差。
 
-**注意：** 这里的 $\delta$ 仅标记几何偏移量，不表示变分或求导，也不同于第 8.1 节中未知量的试算扰动。
+**注意：** 这里的 $\delta$ 仅标记几何偏移量，不表示变分或求导。
 
 四个等权点放在圆周上时，径向偏移量的平方平均值为
 
@@ -560,7 +559,7 @@ $$
 
 ### 8.1 整体残差与切线矩阵
 
-节点未知量为 $\boldsymbol U,\boldsymbol P,\boldsymbol T$；$\Delta\boldsymbol U,\Delta\boldsymbol P,\Delta\boldsymbol T$ 是相对于上一个已收敛时间步的增量。时间离散采用 backward Euler，残差定义为方程左端减右端：
+$\boldsymbol U,\boldsymbol P,\boldsymbol T$ 分别为当前试算的节点位移、孔压和温度总值；$\Delta\boldsymbol U,\Delta\boldsymbol P,\Delta\boldsymbol T$ 是相对于上一个已收敛时间步的增量。时间离散采用 backward Euler，残差定义为方程左端减右端。$\boldsymbol R_u,\boldsymbol R_p,\boldsymbol R_T$ 分别为力学、流体质量和能量方程的残差向量：
 
 $$
 \boxed{
@@ -588,21 +587,45 @@ K_{21}&K_{22S}+S_{\mathrm{PPP}}+\Delta tK_{22P}&-K_{23}\\
 }
 $$
 
-矩阵的行、列依次对应位移、孔压、温度；$0$ 表示相应尺寸的零块。Newton 线性化中的 $\delta\boldsymbol U,\delta\boldsymbol P,\delta\boldsymbol T$ 是对当前试算值的独立扰动，与本步增量 $\Delta\boldsymbol U,\Delta\boldsymbol P,\Delta\boldsymbol T$ 区分。
+矩阵的行、列依次对应位移、孔压、温度；$0$ 表示相应尺寸的零块。
 
 各项的物理含义及构造位置如下。
 
 | 全局量 | 含义 | 构造位置 |
 | --- | --- | --- |
 | $\boldsymbol f_u^{\mathrm{skel}},K_{11},K_{13}$ | 骨架内力、力学切线及温度引起的力学耦合 | [8.2](#section-29) |
-| $K_{12},K_{21}$ | 孔压力与体积变形的耦合 | [8.2](#section-29) |
+| $K_{12},K_{21}$ | 位移—孔压耦合 | [8.2](#section-29) |
 | $K_{22S},K_{23},K_{33X}$ | 储水、温度—流体含量耦合、热容量 | [8.3](#section-31) |
 | $K_{22P},\boldsymbol G_p,K_{33G}$ | 孔压扩散、Darcy 重力载荷、热传导 | [8.4](#section-32) |
 | $\boldsymbol f_T^{\mathrm{adv}},K_{32\mathrm{Adv}},K_{33\mathrm{Adv}}$ | 热对流残差及其对孔压、温度的导数 | [8.5](#section-35) |
 | $S_{\mathrm{PPP}}$ | 已乘稳定化系数的 PPP 矩阵 | [第 10 节](#section-42) |
 | $\boldsymbol F_u^{\mathrm{ext}}=\boldsymbol F_u^\Gamma+\boldsymbol F_u^{\mathrm{body}}$ | 面力与机械体力的等效节点外荷载 | [第 12 节](#section-48) |
+| $\boldsymbol Q_p^{\mathrm{step}},\boldsymbol Q_T^{\mathrm{step}}$ | 本步等效节点流体流入体积与传导热量 | 本节下式 |
 
-$\boldsymbol Q_p^{\mathrm{step}},\boldsymbol Q_T^{\mathrm{step}}$ 分别为本步从边界流入的节点流体体积和热量，流入取正；本文域内源项为零。对应代码为 `dt*Load.Fp`、`dt*Load.FT`，即步末通量乘 $\Delta t$。孔压力、扩散和对流项使用当前孔压或温度总值；储水、热容量及 PPP 项使用本步增量。机械残差和 PPP 项不额外乘 $\Delta t$。
+$\boldsymbol Q_p^{\mathrm{step}},\boldsymbol Q_T^{\mathrm{step}}$ 采用 backward Euler 离散，分别对应代码中的 `dt*Load.Fp`、`dt*Load.FT`，即已组装的步末节点流体流入速率、传导热流入速率乘 $\Delta t$。本文域内源项为零，因此它们只包含边界贡献。对全局节点 $I$，其分量为
+
+$$
+\boxed{
+\begin{aligned}
+\left(\boldsymbol Q_p^{\mathrm{step}}\right)_I
+&=\Delta t\int_{\Gamma_q}N_I\overline q_{\mathrm{in}}\,2\pi r\,\mathrm ds,\\
+\left(\boldsymbol Q_T^{\mathrm{step}}\right)_I
+&=\Delta t\int_{\Gamma_h}N_I\overline h_{\mathrm{in}}\,2\pi r\,\mathrm ds.
+\end{aligned}
+}
+$$
+
+$\Gamma_q,\Gamma_h$ 分别是 r–z 平面内给定流体通量、传导热通量的边界线。$\overline q_{\mathrm{in}}$ 的单位为 $\mathrm{m/s}$，$\overline h_{\mathrm{in}}$ 的单位为 $\mathrm{W/m^2}$；两者均取本步末时刻的值，以流入为正：
+
+$$
+\boldsymbol q_f\cdot\boldsymbol n_{\mathrm{out}}=-\overline q_{\mathrm{in}}
+\quad\text{on }\Gamma_q,
+\qquad
+(-k_T\nabla T)\cdot\boldsymbol n_{\mathrm{out}}=-\overline h_{\mathrm{in}}
+\quad\text{on }\Gamma_h.
+$$
+
+**边界积分使用原始 T3 型函数 $N_I$，沿实际网格边界计算并按节点相加，不使用光滑型函数或 SNS 虚拟点。** 给定通量不依赖当前未知量，因此不增加切线项。这里的热流仅指传导热流；流体携热已由第 8.5 节的域内对流项表示。
 
 **关闭热对流时，同时令 $\boldsymbol f_T^{\mathrm{adv}},K_{32\mathrm{Adv}},K_{33\mathrm{Adv}}$ 为零。** 机械体力和 Darcy 重力仍保留。此时切线的温度—孔压块为零；开启对流后，该块为 $\Delta tK_{32\mathrm{Adv}}$。温度—位移块始终为零。
 
@@ -708,7 +731,7 @@ $$
 
 $\boldsymbol G_p=\operatorname*{Assemble}_k[\boldsymbol G_{p,k}]$。给定参考系数、几何和重力后，$\boldsymbol G_p$ 与当前未知量无关，因此不增加切线项。
 
-边界流量以入流为正，$\boldsymbol q_f\cdot\boldsymbol n_{\mathrm{out}}=-\overline q_{\mathrm{in}}$；热流边界指定传导热流。静水平衡及零通量检查见[第 14.4 节](#section-40)。
+边界通量及其节点载荷按[第 8.1 节](#section-34)定义。静水平衡及零通量检查见[第 14.4 节](#section-40)。
 
 **注意：** 关闭重力时令 $\boldsymbol g=\boldsymbol0$，分母中的参考流体重度 $\gamma_f$ 保持不变。
 
