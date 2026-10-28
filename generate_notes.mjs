@@ -17,6 +17,27 @@ if (fs.existsSync(directory)) for (const file of fs.readdirSync(directory).filte
   const title = source.match(/^# (.+)$/m)?.[1];
   if (!title) throw new Error(`Missing title in ${file}`);
   source = source.replace(/^# .+\r?\n/, '');
+  // Stable per-note IDs keep existing deep links valid when sections move.
+  // Each heading maps to an ID or [primary ID, ...legacy aliases].
+  const anchorFile = path.join(directory, file.replace(/\.md$/, '.anchors.json'));
+  const hasAnchorMap = fs.existsSync(anchorFile);
+  const anchorMap = hasAnchorMap ? JSON.parse(fs.readFileSync(anchorFile, 'utf8')) : null;
+  if (hasAnchorMap) {
+    if (anchorMap === null || typeof anchorMap !== 'object' || Array.isArray(anchorMap)) {
+      throw new Error(`Invalid heading anchor map in ${anchorFile}`);
+    }
+    const configuredIds = new Set();
+    for (const [heading, value] of Object.entries(anchorMap)) {
+      const ids = Array.isArray(value) ? value : [value];
+      if (!ids.length || ids.some(id => typeof id !== 'string' || !/^[A-Za-z][A-Za-z0-9_-]*$/.test(id))) {
+        throw new Error(`Invalid anchor ID for heading "${heading}" in ${anchorFile}`);
+      }
+      for (const id of ids) {
+        if (configuredIds.has(id)) throw new Error(`Duplicate anchor ID "${id}" in ${anchorFile}`);
+        configuredIds.add(id);
+      }
+    }
+  }
   const equations = [];
   // Protect math before Markdown table parsing so TeX pipes and escapes survive.
   source = source.replace(/(`[^`\n]*`)|\$\$([\s\S]*?)\$\$|\$([^$\n]+?)\$/g, (raw, code, display, inline) => {
@@ -32,12 +53,23 @@ if (fs.existsSync(directory)) for (const file of fs.readdirSync(directory).filte
     return isDisplay ? `\n\n${id}\n\n` : id;
   });
   const headings = [];
+  const usedIds = new Set();
   const renderer = {
     heading(token) {
-      const id = `section-${headings.length + 1}`;
+      if (anchorMap !== null && !Object.hasOwn(anchorMap, token.text)) {
+        throw new Error(`Missing stable anchor for heading "${token.text}" in ${file}`);
+      }
+      const mapped = anchorMap === null ? `section-${headings.length + 1}` : anchorMap[token.text];
+      const ids = Array.isArray(mapped) ? mapped : [mapped];
+      for (const id of ids) {
+        if (usedIds.has(id)) throw new Error(`Duplicate rendered anchor ID "${id}" in ${file}`);
+        usedIds.add(id);
+      }
+      const [id, ...aliases] = ids;
       const label = this.parser.parseInline(token.tokens);
       headings.push({id, depth:token.depth, label});
-      return `<h${token.depth} id="${id}">${label}</h${token.depth}>\n`;
+      const legacy = aliases.map(alias => `<span id="${escape(alias)}"></span>\n`).join('');
+      return legacy + `<h${token.depth} id="${escape(id)}">${label}</h${token.depth}>\n`;
     },
     link(token) {
       if (!/^(https?:\/\/|#)/.test(token.href)) throw new Error(`Unsupported note link: ${token.href}`);

@@ -25,8 +25,11 @@ $$
 | 记号 | 含义 |
 | --- | --- |
 | $n$ | 均匀参考孔隙率；边界单位外法向另写 $\boldsymbol n_{\mathrm{out}}$。 |
+| $K_f$ | 孔隙流体的体积模量。 |
+| $\rho_s,\rho_f$ | 固体颗粒、孔隙流体的参考质量密度。 |
+| $\alpha_s,\alpha_f$ | $\alpha_s$ 为固体线膨胀系数；$\alpha_f$ 为流体体积热膨胀系数的三分之一。 |
 | $c_s,c_f$ | 固、液两相的单位质量比热容；不是本构切线 $C_{kg}^{\mathrm{ep}}$。 |
-| $S$ | 储水系数；PPP 稳定化矩阵写作 $S_{\mathrm{PPP}}$。 |
+| $S$ | 固定体积应变和温度时的储水系数，单位为 $\mathrm{Pa}^{-1}$；PPP 稳定化矩阵写作 $S_{\mathrm{PPP}}$。 |
 | $\beta_T$ | 温度—流体含量耦合系数。 |
 | $C_T$ | 混合物单位总体积的热容量，使用大写 $C$。 |
 | $\boldsymbol q_f$ | 相对固体、按总截面积计的 Darcy 体积通量，不是孔隙内真实流速。 |
@@ -150,7 +153,7 @@ $r$ 是到旋转轴的距离，$A_k$ 是二维面积，$V_k$ 是旋转一周后�
 | $N_I$、$N_e$ | $N_I$ 是节点 $I$ 的原始 T3 型函数；$N_e$ 是母三角形三个型函数组成的行向量。省略下标的 $N$ 按上下文表示型函数或该行向量。 |
 | $\boldsymbol U,\boldsymbol P,\boldsymbol T$ | 分别为节点位移、孔压、温度组成的列向量。加下标 $k$ 时，只取光滑域 $k$ 涉及的节点；局部矩阵也按这组节点排列。 |
 | $\Delta$ | 相对于上一个已收敛时间步的增量，例如 $\Delta\boldsymbol T$ 是当前时间步的试算温度总增量；$\Delta t$ 是时间步长。 |
-| $\delta\boldsymbol P,\delta\boldsymbol T$ | 第 8.5 节计算切线时，对当前试算孔压、温度施加的独立小扰动；不是从上一步收敛状态算起的 $\Delta\boldsymbol P,\Delta\boldsymbol T$。 |
+| $\delta\boldsymbol P,\delta\boldsymbol T$ | 第 8.1 节 Newton 线性化时，对当前试算孔压、温度施加的独立小扰动；不是从上一步收敛状态算起的 $\Delta\boldsymbol P,\Delta\boldsymbol T$。 |
 
 矩阵块 $K_{ab}^{k}$ 的上标 $k$ 表示光滑域 $k$ 的局部贡献；不带这个上标的 $K_{ab}$ 表示组装后的全局矩阵。下标 $a,b$ 标记方程和未知量，具体对应见第 8 节。正文中的向量用粗体表示；B、N、E 等矩阵则保留与代码接近的字母写法。
 
@@ -167,10 +170,10 @@ $r$ 是到旋转轴的距离，$A_k$ 是二维面积，$V_k$ 是旋转一周后�
 | $n_{\mathrm{out},r}$、$n_{\mathrm{out},z}$ | 边界单位外法向的径向、轴向分量。 |
 | $B_{e,I}$ | 母三角形 $e$ 中，节点 $I$ 的两个位移自由度对应的 B 矩阵列块。 |
 | $I_{N,k}^{V}$、$n_{\mathrm{node},k}$ | 前者是光滑域 $k$ 的型函数体积积分，后者是该域涉及的节点数。 |
-| $\boldsymbol f_{u,k}^{\mathrm{skel}}$ | 光滑域 $k$ 的骨架内力向量，含该域涉及的所有节点的力学分量，**不是节点 $k$ 的一个力**；见[第 8.1 节](#section-29)。 |
-| $\boldsymbol f_{T,k}^{\mathrm{adv}}$ | 光滑域 $k$ 的热对流残差向量，$T$ 标记温度方程，$\mathrm{adv}$ 标记对流；见[第 8.5.2 节](#section-37)。 |
+| $\boldsymbol f_{u,k}^{\mathrm{skel}}$ | 光滑域 $k$ 的骨架内力向量，含该域涉及的所有节点的力学分量，**不是节点 $k$ 的一个力**；见[第 8.2 节](#section-29)。 |
+| $\boldsymbol f_{T,k}^{\mathrm{adv}}$ | 光滑域 $k$ 的热对流残差向量，$T$ 标记温度方程，$\mathrm{adv}$ 标记对流；见[第 8.5.1 节](#section-37)。 |
 | $\boldsymbol F_{u,I}^{\mathrm{body}}$ | **组装后节点 $I$ 的两个体力等效外力分量**，依次为径向、轴向；$u$ 标记力学方程，见[第 12.4 节](#section-52)。 |
-| $\boldsymbol G_{p,k}$ | 光滑域 $k$ 对流体方程的重力载荷贡献，$p$ 是方程标签；见[第 8.3.1 节](#section-32)。 |
+| $\boldsymbol G_{p,k}$ | 光滑域 $k$ 对流体方程的重力载荷贡献，$p$ 是方程标签；见[第 8.4 节](#section-32)。 |
 | $\boldsymbol q_{f,kg}$ | 光滑域 $k$、虚拟点 $g$ 处的流体通量；下标 $f$ 标记流体。 |
 
 **组合上标要连同完整符号一起读。** 下表两种记号中的 $V$ 都表示旋转体积加权；逗号后的标签进一步说明构造方式。
@@ -460,7 +463,7 @@ $W_{kg}$ 是第 $g$ 个虚拟点的体积积分权重，单位是体积。点 1�
 
 如果希望四个点精确计算随位置变化的 B 所产生的积分，仅让四个权重之和等于 $V_k$ 还不够。例如，计算刚度时，B 的分量会两两相乘，会出现位置偏移量的平方，因此还要检查这些平方项的积分是否正确。以面积为 $A_k$、半径为 $\ell_k$ 的均匀二维圆盘为例，$\delta r_g$ 表示第 $g$ 点相对圆盘中心的径向坐标差，$\delta r$ 表示盘内一般位置的同类坐标差。
 
-**注意：** 这里的 $\delta$ 仅标记几何偏移量，不表示变分或求导，也不同于第 8.5 节中未知量的试算扰动。
+**注意：** 这里的 $\delta$ 仅标记几何偏移量，不表示变分或求导，也不同于第 8.1 节中未知量的试算扰动。
 
 四个等权点放在圆周上时，径向偏移量的平方平均值为
 
@@ -551,280 +554,205 @@ $$
 
 第 3、4 点分别减去、加上轴向项 $\ell_kG_{E,z,k}^{V}$。这里算的是相邻单元 E 值的空间变化，不是对已经存成常数的 $\overline E_k^V$ 直接求导。热应变中用于构造四点温度的 $\overline E_k^V$ 仍按第 7.2 节使用。
 
-## 8. 内力、残差与刚度应该怎样一起修改
+## 8. THM 离散方程、残差与一致切线
 
-下面逐块说明单一均匀、各向同性且 $b=1$ 时的公式。矩阵块下标中的 $1,2,3$ 依次对应位移、孔压、温度：第一个数字表示方程，第二个数字表示求导的未知量；关闭对流时各块的实际正负号见第 8.4 节，开启后的新增项见第 8.5 节。$\boldsymbol m=[1,1,1,0]^T$ 是几何列向量，用来取三个法向应变之和，或将同一标量放入三个法向分量；孔压耦合使用它并不引入额外的材料参数。
+本节采用前文的光滑矩阵、四点权重和材料假设，先给出三场耦合系统，再列出各局部矩阵的构造。所有局部贡献均按[第 2.3 节](#section-6)的节点组装规则形成全局量。
 
-所有光滑域使用同一组材料参数，但各虚拟点的应力、塑性变量和算法切线 $C_{kg}^{\mathrm{ep}}$ 可以不同。$C_{kg}^{\mathrm{ep}}$ 是本构返回的 $4\times4$ 算法切线矩阵，即有效应力对机械应变试算增量的导数；上标 $\mathrm{ep}$ 表示弹塑性，处于弹性时它就是弹性矩阵。因此这里保留状态索引 $kg$，不能因材料均匀就把所有积分点的切线当作同一常矩阵。局部矩阵仍按节点编号组装。
+### 8.1 整体残差与切线矩阵
 
-### 8.1 骨架内力、K11 与 K13
-
-$$
-\Delta\boldsymbol\varepsilon_{kg}^{\mathrm{mech}}=\widetilde B_{kg}\Delta\boldsymbol U_k-\alpha_s\boldsymbol m\widetilde N_{kg}\Delta\boldsymbol T_k,
-$$
+节点未知量为 $\boldsymbol U,\boldsymbol P,\boldsymbol T$；$\Delta\boldsymbol U,\Delta\boldsymbol P,\Delta\boldsymbol T$ 是相对于上一个已收敛时间步的增量。时间离散采用 backward Euler，残差定义为方程左端减右端：
 
 $$
-\boldsymbol f_{u,k}^{\mathrm{skel}}=\sum_gW_{kg}\widetilde B_{kg}^T\boldsymbol\sigma'_{kg},
+\boxed{
+\begin{aligned}
+\boldsymbol R_u&=\boldsymbol f_u^{\mathrm{skel}}-K_{12}\boldsymbol P-\boldsymbol F_u^{\mathrm{ext}},\\
+\boldsymbol R_p&=K_{21}\Delta\boldsymbol U+(K_{22S}+S_{\mathrm{PPP}})\Delta\boldsymbol P-K_{23}\Delta\boldsymbol T
++\Delta t(K_{22P}\boldsymbol P-\boldsymbol G_p)-\boldsymbol Q_p^{\mathrm{step}},\\
+\boldsymbol R_T&=K_{33X}\Delta\boldsymbol T
++\Delta t\left[K_{33G}\boldsymbol T+\boldsymbol f_T^{\mathrm{adv}}(\boldsymbol P,\boldsymbol T)\right]
+-\boldsymbol Q_T^{\mathrm{step}}.
+\end{aligned}
+}
 $$
 
-$$
-K_{11}^k=\sum_gW_{kg}\widetilde B_{kg}^TC_{kg}^{\mathrm{ep}}\widetilde B_{kg},\qquad K_{13}^k=\sum_gW_{kg}\widetilde B_{kg}^TC_{kg}^{\mathrm{ep}}\alpha_s\boldsymbol m\widetilde N_{kg}.
-$$
-
-$\Delta\boldsymbol\varepsilon_{kg}^{\mathrm{mech}}$ 是扣除热应变后的机械应变增量，上标 $\mathrm{mech}$ 表示机械部分；$\boldsymbol f_{u,k}^{\mathrm{skel}}$ 是光滑域 $k$ 的骨架内力贡献，下标 $u$ 表示力学方程。$K_{11}^k$ 是该域的力学切线贡献，$K_{13}^k$ 是温度经热应变影响力学方程的耦合贡献。由于总应变要扣除热应变，温度项带负号，因此全局矩阵中的对应块是 $-K_{13}$。**内力与切线必须使用同一组 $\widetilde B_{kg},\widetilde N_{kg},W_{kg}$**。
-
-J2、DP 等本构均使用这一组装形式。每轮 Newton 迭代都从上一个已收敛时间步的状态出发，由 UMAT 计算本轮试算的应力和算法切线。只有当前时间步收敛后，才保存四个虚拟点的本构状态，供下一步使用。MEX 使用预先算好的几何矩阵、组装所需的材料参数和最新算法切线，不负责本构更新。
-
-### 8.2 K12 与 K21：使用平均矩阵
-
-定义型函数的体积积分行向量 $I_{N,k}^V$；这里的 $I$ 只是积分结果的名称，不是单位矩阵，也不是节点编号：
+对当前节点未知量求导，得到一致切线矩阵
 
 $$
-I_{N,k}^{V}=\operatorname*{Assemble}_{e\ni k}\left[\int_{D_{ke}}N_e\,2\pi r\,\mathrm{d}A\right].
+\boxed{
+K=
+\begin{bmatrix}
+K_{11}&-K_{12}&-K_{13}\\
+K_{21}&K_{22S}+S_{\mathrm{PPP}}+\Delta tK_{22P}&-K_{23}\\
+0&\Delta tK_{32\mathrm{Adv}}&K_{33X}+\Delta t(K_{33G}+K_{33\mathrm{Adv}})
+\end{bmatrix}.
+}
 $$
 
-则
+矩阵的行、列依次对应位移、孔压、温度；$0$ 表示相应尺寸的零块。Newton 线性化中的 $\delta\boldsymbol U,\delta\boldsymbol P,\delta\boldsymbol T$ 是对当前试算值的独立扰动，与本步增量 $\Delta\boldsymbol U,\Delta\boldsymbol P,\Delta\boldsymbol T$ 区分。
+
+各项的物理含义及构造位置如下。
+
+| 全局量 | 含义 | 构造位置 |
+| --- | --- | --- |
+| $\boldsymbol f_u^{\mathrm{skel}},K_{11},K_{13}$ | 骨架内力、力学切线及温度引起的力学耦合 | [8.2](#section-29) |
+| $K_{12},K_{21}$ | 孔压力与体积变形的耦合 | [8.2](#section-29) |
+| $K_{22S},K_{23},K_{33X}$ | 储水、温度—流体含量耦合、热容量 | [8.3](#section-31) |
+| $K_{22P},\boldsymbol G_p,K_{33G}$ | 孔压扩散、Darcy 重力载荷、热传导 | [8.4](#section-32) |
+| $\boldsymbol f_T^{\mathrm{adv}},K_{32\mathrm{Adv}},K_{33\mathrm{Adv}}$ | 热对流残差及其对孔压、温度的导数 | [8.5](#section-35) |
+| $S_{\mathrm{PPP}}$ | 已乘稳定化系数的 PPP 矩阵 | [第 10 节](#section-42) |
+| $\boldsymbol F_u^{\mathrm{ext}}=\boldsymbol F_u^\Gamma+\boldsymbol F_u^{\mathrm{body}}$ | 面力与机械体力的等效节点外荷载 | [第 12 节](#section-48) |
+
+$\boldsymbol Q_p^{\mathrm{step}},\boldsymbol Q_T^{\mathrm{step}}$ 分别为本步从边界流入的节点流体体积和热量，流入取正；本文域内源项为零。对应代码为 `dt*Load.Fp`、`dt*Load.FT`，即步末通量乘 $\Delta t$。孔压力、扩散和对流项使用当前孔压或温度总值；储水、热容量及 PPP 项使用本步增量。机械残差和 PPP 项不额外乘 $\Delta t$。
+
+**关闭热对流时，同时令 $\boldsymbol f_T^{\mathrm{adv}},K_{32\mathrm{Adv}},K_{33\mathrm{Adv}}$ 为零。** 机械体力和 Darcy 重力仍保留。此时切线的温度—孔压块为零；开启对流后，该块为 $\Delta tK_{32\mathrm{Adv}}$。温度—位移块始终为零。
+
+**注意：** Darcy 重力已通过 $-\Delta t\boldsymbol G_p$ 计入流体残差，不再并入 $\boldsymbol Q_p^{\mathrm{step}}$。
+
+### 8.2 骨架内力与力学耦合
+
+各虚拟点的机械应变试算增量、骨架内力及切线贡献为
 
 $$
-\boxed{K_{12}^k=(\overline B_k^V)^T\boldsymbol m I_{N,k}^{V},\qquad K_{21}^k=(K_{12}^k)^T.}
-$$
-
-此处使用第 4.3 节的平均矩阵 $\overline B_k^V$；它在光滑域内为常数，可以移到积分外面，剩下只对原始 T3 的 N 积分。这里不需要计算四个虚拟点处的原始 T3 型函数。按第 6 节的加减梯度写法，$\overline B_k^V$ 也正好等于四个 $\widetilde B_{kg}$ 的平均。组装后仍有 $K_{21}=K_{12}^T$。
-
-由第 7.2 节的 $\overline N_k^V=I_{N,k}^{V}/V_k$，$K_{12}^k$ 等价于 $V_k(\overline B_k^V)^T\boldsymbol m\overline N_k^V$。
-
-**注意：** 将面积平均 $\overline N_k^A$ 乘以 $V_k$，通常不等于所需的体积积分。
-
-机械方程中的孔压项保持 $-K_{12}\boldsymbol P$，流体方程中的变形项保持 $K_{21}\Delta\boldsymbol U$。即使孔压处处相同，总应力中的 $-p\boldsymbol m$ 及边界上施加的力仍需共同满足平衡。**规定孔压仍不会自动施加机械壁面压力**。
-
-### 8.3 储水、热容量、温度引起的孔压变化与扩散
-
-令
-
-$$
-M_k^V=\operatorname*{Assemble}_{e\ni k}\left[\int_{D_{ke}}N_e^TN_e\,\mathrm{d}V\right],
-$$
-
-这里 $M_k^V$ 就是**把原始 T3 型函数的乘积按体积积分后得到的矩阵**（但注意积分区域不是一整个三角形）。以下材料系数在整个域内相同，均不带 $k$；下标 $s,f$ 分别标记固体颗粒、孔隙流体：
-
-| 记号 | 含义 |
-| --- | --- |
-| $n$ | 孔隙率，对应 `Material.poro`；不是 DP 的摩擦角。 |
-| $K_f$ | 孔隙流体的体积模量；固体颗粒采用 $K_s\to\infty$，这不表示多孔骨架不可压缩。 |
-| $\alpha_s,\alpha_f$ | 固体线膨胀系数 $\alpha_s$；流体参数 $\alpha_f$ 取流体体积热膨胀系数的三分之一。 |
-| $\rho_s,\rho_f$；$c_s,c_f$ | 两相的质量密度、单位质量比热容；小写 $c_s,c_f$ 与本构切线矩阵 $C_{kg}^{\mathrm{ep}}$ 表示不同物理量。 |
-| $k_f$；$\gamma_f$ | 各向同性水力传导系数（常标量，单位 m/s）；流体重度（单位体积的重量）。小写 $k_f$ 与大写体积模量 $K_f$ 不同，$k_f/\gamma_f$ 用于孔压梯度驱动的 Darcy 项。 |
-| $k_T$ | 各向同性导热系数（常标量）。 |
-| $S,\beta_T,C_T$ | 依次为固定总应变时的储水系数、温度引起流体含量变化的耦合系数、混合物单位总体积的热容量，由下面公式计算。 |
-
-$$
-S=\frac{n}{K_f},
+\Delta\boldsymbol\varepsilon_{kg}^{\mathrm{mech}}
+=\widetilde B_{kg}\Delta\boldsymbol U_k
+-\alpha_s\boldsymbol m\widetilde N_{kg}\Delta\boldsymbol T_k,
+\qquad \boldsymbol m=[1,1,1,0]^T,
 $$
 
 $$
-\beta_T=3[(1-n)\alpha_s+n\alpha_f],\qquad C_T=(1-n)\rho_sc_s+n\rho_fc_f.
-$$
-
-则
-
-$$
-K_{22S}^k=SM_k^V,\qquad K_{23}^k=\beta_TM_k^V,\qquad K_{33X}^k=C_TM_k^V,
+\boldsymbol f_{u,k}^{\mathrm{skel}}
+=\sum_gW_{kg}\widetilde B_{kg}^T\boldsymbol\sigma'_{kg},
 $$
 
 $$
-K_{22P}^k=\frac{k_f}{\gamma_f}\sum_gW_{kg}\widetilde E_{kg}^T\widetilde E_{kg},\qquad K_{33G}^k=k_T\sum_gW_{kg}\widetilde E_{kg}^T\widetilde E_{kg}.
-$$
-
-组装后，$K_{22S}$、$K_{22P}$ 分别为储水、Darcy 流动矩阵，$K_{23}$ 为温度引起流体含量变化的耦合矩阵，$K_{33X}$、$K_{33G}$ 分别为热容量、热传导矩阵。下标字母 $S,P,X,G$ 沿用代码中的矩阵名称，不是额外的物理变量。轴对称模型仍有三个法向应变和应力分量。这里 $\boldsymbol m^T\boldsymbol m=3$，所以体应变及热膨胀中的三个法向分量包含环向分量，不能因计算域是 r–z 平面就把 3 改为 2。
-
-#### 8.3.1 含重力的 Darcy 通量与流体弱式
-
-在本文 $b=1$ 的假设下，流体体积守恒和 Darcy 定律为
-
-$$
-\frac{\partial\varepsilon_v}{\partial t}
-+S\frac{\partial p}{\partial t}
--\beta_T\frac{\partial T}{\partial t}
-+\nabla\cdot\boldsymbol q_f=0,
+K_{11}^k=\sum_gW_{kg}\widetilde B_{kg}^TC_{kg}^{\mathrm{ep}}\widetilde B_{kg},
 \qquad
-\boldsymbol q_f=-\frac{k_f}{\gamma_f}(\nabla p-\rho_f\boldsymbol g).
+K_{13}^k=\sum_gW_{kg}\widetilde B_{kg}^TC_{kg}^{\mathrm{ep}}\alpha_s\boldsymbol m\widetilde N_{kg}.
 $$
 
-上述时间导数均在固定参考位置取值。$\gamma_f$ 是参考流体重度；在“关闭重力”的数值测试中令 $\boldsymbol g=\boldsymbol0$，**不能同时把分母中的参考 $\gamma_f$ 设为零**。这里的 $k_f$ 是常标量。
+$C_{kg}^{\mathrm{ep}}$ 是轴对称本构接口采用的 $4\times4$ 算法切线，即有效应力对机械应变试算增量的导数；从三维 UMAT 提取该矩阵的方式见[第 11.2 节](#section-45)。上标 $\mathrm{ep}$ 表示弹塑性；材料均匀时，各点的应力、塑性状态和算法切线仍可不同。热应变从总应变中扣除，因此整体切线中的温度耦合块为 $-K_{13}$。**内力与切线使用同一组 $\widetilde B_{kg},\widetilde N_{kg},W_{kg}$。**
+
+孔压耦合使用原始 T3 型函数的体积积分行向量
+
+$$
+I_{N,k}^{V}
+=\operatorname*{Assemble}_{e\ni k}\left[\int_{D_{ke}}N_e\,\mathrm dV\right],
+\qquad
+\boxed{K_{12}^k=(\overline B_k^V)^T\boldsymbol m I_{N,k}^{V},
+\quad K_{21}^k=(K_{12}^k)^T.}
+$$
+
+$I_{N,k}^{V}$ 中的 $I$ 是积分结果的名称，不是单位矩阵或节点编号。$\overline B_k^V$ 采用[第 4.3 节](#section-15)的精确体积平均；由 $\overline N_k^V=I_{N,k}^{V}/V_k$，也有 $K_{12}^k=V_k(\overline B_k^V)^T\boldsymbol m\overline N_k^V$。组装后保持 $K_{21}=K_{12}^T$。
+
+**注意：** 面积平均 $\overline N_k^A$ 乘以 $V_k$ 通常不等于所需体积积分。规定孔压也不会自动施加机械壁面压力；面力仍按第 12 节处理。
+
+每轮 Newton 和 line search 试算均从上一步已收敛的本构状态出发。UMAT 更新试算应力和算法切线，MEX 使用它们组装矩阵；当前时间步收敛后再保存本构状态。
+
+### 8.3 储水、温度—流体含量耦合与热容量
+
+原始 T3 型函数乘积的体积积分矩阵为
+
+$$
+M_k^V=\operatorname*{Assemble}_{e\ni k}
+\left[\int_{D_{ke}}N_e^TN_e\,\mathrm dV\right].
+$$
+
+使用第 0 节定义的常系数 $S,\beta_T,C_T$，得到
+
+$$
+\boxed{
+K_{22S}^k=SM_k^V,\qquad
+K_{23}^k=\beta_TM_k^V,\qquad
+K_{33X}^k=C_TM_k^V.
+}
+$$
+
+这三个矩阵在残差中的作用分别为：
+
+| 局部贡献 | 物理含义 |
+| --- | --- |
+| $K_{22S}^k\Delta\boldsymbol P_k$ | 孔压变化引起的等效节点流体储存体积变化。 |
+| $-K_{23}^k\Delta\boldsymbol T_k$ | 温度变化引起的等效节点流体含量变化；负号与第 8.1 节一致。 |
+| $K_{33X}^k\Delta\boldsymbol T_k$ | 温度变化引起的等效节点储热量变化。 |
+
+$M_k^V$ 按实际四边形子域积分，积分规则见[第 9 节](#section-41)。矩阵下标中的 $S,P,X,G$ 沿用代码名称，不是额外的物理变量。
+
+### 8.4 Darcy 流动、重力与热传导
 
 定义全域相同的标量**水力流度（hydraulic mobility）**
 
 $$
-H_f:=\frac{k_f}{\gamma_f},
+H_f=\frac{k_f}{\gamma_f},
+\qquad
+\boldsymbol q_f=-H_f(\nabla p-\rho_f\boldsymbol g).
 $$
 
-这里 $H_f$ 是标量，单位为 $\mathrm{m^2/(Pa\,s)}$，不是水力传导系数 $k_f$ 本身。下式中的乘法是标量与向量相乘；若使用矩阵接口，对应的矩阵为 $H_f I_2$。虚拟点上的通量为
+$k_f$ 是水力传导系数，$\gamma_f$ 是参考流体重度；$H_f$ 的单位为 $\mathrm{m^2/(Pa\,s)}$。$\boldsymbol q_f$ 为 Darcy 体积通量，按介质总截面积计。虚拟点上的离散通量为
+
+$$
+\boldsymbol q_{f,kg}
+=-H_f\widetilde E_{kg}\boldsymbol P_k+\rho_fH_f\boldsymbol g.
+$$
+
+采用前文的 $\widetilde E_{kg}$ 和 $W_{kg}=V_k/4$，**孔压扩散矩阵** $K_{22P}^k$、**Darcy 重力载荷** $\boldsymbol G_{p,k}$ 和**热传导矩阵** $K_{33G}^k$ 分别为
 
 $$
 \boxed{
-\boldsymbol q_{f,kg}
-=-H_f\widetilde E_{kg}\boldsymbol P_k
-+\rho_fH_f\boldsymbol g,
-\qquad W_{kg}=V_k/4.
+\begin{aligned}
+K_{22P}^k&=\sum_gW_{kg}\widetilde E_{kg}^TH_f\widetilde E_{kg},\\
+\boldsymbol G_{p,k}&=\sum_gW_{kg}\widetilde E_{kg}^TH_f\rho_f\boldsymbol g,\\
+K_{33G}^k&=\sum_gW_{kg}\widetilde E_{kg}^Tk_T\widetilde E_{kg}.
+\end{aligned}
 }
 $$
 
-这里压力梯度、重力驱动力和通量均用径向、轴向两个分量表示；没有环向梯度行。
+$\boldsymbol G_p=\operatorname*{Assemble}_k[\boldsymbol G_{p,k}]$。给定参考系数、几何和重力后，$\boldsymbol G_p$ 与当前未知量无关，因此不增加切线项。
 
-#### 重力贡献为什么带负号
+边界流量以入流为正，$\boldsymbol q_f\cdot\boldsymbol n_{\mathrm{out}}=-\overline q_{\mathrm{in}}$；热流边界指定传导热流。静水平衡及零通量检查见[第 14.4 节](#section-40)。
 
-设 $v_p$ 为孔压方程中的标量试函数，在规定孔压的边界上为零。边界流量以入流为正，即 $\boldsymbol q_f\cdot\boldsymbol n_{\mathrm{out}}=-\overline q_{\mathrm{in}}$。因此
+**注意：** 关闭重力时令 $\boldsymbol g=\boldsymbol0$，分母中的参考流体重度 $\gamma_f$ 保持不变。
 
-$$
-\begin{aligned}
-0={}&\int_D v_p
-\left(\partial_t\varepsilon_v+S\partial_tp-\beta_T\partial_tT\right)\,\mathrm dV
--\int_D(\nabla v_p)^T\boldsymbol q_f\,\mathrm dV
--\int_{\Gamma_q}v_p\overline q_{\mathrm{in}}\,\mathrm dS\\
-={}&\int_D v_p
-\left(\partial_t\varepsilon_v+S\partial_tp-\beta_T\partial_tT\right)\,\mathrm dV
-+\int_D(\nabla v_p)^TH_f\nabla p\,\mathrm dV\\
-&-\int_D(\nabla v_p)^TH_f\rho_f\boldsymbol g\,\mathrm dV
--\int_{\Gamma_q}v_p\overline q_{\mathrm{in}}\,\mathrm dS.
-\end{aligned}
-$$
+### 8.5 热对流残差与一致切线
 
-这一弱式同时确定了以下四项的正负号：压力扩散为正、重力驱动力为负、温度引起的流体含量变化为负、规定入流在残差中为负。
+#### 8.5.1 热对流离散
 
-**注意：** 即使 $\boldsymbol g$ 为常向量，也不能因局部 $\nabla\cdot(H_f\rho_f\boldsymbol g)=0$ 就删除重力弱式项；边界总通量的定义中包含重力部分。
-
-采用与扩散矩阵相同的四点算子，定义
+在本文固定参考几何、常参考系数和无域内热源的设定下，温度方程为
 
 $$
-\begin{aligned}
-K_{22P}^k&=\sum_gW_{kg}\widetilde E_{kg}^TH_f\widetilde E_{kg},\\
-\boldsymbol G_{p,k}&=\sum_gW_{kg}\widetilde E_{kg}^TH_f\rho_f\boldsymbol g,
-\qquad
-\boldsymbol G_p=\operatorname*{Assemble}_k[\boldsymbol G_{p,k}].
-\end{aligned}
+C_T\frac{\partial T}{\partial t}
++\rho_fc_f\boldsymbol q_f\cdot\nabla T
+-\nabla\cdot(k_T\nabla T)=0.
 $$
 
-从直接通量形式也可核对该符号：
+该模型不另加机械体力功、塑性耗散或流动耗散项。由于 $\boldsymbol q_f$ 已是按总截面积定义的 Darcy 通量，对流项前面不再乘孔隙率；轴对称下也没有额外的 $q_f^{(r)}T/r$ 项，其中 $q_f^{(r)}$ 是通量的径向分量。
+
+温度试函数为标量 $v_T$，对流项不作分部积分，其弱式贡献为
 
 $$
--\sum_gW_{kg}\widetilde E_{kg}^T\boldsymbol q_{f,kg}
-=K_{22P}^k\boldsymbol P_k-\boldsymbol G_{p,k}.
+\int_Dv_T\rho_fc_f\boldsymbol q_f\cdot\nabla T\,\mathrm dV.
 $$
 
-### 8.4 关闭热对流时：残差、总量与增量
-
-令 $S_{\mathrm{PPP}}$ 表示已经乘上稳定化系数的 PPP 矩阵。下面把残差 $\boldsymbol R$ 定义为各方程左端减右端，平衡时 $\boldsymbol R$ 为零；$\boldsymbol R_u,\boldsymbol R_p,\boldsymbol R_T$ 分别为力学、流体质量、能量方程的残差向量。$\boldsymbol f_u^{\mathrm{skel}}$ 是组装后的骨架内力，$\boldsymbol F_u^{\mathrm{ext}}=\boldsymbol F_u^\Gamma+\boldsymbol F_u^{\mathrm{body}}$ 包括面力与第 12.4 节的体力贡献，上标 $\mathrm{ext}$ 表示外荷载。先写出 `Keyword.HeatAdvection = false` 时的残差，作为第 8.5 节加入对流的对照：
-
-$$
-\begin{aligned}
-\boldsymbol R_u&=\boldsymbol f_u^{\mathrm{skel}}-K_{12}\boldsymbol P-\boldsymbol F_u^{\mathrm{ext}},\\
-\boldsymbol R_p&=K_{21}\Delta\boldsymbol U+(K_{22S}+S_{\mathrm{PPP}})\Delta\boldsymbol P-K_{23}\Delta\boldsymbol T+\Delta t(K_{22P}\boldsymbol P-\boldsymbol G_p)-\boldsymbol Q_p^{\mathrm{step}},\\
-\boldsymbol R_T&=K_{33X}\Delta\boldsymbol T+\Delta tK_{33G}\boldsymbol T-\boldsymbol Q_T^{\mathrm{step}}.
-\end{aligned}
-$$
-
-$\boldsymbol Q_p^{\mathrm{step}},\boldsymbol Q_T^{\mathrm{step}}$ 分别是本步的节点流体体积和热量贡献，包含边界通量及可选域内源项；本文模型的域内源项为零。流入或加入为正，没有荷载时为零。代码分别使用 `dt*Load.Fp`、`dt*Load.FT`。速率随时间变化时，backward Euler 使用步末速率乘 $\Delta t$，一般不是精确的时间积分。对上述残差按节点未知量 $[\boldsymbol U;\boldsymbol P;\boldsymbol T]$ 求导，得到全局切线矩阵 $K$：
-
-$$
-K=\begin{bmatrix}
-K_{11}&-K_{12}&-K_{13}\\
-K_{21}&K_{22S}+S_{\mathrm{PPP}}+\Delta tK_{22P}&-K_{23}\\
-0&0&K_{33X}+\Delta tK_{33G}
-\end{bmatrix}.
-$$
-
-重力项 $-\Delta t\boldsymbol G_p$ 已显式写在流体残差中，不再重复并入 $\boldsymbol Q_p^{\mathrm{step}}$；它是水力驱动力，不是注入流体的体积源。给定参考密度、导率、几何和重力时，$\boldsymbol G_p$ 与当前未知量无关，故上述流体切线块不变。关闭热对流不等于关闭机械体力或 Darcy 重力。
-
-机械方程的孔压项、Darcy 项使用当前孔压总量 $\boldsymbol P$，储水与 PPP 项使用当前时间步的孔压增量 $\Delta\boldsymbol P$。PPP 项不额外乘 $\Delta t$。在本节关闭对流的情况下，温度方程不依赖位移和孔压，所以 $K_{31},K_{32}$ 为零。
-
-### 8.5 开启热对流后：温度残差和切线怎样变化
-
-#### 8.5.1 温度方程与假设
-
-加入 Darcy 流体携带的热量后，轴对称温度方程为
-
-$$
-C_T\frac{\partial T}{\partial t}+\rho_f c_f\boldsymbol q_f\cdot\nabla T-\nabla\cdot(k_T\nabla T)=Q_T.
-$$
-
-$C_T,k_T$ 见第 8.3 节，$c_f$ 是流体单位质量比热容。时间导数在固定参考位置取值；固定几何下用节点温度的 backward Euler 差分计算。本节将参考 $\rho_f c_f$ 视为给定常量。$Q_T$ 是可选的单位总体积、单位时间热源，正值表示加热；本文模型取 $Q_T=0$。该简化热模型不另加机械体力功、塑性耗散或流动耗散项。
-
-$\boldsymbol q_f=[q_f^{(r)},q_f^{(z)}]^T$ 是相对固体、按介质总截面积计算的 Darcy 体积通量。其含重力形式为
-
-$$
-\boldsymbol q_f=-\frac{k_f}{\gamma_f}(\nabla p-\rho_f\boldsymbol g).
-$$
-
-由于使用的是 Darcy 通量，对流项前面不再额外乘孔隙率。轴对称下，对流项仍为
-
-$$
-\boldsymbol q_f\cdot\nabla T=q_f^{(r)}\frac{\partial T}{\partial r}+q_f^{(z)}\frac{\partial T}{\partial z}.
-$$
-
-**没有额外的 $q_f^{(r)}T/r$ 项。** 积分中的 $2\pi r$ 由体积权重考虑；这里不对非保守形式的对流项作分部积分。
-
-#### 8.5.2 从弱式到四个虚拟积分点
-
-沿用第 7.3 节的温度试函数 $v_T$，新增的弱式贡献为
-
-$$
-\int_D v_T\rho_f c_f\boldsymbol q_f\cdot\nabla T\,2\pi r\,\mathrm{d}r\mathrm{d}z.
-$$
-
-对流项不作分部积分。设光滑域 $k$ 涉及 $n_{\mathrm{node},k}$ 个节点，标量试函数 $v_T$ 与温度采用相同的光滑型函数 $\widetilde N_{kg}$ 插值。在虚拟点 $g$，
-
-$$
-\begin{aligned}
-(\nabla T)_{kg}&=\widetilde E_{kg}\boldsymbol T_k,\\
-\boldsymbol q_{f,kg}&=-\frac{k_f}{\gamma_f}(\widetilde E_{kg}\boldsymbol P_k-\rho_f\boldsymbol g),
-\qquad W_{kg}=\frac{V_k}{4}.
-\end{aligned}
-$$
-
-$\widetilde N_{kg}$、$\widetilde E_{kg}$ 沿用第 7.2、7.3 节的 SNS 矩阵，尺寸分别为 $1\times n_{\mathrm{node},k}$、$2\times n_{\mathrm{node},k}$。$\boldsymbol P_k,\boldsymbol T_k$ 是当前试算孔压、温度的节点总值。Darcy 速度与温度梯度使用同一个点的 $\widetilde E_{kg}$。
-
-分别取各节点对应的光滑型函数作为试函数 $v_T$，将四点积分得到的各节点贡献排成列向量，得到局部对流残差
+试函数使用 $\widetilde N_{kg}$，温度梯度使用 $\widetilde E_{kg}\boldsymbol T_k$；Darcy 通量沿用第 8.4 节。四点积分得到局部对流残差
 
 $$
 \boxed{
 \boldsymbol f_{T,k}^{\mathrm{adv}}(\boldsymbol P_k,\boldsymbol T_k)
-=\rho_f c_f\sum_{g=1}^{4}W_{kg}\widetilde N_{kg}^{T}
+=\rho_fc_f\sum_gW_{kg}\widetilde N_{kg}^{T}
 \left[\boldsymbol q_{f,kg}^{T}\widetilde E_{kg}\boldsymbol T_k\right].
 }
 $$
 
-上标 $\mathrm{adv}$ 表示对流贡献。此向量含 $n_{\mathrm{node},k}$ 个分量，尚未乘时间步长。沿用第 6 节的四点近似，**每点权重为 $V_k/4$，不再乘 $2\pi r$ 或虚拟点半径**；$V_k$ 已是光滑域旋转后的体积。
+$\widetilde N_{kg}$、$\widetilde E_{kg}$ 的尺寸分别为 $1\times n_{\mathrm{node},k}$、$2\times n_{\mathrm{node},k}$，局部残差含 $n_{\mathrm{node},k}$ 个分量。组装后得到 $\boldsymbol f_T^{\mathrm{adv}}=\operatorname*{Assemble}_k[\boldsymbol f_{T,k}^{\mathrm{adv}}]$。**此向量尚未乘 $\Delta t$；每点权重已是 $V_k/4$，不再乘半径。**
 
-#### 8.5.3 分别对温度和孔压求导
+#### 8.5.2 热对流切线
 
-用 $\delta\boldsymbol T_k,\delta\boldsymbol P_k$ 表示当前试算值的独立扰动，与时间步增量 $\Delta\boldsymbol T_k,\Delta\boldsymbol P_k$ 区分。几何、参考材料系数和给定重力固定时，
-
-$$
-\begin{aligned}
-\delta\boldsymbol q_{f,kg}&=-\frac{k_f}{\gamma_f}\widetilde E_{kg}\delta\boldsymbol P_k,\\
-\delta(\nabla T)_{kg}&=\widetilde E_{kg}\delta\boldsymbol T_k.
-\end{aligned}
-$$
-
-对速度与温度梯度的乘积求导，两部分都要保留：
-
-$$
-\begin{aligned}
-\delta\boldsymbol f_{T,k}^{\mathrm{adv}}
-=\rho_f c_f\sum_{g=1}^{4}W_{kg}\widetilde N_{kg}^{T}
-\Bigg[&\boldsymbol q_{f,kg}^{T}\widetilde E_{kg}\delta\boldsymbol T_k\\
-&-(\widetilde E_{kg}\boldsymbol T_k)^T
-\frac{k_f}{\gamma_f}\widetilde E_{kg}\delta\boldsymbol P_k\Bigg].
-\end{aligned}
-$$
-
-因此，新增的两个局部矩阵为
+分别对当前节点温度和孔压求导，得到
 
 $$
 \boxed{
 K_{33\mathrm{Adv}}^k
 =\frac{\partial\boldsymbol f_{T,k}^{\mathrm{adv}}}{\partial\boldsymbol T_k}
-=\rho_f c_f\sum_{g=1}^{4}W_{kg}\widetilde N_{kg}^{T}
+=\rho_fc_f\sum_gW_{kg}\widetilde N_{kg}^{T}
 \boldsymbol q_{f,kg}^{T}\widetilde E_{kg},
 }
 $$
@@ -833,129 +761,46 @@ $$
 \boxed{
 K_{32\mathrm{Adv}}^k
 =\frac{\partial\boldsymbol f_{T,k}^{\mathrm{adv}}}{\partial\boldsymbol P_k}
-=-\rho_f c_f\sum_{g=1}^{4}W_{kg}\widetilde N_{kg}^{T}
-(\widetilde E_{kg}\boldsymbol T_k)^T\frac{k_f}{\gamma_f}\widetilde E_{kg}.
+=-\rho_fc_f\sum_gW_{kg}\widetilde N_{kg}^{T}
+(\widetilde E_{kg}\boldsymbol T_k)^TH_f\widetilde E_{kg}.
 }
 $$
 
-两者都是 $n_{\mathrm{node},k}\times n_{\mathrm{node},k}$ 矩阵，尚未乘 $\Delta t$，分别对应代码中的 `K33Adv`、`K32Adv`。前者固定孔压、对温度求导；后者固定温度、对孔压求导。两部分都需要加入 Newton 切线。$K_{33\mathrm{Adv}}^k$ 必须使用含重力的完整通量；固定参考密度、导率和重力时，$K_{32\mathrm{Adv}}^k$ 的公式不新增重力项，因为重力通量对孔压的偏导数为零。
+两者均为 $n_{\mathrm{node},k}\times n_{\mathrm{node},k}$ 矩阵，组装后分别得到 $K_{33\mathrm{Adv}}$、$K_{32\mathrm{Adv}}$，对应代码 `K33Adv`、`K32Adv`。**它们本身不含 $\Delta t$，时间步长已在第 8.1 节的整体切线中计入。**
 
-**$K_{32\mathrm{Adv}}$ 不是 $K_{23}^T$：** 前者来自孔压对 Darcy 速度的影响，后者来自温度对流体含量的影响。对流矩阵一般不对称。
+$K_{33\mathrm{Adv}}$ 使用含重力的完整通量，随当前孔压更新；$K_{32\mathrm{Adv}}$ 随当前温度梯度更新。参考系数固定时，重力通量对孔压的导数为零，不增加 $K_{32\mathrm{Adv}}$ 的独立项。两者均在每轮 Newton 和 line search 试算时更新。
 
-#### 8.5.4 时间离散、全局残差和切线分块
+**$K_{32\mathrm{Adv}}$ 与 $K_{23}^T$ 是不同的耦合项。** 前者来自孔压对流体携热的影响，后者来自温度对流体含量的影响，整体切线一般不对称。对流项含孔压梯度与温度梯度的乘积，因此即使骨架线弹性，耦合方程仍可非线性。
 
-按第 2.3 节的规则组装：
+#### 8.5.3 重力对流的计入
 
-$$
-\begin{aligned}
-\boldsymbol f_T^{\mathrm{adv}}&=\operatorname*{Assemble}_{k}[\boldsymbol f_{T,k}^{\mathrm{adv}}],\\
-K_{33\mathrm{Adv}}&=\operatorname*{Assemble}_{k}[K_{33\mathrm{Adv}}^k],\qquad
-K_{32\mathrm{Adv}}=\operatorname*{Assemble}_{k}[K_{32\mathrm{Adv}}^k].
-\end{aligned}
-$$
-
-当前程序将温度方程整体乘以 $\Delta t$。因此，开启对流后的温度残差为
-
-$$
-\boxed{
-\boldsymbol R_T
-=K_{33X}\Delta\boldsymbol T
-+\Delta t\left[K_{33G}\boldsymbol T+\boldsymbol f_T^{\mathrm{adv}}(\boldsymbol P,\boldsymbol T)\right]
--\boldsymbol Q_T^{\mathrm{step}}.
-}
-$$
-
-对流使用孔压、温度的当前**总值**，热容量项使用温度增量。力学和流体残差的公式仍见第 8.4 节。
-
-用 $K^{\mathrm{off}}$ 表示第 8.4 节的无对流矩阵，在**同一个当前试算状态**计算。加入对流后，
-
-$$
-\boxed{
-K=K^{\mathrm{off}}+\Delta t
-\begin{bmatrix}
-0&0&0\\
-0&0&0\\
-0&K_{32\mathrm{Adv}}&K_{33\mathrm{Adv}}
-\end{bmatrix}.
-}
-$$
-
-矩阵中的 $0$ 表示相应尺寸的零块。**$K_{31}$ 仍为零，$K_{32}$ 一般不再为零。** 固定 $\boldsymbol P,\boldsymbol T$ 时，位移不直接改变对流项；在完整方程组中，位移仍可通过孔压间接影响温度。
-
-定义纯重力通量和对应对流部分
+纯重力通量及其对流贡献为
 
 $$
 \boldsymbol q_f^{\mathrm{grav}}=\rho_fH_f\boldsymbol g,
 \qquad
 K_{33\mathrm{Adv,grav}}^k
-=\rho_fc_f\sum_gW_{kg}\widetilde N_{kg}^T
+=\rho_fc_f\sum_gW_{kg}\widetilde N_{kg}^{T}
 (\boldsymbol q_f^{\mathrm{grav}})^T\widetilde E_{kg},
 $$
 
 $$
-\boldsymbol f_{T,k}^{\mathrm{adv,grav}}(\boldsymbol T_k)
+\boldsymbol f_{T,k}^{\mathrm{adv,grav}}
 =K_{33\mathrm{Adv,grav}}^k\boldsymbol T_k.
 $$
 
-上述局部贡献按光滑域组装，分别得到全局矩阵 $K_{33\mathrm{Adv,grav}}$ 和向量 $\boldsymbol f_T^{\mathrm{adv,grav}}$；下文代码写法中的 `fAdvGrav` 对应后者，本身未乘 $\Delta t$。
-
-完整通量对孔压是仿射函数，因此正确恒等式是
+局部贡献组装为 $K_{33\mathrm{Adv,grav}}$ 和 $\boldsymbol f_T^{\mathrm{adv,grav}}$。完整对流残差满足
 
 $$
 \boxed{
-\begin{aligned}
 \boldsymbol f_T^{\mathrm{adv}}(\boldsymbol P,\boldsymbol T;\boldsymbol g)
-&=K_{33\mathrm{Adv}}(\boldsymbol P;\boldsymbol g)\boldsymbol T\\
-&=K_{32\mathrm{Adv}}(\boldsymbol T)\boldsymbol P
+=K_{33\mathrm{Adv}}(\boldsymbol P;\boldsymbol g)\boldsymbol T
+=K_{32\mathrm{Adv}}(\boldsymbol T)\boldsymbol P
 +\boldsymbol f_T^{\mathrm{adv,grav}}(\boldsymbol T).
-\end{aligned}
 }
 $$
 
-**注意：** 无重力形式的 $\boldsymbol f_T^{\mathrm{adv}}=K_{32\mathrm{Adv}}\boldsymbol P$ 仅在重力对流贡献为零时成立；无重力是其充分条件。采用含重力的 `K33Adv` 后，`dt*K33Adv*Trial.T` 已包含完整对流残差，**不得再加** `dt*fAdvGrav`。若选择用 `dt*K32Adv*P` 组装对流残差，则必须补上 `dt*fAdvGrav`；这仍是同一残差的另一种写法。
-
-开启热对流、孔压和温度同时作为未知量求解时，对流项含孔压梯度与温度梯度的双线性乘积，使方程组具有非线性耦合，即使固体采用线弹性模型。每轮 Newton 和每次 line search 试算都要更新这两个矩阵；几何仍可预计算，本构历史管理不变。
-
-#### 8.5.5 开关、边界与静水检查
-
-`Keyword.HeatAdvection = false` 只去掉热对流贡献，机械体力和 Darcy 重力项仍保留。对流项不作分部积分；热流边界指定的是传导热流。若改为规定包含流体携热的总热流，需要相应调整弱式中的边界项，使其与新的边界条件一致。
-
-有重力时，$\boldsymbol P=\boldsymbol0$ 只使压力梯度为零，通常并不使 Darcy 通量为零：
-
-$$
-\boldsymbol P=\boldsymbol0
-\ \Longrightarrow\;
-\boldsymbol q_{f,kg}=\rho_fH_f\boldsymbol g.
-$$
-
-原 markdown 文件中四种 patch 的零通量结论仅适用于**测试同时设置 $\boldsymbol g=\boldsymbol0$ 的情况**。材料参数固定时，由公式可得下表：
-
-| 当前状态 | $\boldsymbol f_T^{\mathrm{adv}}$ | $K_{33\mathrm{Adv}}$ | $K_{32\mathrm{Adv}}$ |
-| --- | --- | --- | --- |
-| 各虚拟点 $\boldsymbol q_{f,kg}=\boldsymbol0$，但温度有梯度 | 零 | 零 | 一般非零 |
-| 温度处处相同，但存在 $\boldsymbol q_{f,kg}\ne\boldsymbol0$ 的虚拟点 | 零 | 一般非零；乘均匀温度向量为零 | 零 |
-| 各虚拟点 $\boldsymbol q_{f,kg}=\boldsymbol0$ 且温度处处相同 | 零 | 零 | 零 |
-
-可用静水条件检查 Darcy 方程中各项的符号。若 $z$ 轴向上、$\boldsymbol g=[0,-g]^T$，且 $\rho_f$ 为常数，令
-
-$$
-p(r,z)=p_{\mathrm{ref}}-\rho_fg(z-z_{\mathrm{ref}}),
-\qquad T=T_{\mathrm{ref}}.
-$$
-
-当离散梯度算子能准确计算上述线性压力场的梯度时，有
-
-$$
-\widetilde E_{kg}\boldsymbol P_k=\rho_f\boldsymbol g,
-\quad \boldsymbol q_{f,kg}=\boldsymbol0,
-\quad K_{22P}\boldsymbol P-\boldsymbol G_p=\boldsymbol0.
-$$
-
-通过上述等式，可以核对重力项与扩散项是否使用了相同的离散梯度算子，以及两项的正负号是否正确。
-
-**注意：** 这项检查针对**Darcy 通量和流体扩散残差**；完整的机械自重平衡还要求初始有效应力、边界面力与体力 $\rho\boldsymbol g$ 满足力学平衡。若测试从上述静水压力场开始，且当前时间步保持该压力场不变，则 $\Delta\boldsymbol P=0$；若初始孔压全为零，当前时间步才施加静水压力，就不能要求储水和 PPP 增量残差自动为零。
-
-若光滑梯度算子能准确计算线性压力场的梯度，上述静水检查中的通量和扩散残差应在浮点舍入误差范围内为零。若结果非零，应先核对 $\widetilde E_{kg}\boldsymbol P_k$ 给出的压力梯度是否正确，不能仅凭残差非零就认定重力项的符号有误。
+本文使用含完整通量的 `dt*K33Adv*Trial.T` 组装时间离散后的对流残差。**其中已包含重力对流，不得再加 `dt*fAdvGrav`。** `fAdvGrav` 表示尚未乘时间步长的 $\boldsymbol f_T^{\mathrm{adv,grav}}$。只有重力对流贡献为零时，才能单独用 $K_{32\mathrm{Adv}}\boldsymbol P$ 表示完整对流残差。
 
 ## 9. 加入半径后，哪些积分需要增加高斯点
 
@@ -1034,7 +879,7 @@ $$
 | 第 4 项 | 径向—轴向剪切分量 | $\Delta\gamma_{rz,kg}^{\mathrm{mech}}$ | $\sigma'_{rz,kg}$ |
 | 第 5、6 项 | 其余两个剪切分量，涉及径向—环向和轴向—环向剪切 | $0$ | $0$ |
 
-机械应变试算增量按[第 8.1 节](#section-29)计算，已扣除热应变，均相对于上一步已收敛状态。**第 4 项使用工程剪应变增量 $\Delta\gamma_{rz,kg}^{\mathrm{mech}}=2\Delta\varepsilon_{rz,kg}^{\mathrm{mech}}$。** 本文不考虑绕轴扭转，因此另外两个剪切分量为零。
+机械应变试算增量按[第 8.2 节](#section-29)计算，已扣除热应变，均相对于上一步已收敛状态。**第 4 项使用工程剪应变增量 $\Delta\gamma_{rz,kg}^{\mathrm{mech}}=2\Delta\varepsilon_{rz,kg}^{\mathrm{mech}}$。** 本文不考虑绕轴扭转，因此另外两个剪切分量为零。
 
 `update_axisymmetric_material` 按上表将四分量补为六分量，调用 UMAT 后提取前四个应力、塑性应变分量，并从返回的 $6\times6$ 切线中提取对应的 $4\times4$ 子块。**第 3 项必须传入环向应变增量，不能按平面应变设成零，也不能按平面应力把环向应力设成零。**
 
@@ -1166,7 +1011,7 @@ $$
 -\boldsymbol F_u^{\mathrm{ext}}.
 $$
 
-常体力和固定几何不依赖当前未知量，因此体力外载不增加切线项，也不乘 $\Delta t$。Darcy 重力仍按第 8.3.1 节与 SNS 扩散算子配套构造。
+常体力和固定几何不依赖当前未知量，因此体力外载不增加切线项，也不乘 $\Delta t$。Darcy 重力仍按第 8.4 节与 SNS 扩散算子配套构造。
 
 ## 13. 哪些数据可以预计算，哪些 MEX 需要重新编译
 
@@ -1217,8 +1062,39 @@ $$
 | 机械自重平衡 | 同时使用体力、相应初始有效应力和边界面力，检查完整机械残差；不能只检查 Darcy 通量就宣称机械自重已平衡。 |
 | 静水 Darcy 平衡 | 对 $p=p_{\mathrm{ref}}-\rho_fg(z-z_{\mathrm{ref}})$，核对 $\widetilde E_{kg}\boldsymbol P_k=\rho_f\boldsymbol g$、$\boldsymbol q_{f,kg}=\boldsymbol0$ 与 $K_{22P}\boldsymbol P-\boldsymbol G_p=\boldsymbol0$。以同一静水压力场作为初态，继续计算后续时间步，避免把加载增量与静水平衡混为一谈。 |
 | 含重力的热对流切线 | 选取非零 Darcy 通量和温度梯度，分别扰动孔压、温度，检查 $K_{32\mathrm{Adv}}$、$K_{33\mathrm{Adv}}$；核对完整残差包含重力对流，且不重复计入。 |
-| 开关与退化情形 | $\boldsymbol g=\boldsymbol0$ 时恢复无重力公式；关闭热对流时仍保留机械体力和 Darcy 重力。均匀温度的对流残差为零，但非零通量下 $K_{33\mathrm{Adv}}$ 一般不为零。 |
+| 热对流开关与零重力情形 | $\boldsymbol g=\boldsymbol0$ 时恢复无重力公式；关闭热对流时仍保留机械体力和 Darcy 重力。均匀温度的对流残差为零，但非零通量下 $K_{33\mathrm{Adv}}$ 一般不为零。 |
 
+
+### 14.4 静水状态与热对流检查
+
+热对流的残差和切线在以下典型状态下应满足：
+
+| 当前状态 | $\boldsymbol f_T^{\mathrm{adv}}$ | $K_{33\mathrm{Adv}}$ | $K_{32\mathrm{Adv}}$ |
+| --- | --- | --- | --- |
+| 各虚拟点 $\boldsymbol q_{f,kg}=\boldsymbol0$，但温度有梯度 | 零 | 零 | 一般非零 |
+| 温度处处相同，但存在 $\boldsymbol q_{f,kg}\ne\boldsymbol0$ 的虚拟点 | 零 | 一般非零；乘均匀温度向量为零 | 零 |
+| 各虚拟点 $\boldsymbol q_{f,kg}=\boldsymbol0$ 且温度处处相同 | 零 | 零 | 零 |
+
+**注意：** 有重力时，$\boldsymbol P=\boldsymbol0$ 只使压力梯度为零，此时 $\boldsymbol q_{f,kg}=\rho_fH_f\boldsymbol g$，通常不为零。原 markdown 文件中四种 patch 的零通量结论对应同时设置 $\boldsymbol g=\boldsymbol0$ 的测试条件。
+
+静水检查取 $z$ 轴向上、$\boldsymbol g=[0,-g]^T$ 和常参考密度 $\rho_f$，设置
+
+$$
+p(r,z)=p_{\mathrm{ref}}-\rho_fg(z-z_{\mathrm{ref}}),
+\qquad T=T_{\mathrm{ref}}.
+$$
+
+能准确计算该线性压力场梯度的离散算子应满足
+
+$$
+\widetilde E_{kg}\boldsymbol P_k=\rho_f\boldsymbol g,
+\qquad \boldsymbol q_{f,kg}=\boldsymbol0,
+\qquad K_{22P}\boldsymbol P-\boldsymbol G_p=\boldsymbol0.
+$$
+
+通量和扩散残差应在浮点舍入误差范围内为零。若不满足，应同时检查离散压力梯度、重力载荷和扩散项的符号及所用算子。
+
+**注意：** 这是 Darcy 通量和流体扩散残差的检查。机械自重平衡还要求初始有效应力、边界面力与体力 $\rho\boldsymbol g$ 满足力学平衡。保持已有静水初态时，$\Delta\boldsymbol P=\boldsymbol0$；从零孔压首次施加静水压力时，储水和 PPP 增量残差不必为零。
 
 ## 15. 已确定的策略与实现顺序
 
