@@ -888,7 +888,7 @@ $$
 }
 $$
 
-**注意：** 无重力形式的 $\boldsymbol f_T^{\mathrm{adv}}=K_{32\mathrm{Adv}}\boldsymbol P$ 仅在重力对流贡献为零时成立；无重力是其充分条件。采用含重力的 `K33Adv` 后，`dt*K33Adv*Trial.T` 已包含完整对流残差，**不得再加** `dt*fAdvGrav`。若选择用 `K32Adv*P` 组装残差，则必须补上重力对流部分；这仍是同一残差的另一种写法。
+**注意：** 无重力形式的 $\boldsymbol f_T^{\mathrm{adv}}=K_{32\mathrm{Adv}}\boldsymbol P$ 仅在重力对流贡献为零时成立；无重力是其充分条件。采用含重力的 `K33Adv` 后，`dt*K33Adv*Trial.T` 已包含完整对流残差，**不得再加** `dt*fAdvGrav`。若选择用 `dt*K32Adv*P` 组装对流残差，则必须补上 `dt*fAdvGrav`；这仍是同一残差的另一种写法。
 
 对流含有孔压与温度的乘积，即使固体线弹性，方程也可能非线性。每轮 Newton 和每次 line search 试算都要更新这两个矩阵；几何仍可预计算，本构历史管理不变。
 
