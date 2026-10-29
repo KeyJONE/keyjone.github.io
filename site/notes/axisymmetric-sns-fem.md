@@ -1010,6 +1010,8 @@ $$
 \quad \mathrm dS=2\pi r\,\mathrm ds.
 $$
 
+其中 $\Gamma_t$ 是给定面力 $\overline{\boldsymbol t}$ 的边界线，$\boldsymbol\varepsilon(\boldsymbol v_u)$ 是虚位移 $\boldsymbol v_u$ 对应的小应变张量。
+
 **机械常体力直接采用标准轴对称 T3 单元组装。** 对全局节点 $I$，累加所有包含它的母三角形贡献：
 
 $$
@@ -1029,7 +1031,7 @@ $$
 
 实现时只需遍历母三角形，将上述贡献加到三个节点的径向、轴向自由度；**不再遍历光滑子域**。节点向量 $\boldsymbol F_{u,I}^{\mathrm{body}}$ 有两个分量，按全局自由度顺序排列后组成 $\boldsymbol F_u^{\mathrm{body}}$。
 
-**每个单元分配给三个节点的力之和为 $V_e\boldsymbol f$，但一般不能三等分。** 权重已包含 $2\pi r$。每个节点只有径向、轴向两个力学分量，没有额外的环向节点体力或 $N_I/r$ 体力项。
+**每个单元分配给三个节点的力之和为 $V_e\boldsymbol f$，但一般不能三等分。** 上述节点力积分已包含旋转因子 $2\pi r$。每个节点只有径向、轴向两个力学分量，没有额外的环向节点体力或 $N_I/r$ 体力项。
 
 机械外荷载及残差为
 
@@ -1089,7 +1091,7 @@ $$
 
 | 新增项目 | 检查内容 |
 | --- | --- |
-| 机械体力积分 | 核对 T3 母单元组装、径向/轴向分量排列及[第 12.4 节](#section-52)的节点权重；每个单元的节点力之和应为 $V_e\boldsymbol f$。 |
+| 机械体力积分 | 按[第 12.4 节](#section-52)核对每个母三角形对节点 $I$ 的体力贡献 $\frac{\pi A_e}{6}(2r_I+r_J+r_L)\boldsymbol f$，以及径向、轴向分量的组装；每个单元的节点力之和应为 $V_e\boldsymbol f$。 |
 | 机械自重平衡 | 同时使用体力、相应初始有效应力和边界面力，检查完整机械残差；不能只检查 Darcy 通量就宣称机械自重已平衡。 |
 | 静水 Darcy 平衡 | 对 $p=p_{\mathrm{ref}}-\rho_fg(z-z_{\mathrm{ref}})$，核对 $\widetilde E_{kg}\boldsymbol P_k=\rho_f\boldsymbol g$、$\boldsymbol q_{f,kg}=\boldsymbol0$ 与 $K_{22P}\boldsymbol P-\boldsymbol G_p=\boldsymbol0$。以同一静水压力场作为初态，继续计算后续时间步，避免把加载增量与静水平衡混为一谈。 |
 | 含重力的热对流切线 | 选取非零 Darcy 通量和温度梯度，分别扰动孔压、温度，检查 $K_{32\mathrm{Adv}}$、$K_{33\mathrm{Adv}}$；核对温度残差中的 $\Delta t\boldsymbol f_T^{\mathrm{adv}}$ 已包含重力对流，且不重复计入。 |
