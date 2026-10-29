@@ -64,9 +64,9 @@ for x in xs[:-1]:
     arrow((x + 398, 390), (x + 442, 390))
 
 # 1. The adopted exact volume average, with no unresolved alternative.
-label(225, 267, "原始 B", size=21)
+label(225, 267, r"原始 $\mathbf{B}$", size=21)
 label(225, 311, "按实际旋转体积平均", size=21)
-label(225, 393, r"$\overline{B}_k^V=\dfrac{1}{V_k}\int_{D_k} B\,\mathrm{d}V$", size=25)
+label(225, 393, r"$\overline{\mathbf{B}}_k^V=\dfrac{1}{V_k}\int_{D_k} \mathbf{B}\,\mathrm{d}V$", size=25)
 label(225, 478, "环向行精确积分", size=21, color=BLUE, weight="bold")
 ax.add_patch(FancyBboxPatch((83, 537), 284, 52,
                            boxstyle="round,pad=0,rounding_size=12",
@@ -87,10 +87,10 @@ for n, dx, dy, tx, ty in (
 ):
     ax.add_patch(Circle((cx+dx, cy+dy), 8, color=BLUE))
     label(cx+dx+tx, cy+dy+ty, str(n), size=19, color=BLUE, weight="bold")
-label(675, 578, "得到四个虚拟点 B", size=21)
+label(675, 578, r"得到四个虚拟点 $\mathbf{B}$", size=21)
 
 # 3. Constitutive updates use total increments from the converged state.
-label(1125, 267, "四点 B 与热应变矩阵", size=20)
+label(1125, 267, r"四点 $\mathbf{B}$ 与热应变矩阵", size=20)
 label(1125, 311, "本步位移、温度总增量", size=20)
 label(1125, 355, "上一步已收敛状态", size=20)
 arrow((1125, 391), (1125, 428), color=MUTED)
@@ -106,7 +106,7 @@ label(1575, 267, "每个虚拟点分别计算", size=20)
 ax.add_patch(FancyBboxPatch((1415, 313), 320, 130,
                            boxstyle="round,pad=0,rounding_size=14",
                            facecolor="#FFF4E2", edgecolor="#ECCB94"))
-label(1575, 377, r"$\widetilde{B}_{kg}^{\,T}\,\boldsymbol{\sigma}'_{kg}\,\dfrac{V_k}{4}$", size=27, color="#8C560D")
+label(1575, 377, r"$\widetilde{\mathbf{B}}_{kg}^{\,T}\,\boldsymbol{\sigma}'_{kg}\,\dfrac{V_k}{4}$", size=27, color="#8C560D")
 arrow((1575, 462), (1575, 499), color=MUTED)
 label(1575, 532, "四点求和", size=21, weight="bold")
 label(1575, 572, "得到光滑域骨架内力", size=20, weight="bold")

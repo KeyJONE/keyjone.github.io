@@ -46,7 +46,7 @@ if (fs.existsSync(directory)) for (const file of fs.readdirSync(directory).filte
     const isDisplay = display !== undefined;
     const tex = (isDisplay ? display : inline).trim();
     try {
-      equations.push({id, isDisplay, html: katex.renderToString(tex, {displayMode:isDisplay, throwOnError:true, trust:false, strict:'error'})});
+      equations.push({id, isDisplay, source: raw, html: katex.renderToString(tex, {displayMode:isDisplay, throwOnError:true, trust:false, strict:'error'})});
     } catch (error) {
       throw new Error(`${file}, equation ${equations.length + 1}: ${tex}\n${error.message}`);
     }
@@ -56,10 +56,13 @@ if (fs.existsSync(directory)) for (const file of fs.readdirSync(directory).filte
   const usedIds = new Set();
   const renderer = {
     heading(token) {
-      if (anchorMap !== null && !Object.hasOwn(anchorMap, token.text)) {
-        throw new Error(`Missing stable anchor for heading "${token.text}" in ${file}`);
+      // Match the source heading, including TeX, rather than temporary math IDs.
+      const sourceHeading = token.text.replace(/NOTEMATHPLACEHOLDER(\d+)END/g,
+        (_, index) => equations[Number(index)].source);
+      if (anchorMap !== null && !Object.hasOwn(anchorMap, sourceHeading)) {
+        throw new Error(`Missing stable anchor for heading "${sourceHeading}" in ${file}`);
       }
-      const mapped = anchorMap === null ? `section-${headings.length + 1}` : anchorMap[token.text];
+      const mapped = anchorMap === null ? `section-${headings.length + 1}` : anchorMap[sourceHeading];
       const ids = Array.isArray(mapped) ? mapped : [mapped];
       for (const id of ids) {
         if (usedIds.has(id)) throw new Error(`Duplicate rendered anchor ID "${id}" in ${file}`);

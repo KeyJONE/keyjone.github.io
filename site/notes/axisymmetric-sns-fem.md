@@ -6,6 +6,19 @@
 
 本文采用以下假设：小应变、准静态、固定参考几何、单一均匀且各向同性的材料、不可压缩固体颗粒 $K_s\to\infty$，以及标量 Biot 系数 $b=1$。孔隙率及水力、热学系数取给定参考值，不随位置或当前未知量更新。机械体力和 Darcy 定律中的重力加速度均取给定常向量，不依赖空间位置或当前未知量。
 
+本文统一采用以下字体约定：
+
+| 对象 | 写法 | 含义与区别 |
+| --- | --- | --- |
+| 标量及标量型函数 | $p,T,N_I,K_f,C_T$ | 普通斜体；大写字母本身不表示矩阵。 |
+| 插值与几何算子矩阵 | $\mathbf{B},\mathbf{E},\mathbf{N},\mathbf{G}_{B,r,k}^{V},\mathbf{I}_{N,k}^{V}$ | 粗直立体；型函数行矩阵、矩阵行及列块均沿用这种字体。 |
+| 物理向量及节点向量 | $\bm{u},\bm{U},\bm{R},\bm{G}_p$ | 粗斜体；$\bm{G}_p$ 是重力贡献向量，与几何梯度矩阵 $\mathbf{G}_{B,r,k}^{V}$ 区分。 |
+| 二阶物理张量 | $\bm{\sigma},\bm{\varepsilon}$ | 粗体；其 Voigt 向量也沿用粗体，具体表示在使用处说明。 |
+| 四阶本构张量 | $\mathbb{C}$ | 双线体，与本构的 Voigt 矩阵表示区分。 |
+| 系统、积分及本构矩阵 | $\bm{K},\bm{K}_{12}^{k},\bm{M}_k^V,\bm{S}_{\mathrm{PPP}},\bm{C}_{kg}^{\mathrm{ep}}$ | 粗斜体；组装前后字体一致，位置索引说明局部或全局。$\bm{C}_{kg}^{\mathrm{ep}}$ 是 $4\times4$ 矩阵。 |
+
+矩阵的单个元素、向量或张量的单个分量是标量；例如 $u_r,\sigma_{rr},N_I$ 使用普通斜体。矩阵上的横线、波浪线和帽号见[第 2.4 节](#section-7)。
+
 体力、重力加速度和混合物参考密度分别写为
 
 $$
@@ -28,8 +41,8 @@ $$
 | $K_f$ | 孔隙流体的体积模量。 |
 | $\rho_s,\rho_f$ | 固体颗粒、孔隙流体的参考质量密度。 |
 | $\alpha_s,\alpha_f$ | $\alpha_s$ 为固体线膨胀系数；$\alpha_f$ 为流体体积热膨胀系数的三分之一。 |
-| $c_s,c_f$ | 固、液两相的单位质量比热容；不是本构切线 $C_{kg}^{\mathrm{ep}}$。 |
-| $S$ | 固定体积应变和温度时的储水系数，单位为 $\mathrm{Pa}^{-1}$；PPP 稳定化矩阵写作 $S_{\mathrm{PPP}}$。 |
+| $c_s,c_f$ | 固、液两相的单位质量比热容；不是本构切线 $\bm{C}_{kg}^{\mathrm{ep}}$。 |
+| $S$ | 固定体积应变和温度时的储水系数，单位为 $\mathrm{Pa}^{-1}$；PPP 稳定化矩阵写作 $\bm{S}_{\mathrm{PPP}}$。 |
 | $\beta_T$ | 温度—流体含量耦合系数。 |
 | $C_T$ | 混合物单位总体积的热容量，使用大写 $C$。 |
 | $\boldsymbol q_f$ | 相对固体、按总截面积计的 Darcy 体积通量，不是孔隙内真实流速。 |
@@ -44,16 +57,16 @@ $$
 \qquad C_T=(1-n)\rho_sc_s+n\rho_fc_f.
 $$
 
-**材料参数不带光滑域下标 $k$。** 例如 $n,K_f,\alpha_s,\alpha_f,\rho_s,\rho_f,c_s,c_f,k_f,\gamma_f,k_T,S,\beta_T,C_T$ 在整个计算域内相同。几何量 $V_k$、局部矩阵 $K_{ab}^k$、节点向量 $\boldsymbol U_k$ 及积分点状态 $\boldsymbol\sigma'_{kg},C_{kg}^{\mathrm{ep}}$ 仍保留位置索引。均匀材料的各积分点可以经历不同加载路径，因此应力、塑性变量和算法切线未必相同。
+**材料参数不带光滑域下标 $k$。** 例如 $n,K_f,\alpha_s,\alpha_f,\rho_s,\rho_f,c_s,c_f,k_f,\gamma_f,k_T,S,\beta_T,C_T$ 在整个计算域内相同。几何量 $V_k$、局部矩阵 $\bm{K}_{ab}^k$、节点向量 $\boldsymbol U_k$ 及积分点状态 $\boldsymbol\sigma'_{kg},\bm{C}_{kg}^{\mathrm{ep}}$ 仍保留位置索引。均匀材料的各积分点可以经历不同加载路径，因此应力、塑性变量和算法切线未必相同。
 
 本构的四分量应力顺序为 $[rr,zz,\theta\theta,rz]$，应变的第 4 项使用工程剪应变 $\gamma_{rz}=2\varepsilon_{rz}$。矩阵分量排列与张量所选基的排列必须明确对应，不能混用剪切应变因子。
 
-水力传导系数 $k_f$ 与导热系数 $k_T$ 均为常标量。若程序接口需要二维矩阵，则分别传入 $k_f I_2$ 与 $k_T I_2$；$I_2$ 是二维单位矩阵，正文公式直接使用标量。以下 Darcy 重力采用给定竖向常量 $\boldsymbol g=[0,-g]^T$；机械常体力 $\boldsymbol f$ 按[第 12.4 节](#section-52)的标准轴对称 T3 单元组装。
+水力传导系数 $k_f$ 与导热系数 $k_T$ 均为常标量。若程序接口需要二维矩阵，则分别传入 $k_f \bm{I}_2$ 与 $k_T \bm{I}_2$；$\bm{I}_2$ 是二维单位矩阵，正文公式直接使用标量。以下 Darcy 重力采用给定竖向常量 $\boldsymbol g=[0,-g]^T$；机械常体力 $\boldsymbol f$ 按[第 12.4 节](#section-52)的标准轴对称 T3 单元组装。
 
 
 ## 1. 已确定的前提与光滑方案
 
-采用小变形轴对称模型，不考虑绕轴扭转。材料采用[第 0 节](#section-1)的均匀、各向同性及 $b=1$ 设定。$r,z$ 分别为径向、轴向坐标，$r\geq0$，$\theta$ 表示环向角度。$\boldsymbol u=[u_r,u_z]^T$ 为位移向量，$p,T$ 分别为孔隙水压力和温度；$B$ 是将节点位移换算为应变的矩阵。位移、孔压和温度整体耦合求解：变形与孔压相互影响，温度变化影响变形和孔压。**热对流可通过 `Keyword.HeatAdvection` 开关选择；[第 8 节](#section-28)统一给出含重力的通量、残差和切线。** 关闭时，温度方程不依赖位移和孔压；开启时，孔压通过 Darcy 速度影响温度，但仍不加入由变形率、孔压变化率直接产生的热量项，具体见[第 8.5 节](#section-35)。实现时逐场检查绝对和相对残差，避免零载荷 patch 中相对残差归一化时出现零分母；必要时将 Newton 更新减半重试，每次本构试算仍使用上一步已收敛状态。
+采用小变形轴对称模型，不考虑绕轴扭转。材料采用[第 0 节](#section-1)的均匀、各向同性及 $b=1$ 设定。$r,z$ 分别为径向、轴向坐标，$r\geq0$，$\theta$ 表示环向角度。$\boldsymbol u=[u_r,u_z]^T$ 为位移向量，$p,T$ 分别为孔隙水压力和温度；$\mathbf{B}$ 是将节点位移换算为应变的矩阵。位移、孔压和温度整体耦合求解：变形与孔压相互影响，温度变化影响变形和孔压。**热对流可通过 `Keyword.HeatAdvection` 开关选择；[第 8 节](#section-28)统一给出含重力的通量、残差和切线。** 关闭时，温度方程不依赖位移和孔压；开启时，孔压通过 Darcy 速度影响温度，但仍不加入由变形率、孔压变化率直接产生的热量项，具体见[第 8.5 节](#section-35)。实现时逐场检查绝对和相对残差，避免零载荷 patch 中相对残差归一化时出现零分母；必要时将 Newton 更新减半重试，每次本构试算仍使用上一步已收敛状态。
 
 **已确定：所有光滑操作均按四边形子域的实际旋转体积加权。** 计算按“平均矩阵（[第 4 节](#section-12)）→ 梯度矩阵（[第 5 节](#section-16)）→ 虚拟点矩阵（[第 6 节](#section-20)）”的顺序展开。
 
@@ -62,11 +75,11 @@ $$
 | 事项 | 已确定内容 |
 | --- | --- |
 | 光滑子域体积 | **已确定。** 使用四边形子域的实际旋转体积，不用母三角形旋转体积的 $1/3$，也不用四个顶点的平均半径代替子域面积形心半径。 |
-| 光滑平均 | **已确定。** B、N、E 均按体积平均；平均 B 的计算见[第 4.3 节](#section-15)。 |
-| 梯度矩阵 | **已确定。** B、E 的梯度分别按[第 5.3 节](#section-19)、[第 7.3 节](#section-27)构造，包含径向修正。 |
+| 光滑平均 | **已确定。** $\mathbf{B}$、$\mathbf{N}$、$\mathbf{E}$ 均按体积平均；平均 $\mathbf{B}$ 的计算见[第 4.3 节](#section-15)。 |
+| 梯度矩阵 | **已确定。** $\mathbf{B}$、$\mathbf{E}$ 的梯度分别按[第 5.3 节](#section-19)、[第 7.3 节](#section-27)构造，包含径向修正。 |
 | 四个虚拟点 | **已确定。** 保留点距 $\ell_k=\sqrt{A_k/\pi}$，每点权重为 $V_k/4$，不再乘该点半径，不重新布点或改成不等权。 |
-| 热应变与耦合 | **已确定。** 热应变继续使用光滑温度及其梯度；$K_{12}$ 使用[第 4.3 节](#section-15)的平均矩阵 $\overline B_k^V$ 与原始 T3 型函数的子域积分，不要求定义四个虚拟点上的原始 T3 型函数。 |
-| 热对流 | **可开关；含重力形式见[第 8 节](#section-28)。** $\rho_f c_f$ 按常数处理，Darcy 速度与温度梯度均用四点 $\widetilde E_{kg}$，温度试函数用 $\widetilde N_{kg}$ 插值，每点权重仍为 $V_k/4$。温度残差及其对孔压、温度的导数一起加入，见[第 8.5 节](#section-35)。 |
+| 热应变与耦合 | **已确定。** 热应变继续使用光滑温度及其梯度；$\bm{K}_{12}$ 使用[第 4.3 节](#section-15)的平均矩阵 $\overline{\mathbf{B}}_k^V$ 与原始 T3 型函数的子域积分，不要求定义四个虚拟点上的原始 T3 型函数。 |
+| 热对流 | **可开关；含重力形式见[第 8 节](#section-28)。** $\rho_f c_f$ 按常数处理，Darcy 速度与温度梯度均用四点 $\widetilde{\mathbf{E}}_{kg}$，温度试函数用 $\widetilde{\mathbf{N}}_{kg}$ 插值，每点权重仍为 $V_k/4$。温度残差及其对孔压、温度的导数一起加入，见[第 8.5 节](#section-35)。 |
 | 子域积分、PPP | **已确定。** 四边形子域采用 $3\times3$ Gauss 积分；PPP 使用母三角形的体积平均压力，积分也按实际旋转体积计算，系数沿用固定弹性参考参数。 |
 | 机械体力 | 常向量 $\boldsymbol f$ 采用标准轴对称 T3 母单元组装，见[第 12.4 节](#section-52)。 |
 | 轴线、圆弧 | **已确定。** 轴线只因轴对称条件约束 $u_r=0$；圆弧用直线段逼近，各段使用自己的外法向，荷载积分保留 $2\pi r$。 |
@@ -109,21 +122,27 @@ $r$ 是到旋转轴的距离，$A_k$ 是二维面积，$V_k$ 是旋转一周后�
 
 ### 2.3 组装：按节点编号对齐，再相加
 
-本文统一用 $\operatorname{Assemble}$ 表示组装。它的意思就是：**把对应节点自由度的行或列，按节点编号和自由度类型对齐，再相加。** 刚度矩阵需要对齐行和列；B、N、E 只需对齐节点列，它们的应变、标量或梯度分量行保持原顺序。位移的径向与轴向分量、孔压、温度分别对应各自的位置。
+本文统一用 $\operatorname{Assemble}$ 表示组装：**按节点编号和自由度类型对齐，再相加。** 光滑域 $k$ 的支撑节点集合，是所有与节点 $k$ 相连的母三角形的节点并集；$n_{\mathrm{node},k}$ 是其中不同节点的数量。先固定这组节点的排列，再进行组装。
 
-例如，只看每个节点的一个标量贡献（数值仅用于示意）。三角形 1 的节点依次为 4、8、12，三角形 2 的节点依次为 4、12、19。按节点编号对应后，组装结果是：
+**不能把各母单元的 $4\times6$ $\mathbf{B}$ 矩阵按局部列位置直接相加。** 每个母单元的贡献先扩展为 $4\times(2n_{\mathrm{node},k})$：每个节点占径向、轴向两列，该单元不包含的节点对应两列补零，共有节点的对应列相加。
 
-| 节点编号 | 4 | 8 | 12 | 19 |
-| --- | ---: | ---: | ---: | ---: |
-| 三角形 1 的贡献 | 2 | 5 | 7 | 0 |
-| 三角形 2 的贡献 | 3 | 0 | 11 | 13 |
-| 组装后的贡献 | 5 | 5 | 18 | 13 |
+例如，节点 $k=4$ 的光滑域包含两个母三角形，其节点分别为 $(4,8,12)$、$(4,12,19)$。固定支撑节点顺序为 $(4,8,12,19)$，用 $\mathbf{B}_{e,I}$ 表示母单元 $e$ 中节点 $I$ 对应的 $4\times2$ 列块，则
 
-这些数字只用于说明组装。三角形 1 的第 3 个节点和三角形 2 的第 2 个节点都是节点 12，所以对应的 7 和 11 要相加。刚度矩阵组装时，行和列都按这个规则对应。
+| 节点列块 | 4 | 8 | 12 | 19 |
+| --- | --- | --- | --- | --- |
+| 母单元 1，扩展后 | $\mathbf{B}_{1,4}$ | $\mathbf{B}_{1,8}$ | $\mathbf{B}_{1,12}$ | $\bm{0}$ |
+| 母单元 2，扩展后 | $\mathbf{B}_{2,4}$ | $\bm{0}$ | $\mathbf{B}_{2,12}$ | $\mathbf{B}_{2,19}$ |
+| 按对应列相加 | $\mathbf{B}_{1,4}+\mathbf{B}_{2,4}$ | $\mathbf{B}_{1,8}$ | $\mathbf{B}_{1,12}+\mathbf{B}_{2,12}$ | $\mathbf{B}_{2,19}$ |
+
+表中每项都是 $4\times2$ 列块，$\bm{0}$ 表示同尺寸零块，因此组装后的矩阵是 $4\times8$。各子域的积分及平均系数按相应公式计入；这里仅说明列的位置。
+
+**后文所有 Assemble 都采用这一对齐规则。** $\mathbf{B}$、$\mathbf{N}$、$\mathbf{E}$ 及其梯度只对齐节点列，物理分量行保持原顺序；力或残差向量按节点自由度对齐条目；刚度、耦合及型函数乘积积分矩阵需要同时对齐行和列，耦合块的行、列分别对应各自的物理场。光滑域上的 $\mathbf{N}$、$\mathbf{E}$ 分别有 $n_{\mathrm{node},k}$ 列，$\mathbf{B}$ 有 $2n_{\mathrm{node},k}$ 列。
+
+同一光滑域的四个虚拟点矩阵已经采用相同节点顺序，因此对 $g$ 求和时可直接相加；得到局部贡献后，再按全局节点自由度组装。
 
 | 写法 | 相加的范围 |
 | --- | --- |
-| $\operatorname*{Assemble}_{e\ni k}[\cdots]$ | 只取与节点 $k$ 相连的三角形，将它们的贡献按光滑域 $k$ 的节点顺序对齐后相加。 |
+| $\operatorname*{Assemble}_{e\ni k}[\cdots]$ | 与节点 $k$ 相连的母三角形 $\to$ 光滑域 $k$ 的支撑节点集合。 |
 | $\operatorname*{Assemble}_{k}[\cdots]$ | 遍历所有光滑域，将它们的贡献按全局节点顺序对齐后相加。 |
 | $\operatorname*{Assemble}_{e}[\cdots]$ | 遍历所有母三角形，将它们的贡献按全局节点顺序对齐后相加。 |
 
@@ -135,9 +154,9 @@ $r$ 是到旋转轴的距离，$A_k$ 是二维面积，$V_k$ 是旋转一周后�
 
 | 记号与例子 | 本文含义 |
 | --- | --- |
-| 横线：$\overline B_k^V,\overline N_k^V,\overline E_k^V$ | 光滑域上的**平均矩阵**；上标 $V$ 表示按旋转体积平均。 |
-| 波浪线：$\widetilde B_{kg},\widetilde N_{kg},\widetilde E_{kg}$ | **SNS 虚拟点矩阵**，由平均矩阵加减相应方向的梯度项构造；$g$ 标记四个虚拟点。 |
-| 帽号：$\widehat B,\widehat E$ | **光滑梯度积分的输入矩阵**。每个母三角形内取 $\widehat B=B_e$（母单元中心的 B）、$\widehat E=E_e$（原始 T3 型函数梯度），节点列按光滑域顺序对齐；见[第 5.2 节](#section-18)、[第 7.3 节](#section-27)。 |
+| 横线：$\overline{\mathbf{B}}_k^V,\overline{\mathbf{N}}_k^V,\overline{\mathbf{E}}_k^V$ | 光滑域上的**平均矩阵**；上标 $V$ 表示按旋转体积平均。 |
+| 波浪线：$\widetilde{\mathbf{B}}_{kg},\widetilde{\mathbf{N}}_{kg},\widetilde{\mathbf{E}}_{kg}$ | **SNS 虚拟点矩阵**，由平均矩阵加减相应方向的梯度项构造；$g$ 标记四个虚拟点。 |
+| 帽号：$\widehat{\mathbf{B}},\widehat{\mathbf{E}}$ | **光滑梯度积分的输入矩阵**。分别由母单元中心的 $\mathbf{B}_e$、原始 T3 型函数梯度 $\mathbf{E}_e$ 按[第 2.3 节](#section-6)对齐节点列得到；见[第 5.2 节](#section-18)、[第 7.3 节](#section-27)。 |
 
 边界条件中的 $\overline{\boldsymbol t}$、$\overline q_{\mathrm{in}}$、$\overline h_{\mathrm{in}}$ 分别表示**给定的面力、流体入流通量、传导热流入流通量**，这里的横线不表示平均。
 
@@ -150,11 +169,11 @@ $r$ 是到旋转轴的距离，$A_k$ 是二维面积，$V_k$ 是旋转一周后�
 | 下标 $kg$ | 依次表示光滑域 $k$、虚拟点 $g$，不是两者相乘。 |
 | 上标 $A,V$ | 分别标明按二维面积、旋转体积加权，不是乘方；[第 4 节](#section-12)用这两个上标区分不同平均方式。 |
 | $\boldsymbol x=[r,z]^T$、$\boldsymbol x_I=[r_I,z_I]^T$ | 分别为积分位置、节点 $I$ 的坐标。右上角 $T$ 表示转置，与温度 $T$ 区分。 |
-| $N_I$、$N_e$ | $N_I$ 是节点 $I$ 的原始 T3 型函数；$N_e$ 是母三角形三个型函数组成的行向量。省略下标的 $N$ 按上下文表示型函数或该行向量。 |
+| $N_I$、$\mathbf{N}_e$ | $N_I$ 是节点 $I$ 的标量 T3 型函数；$\mathbf{N}_e=[N_1,N_2,N_3]$ 是母三角形的型函数行矩阵。省略下标的 $\mathbf{N}$ 仍表示型函数行矩阵。 |
 | $\boldsymbol U,\boldsymbol P,\boldsymbol T$ | 分别为节点位移、孔压、温度组成的列向量。加下标 $k$ 时，只取光滑域 $k$ 涉及的节点；局部矩阵也按这组节点排列。 |
 | $\Delta$ | 相对于上一个已收敛时间步的增量，例如 $\Delta\boldsymbol T$ 是当前时间步的试算温度总增量；$\Delta t$ 是时间步长。 |
 
-矩阵块 $K_{ab}^{k}$ 的上标 $k$ 表示光滑域 $k$ 的局部贡献；不带这个上标的 $K_{ab}$ 表示组装后的全局矩阵。下标 $a,b$ 标记方程和未知量，具体对应见[第 8 节](#section-28)。正文中的向量用粗体表示；B、N、E 等矩阵则保留与代码接近的字母写法。
+矩阵块 $\bm{K}_{ab}^{k}$ 的上标 $k$ 表示光滑域 $k$ 的局部贡献；不带这个上标的 $\bm{K}_{ab}$ 表示组装后的全局矩阵。下标 $a,b$ 标记方程和未知量，具体对应见[第 8 节](#section-28)。字体遵循[第 0 节](#section-1)的约定；矩阵的行或列块沿用所属矩阵的字体。
 
 **本文的试函数（test function）统一使用字母 v，用下标区分方程、粗体区分向量与标量。** 力学方程的试函数为虚位移向量 $\boldsymbol v_u=[v_r,v_z]^T$，其中 $v_r,v_z$ 分别是径向、轴向分量；孔压方程的试函数为标量 $v_p$；温度方程的试函数为标量 $v_T$。下标 $u,p,T$ 标明所属方程，各方程中的试函数独立选取。每个弱式前都会说明其含义。
 
@@ -164,11 +183,11 @@ $r$ 是到旋转轴的距离，$A_k$ 是二维面积，$V_k$ 是旋转一周后�
 
 | 记号 | 如何理解 |
 | --- | --- |
-| $G_{B,r,k}^{V}$、$G_{E,z,k}^{V}$ | B 的径向梯度、E 的轴向梯度，均属于光滑域 $k$；定义见[第 5 节](#section-16)、[第 7 节](#section-24)。 |
-| $\overline E_{r,k}^{V}$、$\overline E_{z,k}^{V}$ | 光滑域 $k$ 的平均 E 矩阵中，对应径向、轴向的两行。 |
+| $\mathbf{G}_{B,r,k}^{V}$、$\mathbf{G}_{E,z,k}^{V}$ | $\mathbf{B}$ 的径向梯度、$\mathbf{E}$ 的轴向梯度，均属于光滑域 $k$；定义见[第 5 节](#section-16)、[第 7 节](#section-24)。 |
+| $\overline{\mathbf{E}}_{r,k}^{V}$、$\overline{\mathbf{E}}_{z,k}^{V}$ | 光滑域 $k$ 的平均 $\mathbf{E}$ 矩阵中，对应径向、轴向的两行。 |
 | $n_{\mathrm{out},r}$、$n_{\mathrm{out},z}$ | 边界单位外法向的径向、轴向分量。 |
-| $B_{e,I}$ | 母三角形 $e$ 中，节点 $I$ 的两个位移自由度对应的 B 矩阵列块。 |
-| $I_{N,k}^{V}$、$n_{\mathrm{node},k}$ | 前者是光滑域 $k$ 的型函数体积积分，后者是该域涉及的节点数。 |
+| $\mathbf{B}_{e,I}$ | 母三角形 $e$ 中，节点 $I$ 的两个位移自由度对应的 $\mathbf{B}$ 矩阵列块。 |
+| $\mathbf{I}_{N,k}^{V}$、$n_{\mathrm{node},k}$ | 前者是光滑域 $k$ 的型函数体积积分，后者是该域涉及的节点数。 |
 | $\boldsymbol f_{u,k}^{\mathrm{skel}}$ | 光滑域 $k$ 的骨架内力向量，含该域涉及的所有节点的力学分量，**不是节点 $k$ 的一个力**；见[第 8.2 节](#section-29)。 |
 | $\boldsymbol f_{T,k}^{\mathrm{adv}}$ | 光滑域 $k$ 的热对流残差向量，$T$ 标记温度方程，$\mathrm{adv}$ 标记对流；见[第 8.5.1 节](#section-37)。 |
 | $\boldsymbol F_{u,I}^{\mathrm{body}}$ | **组装后节点 $I$ 的两个体力等效外力分量**，依次为径向、轴向；$u$ 标记力学方程，见[第 12.4 节](#section-52)。 |
@@ -179,10 +198,10 @@ $r$ 是到旋转轴的距离，$A_k$ 是二维面积，$V_k$ 是旋转一周后�
 
 | 完整符号 | 上标的含义 |
 | --- | --- |
-| $\overline B_k^{V,\mathrm c}$ | $V$：旋转体积加权；$\mathrm c$：使用母单元中心的 B 矩阵，见[第 4.2 节](#section-14)。 |
-| $G_{B,r,k}^{V,\mathrm{incomplete}}$ | $V$：旋转体积加权；$\mathrm{incomplete}$：漏掉径向修正项的不完整梯度，见[第 5.3 节](#section-19)。 |
+| $\overline{\mathbf{B}}_k^{V,\mathrm c}$ | $V$：旋转体积加权；$\mathrm c$：使用母单元中心的 $\mathbf{B}$ 矩阵，见[第 4.2 节](#section-14)。 |
+| $\mathbf{G}_{B,r,k}^{V,\mathrm{incomplete}}$ | $V$：旋转体积加权；$\mathrm{incomplete}$：漏掉径向修正项的不完整梯度，见[第 5.3 节](#section-19)。 |
 
-$\boldsymbol f_{T,k}^{\mathrm{adv,grav}}$ 和 $K_{33\mathrm{Adv,grav}}$ 中的 $\mathrm{adv,grav}$ 同样是一组标签，表示热对流中的纯重力贡献。上述逗号均只分隔标签；函数自变量、向量分量和并列公式之间的普通逗号仍按通常标点理解。
+$\boldsymbol f_{T,k}^{\mathrm{adv,grav}}$ 和 $\bm{K}_{33\mathrm{Adv,grav}}$ 中的 $\mathrm{adv,grav}$ 同样是一组标签，表示热对流中的纯重力贡献。上述逗号均只分隔标签；函数自变量、向量分量和并列公式之间的普通逗号仍按通常标点理解。
 
 ## 3. 四边形光滑子域的体积如何计算
 
@@ -244,13 +263,13 @@ $$
 
 四个顶点的平均坐标 $\boldsymbol x_{ie}^{\mathrm{vertices}}$ 一般不等于[第 3.2 节定义的面积形心坐标](#section-10) $\boldsymbol x_{ie}^{A}=[r_{ie}^{A},z_{ie}^{A}]^T$。这里 $i$ 是子域所对应的节点编号，$e$ 是母三角形编号，上标 $A$ 表示按面积求平均。$\boldsymbol x_{ie}^{A}$ 是把整个四边形子域 $D_{ie}$ 看成均匀薄片时的重心坐标，其中 $r_{ie}^{A}$ 是计算该子域实际旋转体积所用的半径。
 
-原 markdown 文件（本讨论整理前的技术笔记）记载，参考函数 `Smooth_T3_axisym.m` 使用 `xc_sub=(x1+xm1+xc+xm3)/4` 计算子域中心坐标，并使用 `N_ino/center_SD_ino` 计算 B 的环向应变行。按这条四点算术平均表达式，代码变量 `xc_sub` 对应本文的 $\boldsymbol x_{ie}^{\mathrm{vertices}}$，即四个顶点坐标的平均，一般不等于面积形心 $\boldsymbol x_{ie}^{A}$。下面分析这两条表达式对环向应变的影响。
+原 markdown 文件（本讨论整理前的技术笔记）记载，参考函数 `Smooth_T3_axisym.m` 使用 `xc_sub=(x1+xm1+xc+xm3)/4` 计算子域中心坐标，并使用 `N_ino/center_SD_ino` 计算 $\mathbf{B}$ 的环向应变行。按这条四点算术平均表达式，代码变量 `xc_sub` 对应本文的 $\boldsymbol x_{ie}^{\mathrm{vertices}}$，即四个顶点坐标的平均，一般不等于面积形心 $\boldsymbol x_{ie}^{A}$。下面分析这两条表达式对环向应变的影响。
 
 按照原 markdown 文件对 `N_ino/center_SD_ino` 的描述，若分子取型函数的精确面积平均，分母取四个顶点的平均半径，则分子与分母采用了不同的平均规则。对[第 3.2 节](#section-10)的单三角形、节点 1 和 $u_r=r$，由此得到 $\varepsilon_{\theta\theta}=14/15$，正确值应为 $1$。这一结果说明，混用型函数的面积平均与四顶点平均半径会导致环向应变误差。**旧手稿中的“子域形心”采用的就是四顶点平均坐标；将其当作四边形子域的面积形心是错误的。**
 
-## 4. 平均 B 矩阵的三种构造
+## 4. 平均 $\mathbf{B}$ 矩阵的三种构造
 
-**方法一、二都先用母三角形中心矩阵 $B_e$ 近似单元内的 B，再分别按面积、旋转体积平均。方法三直接对原始 B 做精确旋转体积平均，本文采用方法三。**
+**方法一、二都先用母三角形中心矩阵 $\mathbf{B}_e$ 近似单元内的 $\mathbf{B}$，再分别按面积、旋转体积平均。方法三直接对原始 $\mathbf{B}$ 做精确旋转体积平均，本文采用方法三。**
 
 ### 4.1 方法一：中心矩阵的面积平均（不采用）
 
@@ -259,7 +278,7 @@ $$
 母三角形 $e$ 的中心半径为 $r_{ec}$，中心处的型函数值为 $1/3$。节点 $I$ 的径向、轴向位移对应的两列为
 
 $$
-B_{e,I}=\begin{bmatrix}
+\mathbf{B}_{e,I}=\begin{bmatrix}
 \dfrac{\partial N_I}{\partial r}&0\\[10pt]
 0&\dfrac{\partial N_I}{\partial z}\\[10pt]
 \dfrac{1}{3r_{ec}}&0\\[10pt]
@@ -267,10 +286,10 @@ B_{e,I}=\begin{bmatrix}
 \end{bmatrix}.
 $$
 
-$B_e$ 由三个节点的列块组成，应变分量顺序为 $[rr,zz,\theta\theta,rz]$，第 4 项为工程剪应变。对各四边形子域按面积加权，得到
+$\mathbf{B}_e$ 由三个节点的列块组成，应变分量顺序为 $[rr,zz,\theta\theta,rz]$，第 4 项为工程剪应变。对各四边形子域按面积加权，得到
 
 $$
-\overline B_k^A=\frac{1}{A_k}\operatorname*{Assemble}_{e\ni k}\left[A_{ke}B_e\right].
+\overline{\mathbf{B}}_k^A=\frac{1}{A_k}\operatorname*{Assemble}_{e\ni k}\left[A_{ke}\mathbf{B}_e\right].
 $$
 
 **反例：** 四个角点为 $(1,0),(3,0),(3,2),(1,2)$，内部点为 $(1.7,0.8)$；将内部点与四角连接，得到四个三角形。长度单位为 m，孔压、体力均为零，施加均匀应力
@@ -283,24 +302,24 @@ $$
 外边界施加与该应力对应的面力，内部节点没有外荷载，其合内力应为零。孔压为零时，有效应力 $\boldsymbol\sigma'$ 等于总应力；各光滑域的骨架内力为
 
 $$
-\boldsymbol f_{u,k}^{\mathrm{skel}}=V_k(\overline B_k^A)^T\boldsymbol\sigma'.
+\boldsymbol f_{u,k}^{\mathrm{skel}}=V_k(\overline{\mathbf{B}}_k^A)^T\boldsymbol\sigma'.
 $$
 
 组装后，内部节点的径向内力为 **$3.4867281154\ \mathrm{kN}$，正确值应为零**。这就是该面积平均方法不满足力平衡的反例。
 
 ### 4.2 方法二：中心矩阵的旋转体积平均
 
-仍用同一套 $B_e$，改用各子域的实际旋转体积加权：
+仍用同一套 $\mathbf{B}_e$，改用各子域的实际旋转体积加权：
 
 $$
-\overline B_k^{V,\mathrm c}=\frac{1}{V_k}\operatorname*{Assemble}_{e\ni k}\left[V_{ke}B_e\right].
+\overline{\mathbf{B}}_k^{V,\mathrm c}=\frac{1}{V_k}\operatorname*{Assemble}_{e\ni k}\left[V_{ke}\mathbf{B}_e\right].
 $$
 
-上标 $\mathrm c$ 表示使用母单元中心值。该方法保持组装后的 B 体积积分：
+上标 $\mathrm c$ 表示使用母单元中心值。该方法保持组装后的 $\mathbf{B}$ 体积积分：
 
 $$
-\operatorname*{Assemble}_k\left[V_k\overline B_k^{V,\mathrm c}\right]
-=\operatorname*{Assemble}_e\left[V_eB_e\right].
+\operatorname*{Assemble}_k\left[V_k\overline{\mathbf{B}}_k^{V,\mathrm c}\right]
+=\operatorname*{Assemble}_e\left[V_e\mathbf{B}_e\right].
 $$
 
 对每个母单元，中心环向值满足
@@ -310,20 +329,20 @@ V_e\frac{1}{3r_{ec}}=\frac{2\pi A_e}{3}
 =\int_e\frac{N_I}{r}\,\mathrm{d}V.
 $$
 
-其余三行的 T3 型函数导数为常数，因此组装后的积分与原始 B 的体积积分相同。**应力处处相同时，该方法与原始轴对称 T3 得到相同的节点内力。** 在上述反例中，内部节点径向内力为 $-1.8\times10^{-15}\ \mathrm{kN}$，即舍入误差范围内的零。
+其余三行的 T3 型函数导数为常数，因此组装后的积分与原始 $\mathbf{B}$ 的体积积分相同。**应力处处相同时，该方法与原始轴对称 T3 得到相同的节点内力。** 在上述反例中，内部节点径向内力为 $-1.8\times10^{-15}\ \mathrm{kN}$，即舍入误差范围内的零。
 
 这里保持的是组装后的积分；单个四边形子域内的环向值仍采用母单元中心近似。
 
-### 4.3 方法三：原始 B 的精确旋转体积平均（本文采用）
+### 4.3 方法三：原始 $\mathbf{B}$ 的精确旋转体积平均（本文采用）
 
-直接积分原始位置相关矩阵 $B(r,z)$：
+直接积分原始位置相关矩阵 $\mathbf{B}(r,z)$：
 
 $$
-\boxed{\overline B_k^V=\frac{1}{V_k}\operatorname*{Assemble}_{e\ni k}
-\left[\int_{D_{ke}}B(r,z)\,\mathrm{d}V\right].}
+\boxed{\overline{\mathbf{B}}_k^V=\frac{1}{V_k}\operatorname*{Assemble}_{e\ni k}
+\left[\int_{D_{ke}}\mathbf{B}(r,z)\,\mathrm{d}V\right].}
 $$
 
-**B 的第 3 行计算环向应变 $\varepsilon_{\theta\theta}=u_r/r$。** 其径向位移列的原始系数为 $N_I/r$，精确平均后记为 $\overline h_{kI}^V$：
+**$\mathbf{B}$ 的第 3 行计算环向应变 $\varepsilon_{\theta\theta}=u_r/r$。** 其径向位移列的原始系数为 $N_I/r$，精确平均后记为 $\overline h_{kI}^V$：
 
 $$
 \boxed{\overline h_{kI}^V
@@ -331,7 +350,7 @@ $$
 =\frac{2\pi}{V_k}\sum_{e\ni k}\int_{D_{ke}}N_I\,\mathrm{d}A.}
 $$
 
-这里用 $\mathrm{d}V=2\pi r\,\mathrm{d}A$ 抵消了 $1/r$。右端虽写成面积积分，除数仍为真实体积 $V_k$，所以仍是旋转体积平均。节点 $I$ 不属于某个母单元时，该单元对该系数的贡献为零。
+这里用 $\mathrm{d}V=2\pi r\,\mathrm{d}A$ 抵消了 $1/r$。右端虽写成面积积分，除数仍为真实体积 $V_k$，所以仍是旋转体积平均。节点列的对齐与补零遵循[第 2.3 节](#section-6)。
 
 对本文的“节点—边中点—单元中心—另一边中点”四边形，节点 $k,j,l$ 按母三角形顺序排列，有
 
@@ -347,69 +366,69 @@ $$
 
 ## 5. 光滑梯度的构造
 
-[第 4 节](#section-12)已给出平均矩阵 $\overline B_k^V$；本节构造径向、轴向两个梯度矩阵。平均矩阵与两个梯度矩阵分别计算，最后在[第 6.1 节](#section-21)组合成虚拟点矩阵。下面依次说明梯度的记号、输入矩阵和计算公式。
+[第 4 节](#section-12)已给出平均矩阵 $\overline{\mathbf{B}}_k^V$；本节构造径向、轴向两个梯度矩阵。平均矩阵与两个梯度矩阵分别计算，最后在[第 6.1 节](#section-21)组合成虚拟点矩阵。下面依次说明梯度的记号、输入矩阵和计算公式。
 
 ### 5.1 梯度的记号与节点列排列
 
-径向、轴向梯度矩阵分别记为 $G_{B,r,k}^V$、$G_{B,z,k}^V$，上标 $V$ 表示体积加权。下标依次标明矩阵种类 B、方向 r 或 z、光滑域编号 $k$；逗号只分隔标签，不表示求导。后面的 $G_{E,r,k}^V,G_{E,z,k}^V$ 也采用这一顺序。
+径向、轴向梯度矩阵分别记为 $\mathbf{G}_{B,r,k}^V$、$\mathbf{G}_{B,z,k}^V$，上标 $V$ 表示体积加权。下标依次标明矩阵种类 $\mathbf{B}$、方向 r 或 z、光滑域编号 $k$；逗号只分隔标签，不表示求导。后面的 $\mathbf{G}_{E,r,k}^V,\mathbf{G}_{E,z,k}^V$ 也采用这一顺序。
 
-$\widehat B$ 表示梯度积分所使用的母单元矩阵，其取值在[第 5.2 节](#section-18)给出。积分前，各母单元矩阵的列都按光滑域 $k$ 的节点顺序排列；**该单元不含的节点对应列补零**。
+$\widehat{\mathbf{B}}$ 表示梯度积分所使用的母单元矩阵，其取值在[第 5.2 节](#section-18)给出。积分前按[第 2.3 节](#section-6)对齐并补齐节点列。
 
 $\partial D_k$ 是光滑域边界，$\boldsymbol n_{\mathrm{out}}=[n_{\mathrm{out},r},n_{\mathrm{out},z}]^T$ 是其单位外法向，两个分量分别对应径向、轴向。
 
 ### 5.2 梯度计算所用的母单元中心矩阵
 
-**本文在每个母三角形内取 $\widehat B=B_e$，其中 $B_e$ 是[第 4.1 节](#section-13)的母单元中心矩阵，并按[第 5.1 节](#section-17)对齐节点列。** 对属于该三角形的节点 $I$，中心点 $(r_{ec},z_{ec})$ 处有
+**本文将[第 4.1 节](#section-13)的母单元中心矩阵 $\mathbf{B}_e$ 按[第 2.3 节](#section-6)对齐节点列，得到梯度积分使用的 $\widehat{\mathbf{B}}$。** 对属于该三角形的节点 $I$，中心点 $(r_{ec},z_{ec})$ 处有
 
 $$
 N_I(r_{ec},z_{ec})=\frac13,\qquad
 \left.\frac{N_I}{r}\right|_{(r_{ec},z_{ec})}=\frac{1}{3r_{ec}}.
 $$
 
-因此，$\widehat B$ 的第 3 行径向位移列取 $1/(3r_{ec})$，轴向位移列取零；其余行使用该 T3 单元的常数型函数导数。
+因此，$\widehat{\mathbf{B}}$ 的第 3 行径向位移列取 $1/(3r_{ec})$，轴向位移列取零；其余行使用该 T3 单元的常数型函数导数。
 
-每个母三角形内部的 $\widehat B$ 是常数，相邻三角形的取值一般不同。[第 5.3 节](#section-19)的公式计入这些跨单元的差别。**不能仅因各母单元内的矩阵为常数，就把光滑梯度设为零。**
+每个母三角形内部的 $\widehat{\mathbf{B}}$ 是常数，相邻三角形的取值一般不同。[第 5.3 节](#section-19)的公式计入这些跨单元的差别。**不能仅因各母单元内的矩阵为常数，就把光滑梯度设为零。**
 
 ### 5.3 体积加权梯度与径向修正
 
-先用一般矩阵场 $B$ 推导，暂不指定其离散取值。在下列积分存在时，**径向光滑梯度定义为 $\partial B/\partial r$ 的体积平均。**
+先用一般矩阵场 $\mathbf{B}$ 推导，暂不指定其离散取值。在下列积分存在时，**径向光滑梯度定义为 $\partial \mathbf{B}/\partial r$ 的体积平均。**
 
 **乘积法则：**
 
 $$
-2\pi r\frac{\partial B}{\partial r}
-=\frac{\partial(2\pi rB)}{\partial r}-2\pi B.
+2\pi r\frac{\partial \mathbf{B}}{\partial r}
+=\frac{\partial(2\pi r\mathbf{B})}{\partial r}-2\pi \mathbf{B}.
 $$
 
-将上述乘积法则代入体积平均，再对 $B$ 矩阵中的每个标量元素分别应用**二维散度定理**，得到
+将上述乘积法则代入体积平均，再对 $\mathbf{B}$ 矩阵中的每个标量元素分别应用**二维散度定理**，得到
 
 $$
 \begin{aligned}
-\frac{1}{V_k}\int_{D_k}\frac{\partial B}{\partial r}\,\mathrm{d}V
-&=\frac{1}{V_k}\int_{D_k}\frac{\partial B}{\partial r}\,2\pi r\,\mathrm{d}A\\
+\frac{1}{V_k}\int_{D_k}\frac{\partial \mathbf{B}}{\partial r}\,\mathrm{d}V
+&=\frac{1}{V_k}\int_{D_k}\frac{\partial \mathbf{B}}{\partial r}\,2\pi r\,\mathrm{d}A\\
 &=\frac{1}{V_k}\int_{D_k}
-\left[\frac{\partial(2\pi rB)}{\partial r}-2\pi B\right]\mathrm{d}A\\
+\left[\frac{\partial(2\pi r\mathbf{B})}{\partial r}-2\pi \mathbf{B}\right]\mathrm{d}A\\
 &=\frac{1}{V_k}\left[
-\int_{\partial D_k}2\pi rB\,n_{\mathrm{out},r}\,\mathrm{d}s
--\int_{D_k}2\pi B\,\mathrm{d}A\right].
+\int_{\partial D_k}2\pi r\mathbf{B}\,n_{\mathrm{out},r}\,\mathrm{d}s
+-\int_{D_k}2\pi \mathbf{B}\,\mathrm{d}A\right].
 \end{aligned}
 $$
 
-这就是径向修正项的来源。轴向推导相同，但 $r$ 不随 $z$ 变化，因此没有对应的域内修正项。对跨单元分片不连续的 $B$，这里的导数按包含单元间跳跃的弱导数理解。
+这就是径向修正项的来源。轴向推导相同，但 $r$ 不随 $z$ 变化，因此没有对应的域内修正项。对跨单元分片不连续的 $\mathbf{B}$，这里的导数按包含单元间跳跃的弱导数理解。
 
 **注意：** 若直接代入原始环向项，域内积分含有 $\int N_I/r\,\mathrm{d}A$。当子域沿轴线有一段边界，且 $N_I$ 在该段非零时，这个积分对数发散，没有有限值。
 
-离散计算时，将边界项和域内项中的 $B$ **同时替换为[第 5.2 节](#section-18)的母单元中心矩阵 $\widehat B$**。其中的 $1/(3r_{ec})$ 有限，可避免上述奇异性，得到
+离散计算时，将边界项和域内项中的 $\mathbf{B}$ **同时替换为[第 5.2 节](#section-18)的母单元中心矩阵 $\widehat{\mathbf{B}}$**。其中的 $1/(3r_{ec})$ 有限，可避免上述奇异性，得到
 
 $$
-\boxed{G_{B,r,k}^{V}=\frac{1}{V_k}\left[\int_{\partial D_k}2\pi r\widehat B\,n_{\mathrm{out},r}\,\mathrm{d}s-\int_{D_k}2\pi\widehat B\,\mathrm{d}A\right],}
+\boxed{\mathbf{G}_{B,r,k}^{V}=\frac{1}{V_k}\left[\int_{\partial D_k}2\pi r\widehat{\mathbf{B}}\,n_{\mathrm{out},r}\,\mathrm{d}s-\int_{D_k}2\pi\widehat{\mathbf{B}}\,\mathrm{d}A\right],}
 $$
 
 $$
-\boxed{G_{B,z,k}^{V}=\frac{1}{V_k}\int_{\partial D_k}2\pi r\widehat B\,n_{\mathrm{out},z}\,\mathrm{d}s.}
+\boxed{\mathbf{G}_{B,z,k}^{V}=\frac{1}{V_k}\int_{\partial D_k}2\pi r\widehat{\mathbf{B}}\,n_{\mathrm{out},z}\,\mathrm{d}s.}
 $$
 
-**注意：** 边界积分和域内积分必须使用[第 5.2 节](#section-18)给定的同一套 $\widehat B$。域内积分按 $\operatorname*{Assemble}_{e\ni k}\left[2\pi A_{ke}B_e\right]$ 组装，不能替换成 $2\pi A_k\overline B_k^V$。
+**注意：** 边界积分和域内积分必须使用[第 5.2 节](#section-18)给定的同一套 $\widehat{\mathbf{B}}$。域内积分按 $\operatorname*{Assemble}_{e\ni k}\left[2\pi A_{ke}\mathbf{B}_e\right]$ 组装，不能替换成 $2\pi A_k\overline{\mathbf{B}}_k^V$。
 
 **均匀应变再现检查：** 给节点施加位移场 $u_r=\varepsilon_{r0}r$、$u_z=\varepsilon_{z0}z+u_{z0}$，其中 $\varepsilon_{r0},\varepsilon_{z0},u_{z0}$ 均为常数，应得到恒定应变
 
@@ -417,13 +436,13 @@ $$
 \boldsymbol\varepsilon_0=[\varepsilon_{r0},\varepsilon_{z0},\varepsilon_{r0},0]^T.
 $$
 
-此时 $\widehat B\boldsymbol U_k=\boldsymbol\varepsilon_0$ 在光滑域内处处相同，径向、轴向应变梯度都应为零。以非零的 $\boldsymbol\varepsilon_0$ 为例，若省略径向梯度中的域内修正项 $-\frac{1}{V_k}\int_{D_k}2\pi\widehat B\,\mathrm dA$，则会得到
+此时 $\widehat{\mathbf{B}}\boldsymbol U_k=\boldsymbol\varepsilon_0$ 在光滑域内处处相同，径向、轴向应变梯度都应为零。以非零的 $\boldsymbol\varepsilon_0$ 为例，若省略径向梯度中的域内修正项 $-\frac{1}{V_k}\int_{D_k}2\pi\widehat{\mathbf{B}}\,\mathrm dA$，则会得到
 
 $$
 \begin{aligned}
-G_{B,r,k}^{V,\mathrm{incomplete}}\boldsymbol U_k
-&=\frac{1}{V_k}\left[\int_{\partial D_k}2\pi r\widehat B\,n_{\mathrm{out},r}\,\mathrm{d}s\right]\boldsymbol U_k\\
-&=\frac{1}{V_k}\int_{\partial D_k}2\pi r(\widehat B\boldsymbol U_k)n_{\mathrm{out},r}\,\mathrm{d}s\\
+\mathbf{G}_{B,r,k}^{V,\mathrm{incomplete}}\boldsymbol U_k
+&=\frac{1}{V_k}\left[\int_{\partial D_k}2\pi r\widehat{\mathbf{B}}\,n_{\mathrm{out},r}\,\mathrm{d}s\right]\boldsymbol U_k\\
+&=\frac{1}{V_k}\int_{\partial D_k}2\pi r(\widehat{\mathbf{B}}\boldsymbol U_k)n_{\mathrm{out},r}\,\mathrm{d}s\\
 &=\frac{2\pi}{V_k}\left[\int_{\partial D_k}r n_{\mathrm{out},r}\,\mathrm{d}s\right]\boldsymbol\varepsilon_0\\
 &=\frac{2\pi}{V_k}\left[\int_{D_k}\frac{\partial r}{\partial r}\,\mathrm{d}A\right]\boldsymbol\varepsilon_0\\
 &=\frac{2\pi}{V_k}\left[\int_{D_k}1\,\mathrm{d}A\right]\boldsymbol\varepsilon_0\\
@@ -431,36 +450,36 @@ G_{B,r,k}^{V,\mathrm{incomplete}}\boldsymbol U_k
 \end{aligned}
 $$
 
-这里先代入 $\widehat B\boldsymbol U_k=\boldsymbol\varepsilon_0$，将常量应变提出积分；再用二维散度定理将边界积分转为面积积分，并利用 $\partial r/\partial r=1$。上标 $\mathrm{incomplete}$ 表示漏掉上述域内修正项的计算结果。也就是说，本来没有变化的应变会被算成有径向变化，四个虚拟点的应力和刚度因此受到影响。补回域内修正项后，径向应变梯度才为零。
+这里先代入 $\widehat{\mathbf{B}}\boldsymbol U_k=\boldsymbol\varepsilon_0$，将常量应变提出积分；再用二维散度定理将边界积分转为面积积分，并利用 $\partial r/\partial r=1$。上标 $\mathrm{incomplete}$ 表示漏掉上述域内修正项的计算结果。也就是说，本来没有变化的应变会被算成有径向变化，四个虚拟点的应力和刚度因此受到影响。补回域内修正项后，径向应变梯度才为零。
 
 使用完整公式后，两个应变梯度均为零；[第 4.3 节](#section-15)的平均矩阵也给出 $\boldsymbol\varepsilon_0$。因此，[第 6.1 节](#section-21)由平均矩阵加减梯度项构造的四个虚拟点，都得到同一个正确的均匀应变。
 
-压力、温度所用的 E 矩阵及其体积加权梯度见[第 7 节](#section-24)。
+压力、温度所用的 $\mathbf{E}$ 矩阵及其体积加权梯度见[第 7 节](#section-24)。
 
 ## 6. 四个虚拟点、V/4 与真实体积积分
 
 ### 6.1 四个虚拟点及其体积权重
 
-按已确定的体积加权方案，使用[第 4.3 节](#section-15)的平均矩阵和[第 5.3 节](#section-19)的近似梯度，四个虚拟点的 B 矩阵写为：
+按已确定的体积加权方案，使用[第 4.3 节](#section-15)的平均矩阵和[第 5.3 节](#section-19)的近似梯度，四个虚拟点的 $\mathbf{B}$ 矩阵写为：
 
 $$
 \begin{aligned}
-\widetilde B_{k1}&=\overline B_k^V-\ell_kG_{B,r,k}^V,\qquad \widetilde B_{k2}=\overline B_k^V+\ell_kG_{B,r,k}^V,\\
-\widetilde B_{k3}&=\overline B_k^V-\ell_kG_{B,z,k}^V,\qquad \widetilde B_{k4}=\overline B_k^V+\ell_kG_{B,z,k}^V.
+\widetilde{\mathbf{B}}_{k1}&=\overline{\mathbf{B}}_k^V-\ell_k\mathbf{G}_{B,r,k}^V,\qquad \widetilde{\mathbf{B}}_{k2}=\overline{\mathbf{B}}_k^V+\ell_k\mathbf{G}_{B,r,k}^V,\\
+\widetilde{\mathbf{B}}_{k3}&=\overline{\mathbf{B}}_k^V-\ell_k\mathbf{G}_{B,z,k}^V,\qquad \widetilde{\mathbf{B}}_{k4}=\overline{\mathbf{B}}_k^V+\ell_k\mathbf{G}_{B,z,k}^V.
 \end{aligned}
 $$
 
 $$
-W_{kg}=V_k/4,\qquad \frac14\sum_{g=1}^4\widetilde B_{kg}=\overline B_k^V.
+W_{kg}=V_k/4,\qquad \frac14\sum_{g=1}^4\widetilde{\mathbf{B}}_{kg}=\overline{\mathbf{B}}_k^V.
 $$
 
-$W_{kg}$ 是第 $g$ 个虚拟点的体积积分权重，单位是体积。点 1、2、3、4 依次对应径向负、径向正、轴向负、轴向正的偏移。四个点的权重都为正，四个 B 相加除以四，正好得到平均的 NS 矩阵。每个虚拟点分别保存一套塑性状态变量。
+$W_{kg}$ 是第 $g$ 个虚拟点的体积积分权重，单位是体积。点 1、2、3、4 依次对应径向负、径向正、轴向负、轴向正的偏移。四个点的权重都为正，四个 $\mathbf{B}$ 相加除以四，正好得到平均的 NS 矩阵。每个虚拟点分别保存一套塑性状态变量。
 
 **用了 $V_k/4$，就不能再乘 $2\pi$ 和虚拟点半径。** 因为计算体积时已经计入旋转权重，再乘就是重复计算。也不能把 $A_k/4$ 乘以 $2\pi$ 和各虚拟点的示意半径作为权重：若四点围绕节点对称布置，这些权重之和为 $2\pi r_kA_k$，通常不等于实际体积 $V_k$，轴线附近还可能出现零权重或负权重。这里 $r_k$ 是光滑域中心节点到旋转轴的距离。
 
 ### 6.2 “四点乘体积”并不自动等于真实域上的精确积分
 
-如果希望四个点精确计算随位置变化的 B 所产生的积分，仅让四个权重之和等于 $V_k$ 还不够。例如，计算刚度时，B 中的元素会两两相乘，会出现位置偏移量的平方，因此还要检查这些平方项的积分是否正确。以面积为 $A_k$、半径为 $\ell_k$ 的均匀二维圆盘为例，$\delta r_g$ 表示第 $g$ 点相对圆盘中心的径向坐标差，$\delta r$ 表示盘内一般位置的同类坐标差。
+如果希望四个点精确计算随位置变化的 $\mathbf{B}$ 所产生的积分，仅让四个权重之和等于 $V_k$ 还不够。例如，计算刚度时，$\mathbf{B}$ 中的元素会两两相乘，会出现位置偏移量的平方，因此还要检查这些平方项的积分是否正确。以面积为 $A_k$、半径为 $\ell_k$ 的均匀二维圆盘为例，$\delta r_g$ 表示第 $g$ 点相对圆盘中心的径向坐标差，$\delta r$ 表示盘内一般位置的同类坐标差。
 
 **注意：** 这里的 $\delta$ 仅标记几何偏移量，不表示变分或求导。
 
@@ -492,17 +511,17 @@ $$
 
 ### 6.3 靠轴线的“负半径虚拟点”如何理解
 
-本文采用位于 $r\geq0$ 区域的非退化 T3 网格，因此母单元面积 $A_e>0$、中心半径 $r_{ec}>0$，光滑域实际旋转体积 $V_k>0$。预计算 B 及其梯度时，分母来自这些真实几何量。虚拟点的 B 直接按[第 6.1 节](#section-21)的四个公式组合，无须在虚拟点坐标处重新求型函数。即使示意图上出现 $r_k-\ell_k<0$，这个示意半径也不进入 $N/r$ 求值或积分权重；内力计算使用组合后的矩阵和正权重 $V_k/4$。
+本文采用位于 $r\geq0$ 区域的非退化 T3 网格，因此母单元面积 $A_e>0$、中心半径 $r_{ec}>0$，光滑域实际旋转体积 $V_k>0$。预计算 $\mathbf{B}$ 及其梯度时，分母来自这些真实几何量。虚拟点的 $\mathbf{B}$ 直接按[第 6.1 节](#section-21)的四个公式组合，无须在虚拟点坐标处重新求型函数。即使示意图上出现 $r_k-\ell_k<0$，这个示意半径也不进入 $N_I/r$ 求值或积分权重；内力计算使用组合后的矩阵和正权重 $V_k/4$。
 
 **注意：** 虚拟点矩阵按[第 6.1 节](#section-21)直接组合。不要在负半径处重新求型函数，也不能将示意半径取绝对值后用于求值或积分。
 
 ## 7. 温度应变，以及压力、温度梯度如何处理
 
-### 7.1 保留 SNS 的四点 E 矩阵
+### 7.1 保留 SNS 的四点 $\mathbf{E}$ 矩阵
 
-本文用 SNS 虚拟点矩阵计算渗流和热传导。为区分不同的 E，本文记原始 T3 型函数梯度为 $E_e=\nabla N_e$，常数 NS 矩阵为 $\overline E_k^V$，SNS 虚拟点矩阵为 $\widetilde E_{kg}$；其中 $k,g$ 分别标明光滑域和虚拟点。四点矩阵由平均 E 加减相应方向的梯度项得到。
+本文用 SNS 虚拟点矩阵计算渗流和热传导。为区分不同的 $\mathbf{E}$，本文记原始 T3 型函数梯度为 $\mathbf{E}_e=\nabla \mathbf{N}_e$，常数 NS 矩阵为 $\overline{\mathbf{E}}_k^V$，SNS 虚拟点矩阵为 $\widetilde{\mathbf{E}}_{kg}$；其中 $k,g$ 分别标明光滑域和虚拟点。四点矩阵由平均 $\mathbf{E}$ 加减相应方向的梯度项得到。
 
-热传导使用四点 $\widetilde E_{kg}$，热容量使用原始 T3 型函数。关闭热对流时，温度方程不依赖 $\boldsymbol u,p$；开启后，仍用四点 $\widetilde E_{kg}$ 计算 Darcy 速度和温度梯度，新增项见[第 8.5 节](#section-35)。温度方程不额外加入 PPP 项，E 中的 SNS 梯度项保留。节点光滑在瞬态导热中也可能出现积分不足造成的数值问题，保留这些梯度项有依据，见 [Cui 等关于稳态与瞬态导热的研究](https://doi.org/10.1016/j.ijthermalsci.2016.06.027)。
+热传导使用四点 $\widetilde{\mathbf{E}}_{kg}$，热容量使用原始 T3 型函数。关闭热对流时，温度方程不依赖 $\boldsymbol u,p$；开启后，仍用四点 $\widetilde{\mathbf{E}}_{kg}$ 计算 Darcy 速度和温度梯度，新增项见[第 8.5 节](#section-35)。温度方程不额外加入 PPP 项，$\mathbf{E}$ 中的 SNS 梯度项保留。节点光滑在瞬态导热中也可能出现积分不足造成的数值问题，保留这些梯度项有依据，见 [Cui 等关于稳态与瞬态导热的研究](https://doi.org/10.1016/j.ijthermalsci.2016.06.027)。
 
 ### 7.2 体积平均的温度与其梯度
 
@@ -510,31 +529,31 @@ $$
 
 $$
 \begin{aligned}
-\overline N_k^V&=\frac{1}{V_k}\operatorname*{Assemble}_{e\ni k}\left[\int_{D_{ke}}N_e\,\mathrm{d}V\right],\\
-\overline E_k^V&=\frac{1}{V_k}\operatorname*{Assemble}_{e\ni k}\left[\int_{D_{ke}}\nabla N_e\,\mathrm{d}V\right].
+\overline{\mathbf{N}}_k^V&=\frac{1}{V_k}\operatorname*{Assemble}_{e\ni k}\left[\int_{D_{ke}}\mathbf{N}_e\,\mathrm{d}V\right],\\
+\overline{\mathbf{E}}_k^V&=\frac{1}{V_k}\operatorname*{Assemble}_{e\ni k}\left[\int_{D_{ke}}\nabla \mathbf{N}_e\,\mathrm{d}V\right].
 \end{aligned}
 $$
 
-T3 的 $\nabla N_e$ 在母单元内为常数，后一式可以直接用子域体积加权。**注意：** $\overline E_k^V$ 是“先求导、再平均”，不应当对已经存为常数的 $\overline N_k^V$ 直接求导而得到零。
+T3 的 $\nabla \mathbf{N}_e$ 在母单元内为常数，后一式可以直接用子域体积加权。**注意：** $\overline{\mathbf{E}}_k^V$ 是“先求导、再平均”，不应当对已经存为常数的 $\overline{\mathbf{N}}_k^V$ 直接求导而得到零。
 
-这里 $\nabla=(\partial_r,\partial_z)^T$，$\partial_r,\partial_z$ 分别表示对 $r,z$ 求偏导。$\overline E_{r,k}^V$、$\overline E_{z,k}^V$ 分别是平均梯度矩阵 $\overline E_k^V$ 的第一行、第二行。继续定义
+这里 $\nabla=(\partial_r,\partial_z)^T$，$\partial_r,\partial_z$ 分别表示对 $r,z$ 求偏导。$\overline{\mathbf{E}}_{r,k}^V$、$\overline{\mathbf{E}}_{z,k}^V$ 分别是平均梯度矩阵 $\overline{\mathbf{E}}_k^V$ 的第一行、第二行。继续定义
 
 $$
 \begin{aligned}
-\widetilde N_{k1}&=\overline N_k^V-\ell_k\overline E_{r,k}^V,\qquad \widetilde N_{k2}=\overline N_k^V+\ell_k\overline E_{r,k}^V,\\
-\widetilde N_{k3}&=\overline N_k^V-\ell_k\overline E_{z,k}^V,\qquad \widetilde N_{k4}=\overline N_k^V+\ell_k\overline E_{z,k}^V.
+\widetilde{\mathbf{N}}_{k1}&=\overline{\mathbf{N}}_k^V-\ell_k\overline{\mathbf{E}}_{r,k}^V,\qquad \widetilde{\mathbf{N}}_{k2}=\overline{\mathbf{N}}_k^V+\ell_k\overline{\mathbf{E}}_{r,k}^V,\\
+\widetilde{\mathbf{N}}_{k3}&=\overline{\mathbf{N}}_k^V-\ell_k\overline{\mathbf{E}}_{z,k}^V,\qquad \widetilde{\mathbf{N}}_{k4}=\overline{\mathbf{N}}_k^V+\ell_k\overline{\mathbf{E}}_{z,k}^V.
 \end{aligned}
 $$
 
 $$
-\Delta\boldsymbol\varepsilon_{kg}^{\mathrm{th}}=\alpha_s\boldsymbol m\widetilde N_{kg}\Delta\boldsymbol T_k,\qquad \boldsymbol m=[1,1,1,0]^T.
+\Delta\boldsymbol\varepsilon_{kg}^{\mathrm{th}}=\alpha_s\boldsymbol m\widetilde{\mathbf{N}}_{kg}\Delta\boldsymbol T_k,\qquad \boldsymbol m=[1,1,1,0]^T.
 $$
 
-$\alpha_s$ 是固体的线膨胀系数；$\boldsymbol m=[1,1,1,0]^T$ 将标量热膨胀量放入三个正应变分量，并使剪应变为零。$\Delta\boldsymbol\varepsilon_{kg}^{\mathrm{th}}$ 是第 $g$ 个虚拟点的热应变增量，上标 $\mathrm{th}$ 表示热应变。这里的 $\widetilde N_{kg}$ 将节点温度增量换算成该点用于计算热应变的温度增量。它由平均型函数行向量 $\overline N_k^V$ 加减梯度项得到，不需要判断虚拟点落在哪个三角形里，再去求那个三角形的型函数。
+$\alpha_s$ 是固体的线膨胀系数；$\boldsymbol m=[1,1,1,0]^T$ 将标量热膨胀量放入三个正应变分量，并使剪应变为零。$\Delta\boldsymbol\varepsilon_{kg}^{\mathrm{th}}$ 是第 $g$ 个虚拟点的热应变增量，上标 $\mathrm{th}$ 表示热应变。这里的 $\widetilde{\mathbf{N}}_{kg}$ 将节点温度增量换算成该点用于计算热应变的温度增量。它由平均型函数行向量 $\overline{\mathbf{N}}_k^V$ 加减梯度项得到，不需要判断虚拟点落在哪个三角形里，再去求那个三角形的型函数。
 
-均匀温升时必须有 $\overline N_k^V\boldsymbol 1=1$、$\overline E_k^V\boldsymbol 1=\boldsymbol 0$，其中 $\boldsymbol 1$ 是与节点数量对应的全 1 列向量，所以四个虚拟点获得相同热应变。在本文均匀材料假设下，无初始应力、无机械体力、无额外机械约束，且孔压保持 $p=0$ 时，自由膨胀位移为 $u_r=\alpha_s\Delta T r,\ u_z=\alpha_s\Delta T z$（$\Delta T$ 为均匀温升）。此时总应变减去热应变得到的机械应变为零，包括环向分量。**注意：** 不排水升温可能产生孔压，不能直接套用这一自由膨胀检查。
+均匀温升时必须有 $\overline{\mathbf{N}}_k^V\boldsymbol 1=1$、$\overline{\mathbf{E}}_k^V\boldsymbol 1=\boldsymbol 0$，其中 $\boldsymbol 1$ 是与节点数量对应的全 1 列向量，所以四个虚拟点获得相同热应变。在本文均匀材料假设下，无初始应力、无机械体力、无额外机械约束，且孔压保持 $p=0$ 时，自由膨胀位移为 $u_r=\alpha_s\Delta T r,\ u_z=\alpha_s\Delta T z$（$\Delta T$ 为均匀温升）。此时总应变减去热应变得到的机械应变为零，包括环向分量。**注意：** 不排水升温可能产生孔压，不能直接套用这一自由膨胀检查。
 
-### 7.3 压力、温度的梯度没有 N/r 行
+### 7.3 压力、温度的梯度没有 $N_I/r$ 行
 
 压力和温度的梯度仍然只有径向和轴向两个分量。轴对称给扩散方程带来的半径因子，已经包含在体积积分中。以热传导项为例：$D$ 表示整个 r–z 计算域，$k_T$ 是常标量导热系数，$v_T$ 是温度方程弱式中的标量试函数，在规定温度的边界上为零。它不是温度 $T$，也不是时间步温度增量 $\Delta T$：
 
@@ -542,26 +561,26 @@ $$
 \int_D(\nabla v_T)^Tk_T\nabla T\,2\pi r\,\mathrm{d}A.
 $$
 
-上式已经考虑圆柱坐标的影响，不能再给热传导或 Darcy 的梯度矩阵添加一个类似机械环向应变的 $N/r$ 行，也不需要在孔压扩散矩阵 $K_{22P}$ 或热传导矩阵 $K_{33G}$ 中重复增加 $1/r$ 项。
+上式已经考虑圆柱坐标的影响，不能再给热传导或 Darcy 的梯度矩阵添加一个类似机械环向应变的 $N_I/r$ 行，也不需要在孔压扩散矩阵 $\bm{K}_{22P}$ 或热传导矩阵 $\bm{K}_{33G}$ 中重复增加 $1/r$ 项。
 
-**E 的体积加权梯度同样需要径向修正。** 记 $G_{E,r,k}^{V},G_{E,z,k}^{V}$ 为计算四点 E 时使用的径向、轴向变化矩阵。对 E 应用[第 5.3 节](#section-19)的乘积法则与散度定理，得到
+**$\mathbf{E}$ 的体积加权梯度同样需要径向修正。** 记 $\mathbf{G}_{E,r,k}^{V},\mathbf{G}_{E,z,k}^{V}$ 为计算四点 $\mathbf{E}$ 时使用的径向、轴向变化矩阵。对 $\mathbf{E}$ 应用[第 5.3 节](#section-19)的乘积法则与散度定理，得到
 
 $$
 \begin{aligned}
-G_{E,r,k}^{V}&=\frac{1}{V_k}\left[\int_{\partial D_k}2\pi r\widehat E\,n_{\mathrm{out},r}\,\mathrm{d}s-\int_{D_k}2\pi\widehat E\,\mathrm{d}A\right],\\
-G_{E,z,k}^{V}&=\frac{1}{V_k}\int_{\partial D_k}2\pi r\widehat E\,n_{\mathrm{out},z}\,\mathrm{d}s.
+\mathbf{G}_{E,r,k}^{V}&=\frac{1}{V_k}\left[\int_{\partial D_k}2\pi r\widehat{\mathbf{E}}\,n_{\mathrm{out},r}\,\mathrm{d}s-\int_{D_k}2\pi\widehat{\mathbf{E}}\,\mathrm{d}A\right],\\
+\mathbf{G}_{E,z,k}^{V}&=\frac{1}{V_k}\int_{\partial D_k}2\pi r\widehat{\mathbf{E}}\,n_{\mathrm{out},z}\,\mathrm{d}s.
 \end{aligned}
 $$
 
-这里 $\widehat E$ 在每个母三角形内取该单元的 $E_e$；各矩阵的节点列同样先按光滑域 $k$ 的节点顺序排列，**缺少的列补零**。它不含 $N/r$，而且在直边 T3 内是常数，所以径向修正中的面积积分 $\int_{D_k}2\pi\widehat E\,\mathrm dA$ 可以按各子域精确求和。**没有 $N/r$，不代表可以省略径向修正：这个修正来自体积权重中的 r。** 若积分时的 $\widehat E$ 处处相同，径向公式中的两项恰好抵消，结果为零。
+在每个母三角形内，$\widehat{\mathbf{E}}$ 由该单元的 $\mathbf{E}_e$ 按[第 2.3 节](#section-6)对齐节点列得到。它不含 $N_I/r$，而且在直边 T3 内是常数，所以径向修正中的面积积分 $\int_{D_k}2\pi\widehat{\mathbf{E}}\,\mathrm dA$ 可以按各子域精确求和。**没有 $N_I/r$，不代表可以省略径向修正：这个修正来自体积权重中的 r。** 若积分时的 $\widehat{\mathbf{E}}$ 处处相同，径向公式中的两项恰好抵消，结果为零。
 
 例如前两个虚拟点使用
 
 $$
-\widetilde E_{k1}=\overline E_k^V-\ell_kG_{E,r,k}^{V},\qquad \widetilde E_{k2}=\overline E_k^V+\ell_kG_{E,r,k}^{V}.
+\widetilde{\mathbf{E}}_{k1}=\overline{\mathbf{E}}_k^V-\ell_k\mathbf{G}_{E,r,k}^{V},\qquad \widetilde{\mathbf{E}}_{k2}=\overline{\mathbf{E}}_k^V+\ell_k\mathbf{G}_{E,r,k}^{V}.
 $$
 
-第 3、4 点分别减去、加上轴向项 $\ell_kG_{E,z,k}^{V}$。$G_{E,r,k}^{V},G_{E,z,k}^{V}$ 描述的是相邻单元 E 值的空间变化，不是对已经存成常数的 $\overline E_k^V$ 直接求导。热应变中用于构造四点温度的 $\overline E_k^V$ 仍按[第 7.2 节](#section-26)使用。
+第 3、4 点分别减去、加上轴向项 $\ell_k\mathbf{G}_{E,z,k}^{V}$。$\mathbf{G}_{E,r,k}^{V},\mathbf{G}_{E,z,k}^{V}$ 描述的是相邻单元 $\mathbf{E}$ 值的空间变化，不是对已经存成常数的 $\overline{\mathbf{E}}_k^V$ 直接求导。热应变中用于构造四点温度的 $\overline{\mathbf{E}}_k^V$ 仍按[第 7.2 节](#section-26)使用。
 
 ## 8. THM 离散方程、残差与一致切线
 
@@ -574,11 +593,11 @@ $\boldsymbol U,\boldsymbol P,\boldsymbol T$ 分别为当前试算的节点位移
 $$
 \boxed{
 \begin{aligned}
-\boldsymbol R_u&=\boldsymbol f_u^{\mathrm{skel}}-K_{12}\boldsymbol P-\boldsymbol F_u^{\mathrm{ext}},\\
-\boldsymbol R_p&=K_{21}\Delta\boldsymbol U+(K_{22S}+S_{\mathrm{PPP}})\Delta\boldsymbol P-K_{23}\Delta\boldsymbol T
-+\Delta t(K_{22P}\boldsymbol P-\boldsymbol G_p)-\boldsymbol Q_p^{\mathrm{step}},\\
-\boldsymbol R_T&=K_{33X}\Delta\boldsymbol T
-+\Delta t\left[K_{33G}\boldsymbol T+\boldsymbol f_T^{\mathrm{adv}}(\boldsymbol P,\boldsymbol T)\right]
+\boldsymbol R_u&=\boldsymbol f_u^{\mathrm{skel}}-\bm{K}_{12}\boldsymbol P-\boldsymbol F_u^{\mathrm{ext}},\\
+\boldsymbol R_p&=\bm{K}_{21}\Delta\boldsymbol U+(\bm{K}_{22S}+\bm{S}_{\mathrm{PPP}})\Delta\boldsymbol P-\bm{K}_{23}\Delta\boldsymbol T
++\Delta t(\bm{K}_{22P}\boldsymbol P-\boldsymbol G_p)-\boldsymbol Q_p^{\mathrm{step}},\\
+\boldsymbol R_T&=\bm{K}_{33X}\Delta\boldsymbol T
++\Delta t\left[\bm{K}_{33G}\boldsymbol T+\boldsymbol f_T^{\mathrm{adv}}(\boldsymbol P,\boldsymbol T)\right]
 -\boldsymbol Q_T^{\mathrm{step}}.
 \end{aligned}
 }
@@ -588,27 +607,27 @@ $$
 
 $$
 \boxed{
-K=
+\bm{K}=
 \begin{bmatrix}
-K_{11}&-K_{12}&-K_{13}\\
-K_{21}&K_{22S}+S_{\mathrm{PPP}}+\Delta tK_{22P}&-K_{23}\\
-0&\Delta tK_{32\mathrm{Adv}}&K_{33X}+\Delta t(K_{33G}+K_{33\mathrm{Adv}})
+\bm{K}_{11}&-\bm{K}_{12}&-\bm{K}_{13}\\
+\bm{K}_{21}&\bm{K}_{22S}+\bm{S}_{\mathrm{PPP}}+\Delta t\bm{K}_{22P}&-\bm{K}_{23}\\
+\bm{0}&\Delta t\bm{K}_{32\mathrm{Adv}}&\bm{K}_{33X}+\Delta t(\bm{K}_{33G}+\bm{K}_{33\mathrm{Adv}})
 \end{bmatrix}.
 }
 $$
 
-矩阵的行依次对应 $\boldsymbol R_u,\boldsymbol R_p,\boldsymbol R_T$，列依次对应 $\boldsymbol U,\boldsymbol P,\boldsymbol T$；$0$ 表示相应尺寸的零块。
+矩阵的行依次对应 $\boldsymbol R_u,\boldsymbol R_p,\boldsymbol R_T$，列依次对应 $\boldsymbol U,\boldsymbol P,\boldsymbol T$；$\bm{0}$ 表示相应尺寸的零块。
 
 各项的物理含义及构造位置如下。
 
 | 全局量 | 含义 | 构造位置 |
 | --- | --- | --- |
-| $\boldsymbol f_u^{\mathrm{skel}},K_{11},K_{13}$ | 骨架内力、力学切线及温度引起的力学耦合 | [8.2](#section-29) |
-| $K_{12},K_{21}$ | 位移—孔压耦合 | [8.2](#section-29) |
-| $K_{22S},K_{23},K_{33X}$ | 储水、温度—流体含量耦合、热容量 | [8.3](#section-31) |
-| $K_{22P},\boldsymbol G_p,K_{33G}$ | 孔压扩散、Darcy 重力项、热传导 | [8.4](#section-32) |
-| $\boldsymbol f_T^{\mathrm{adv}},K_{32\mathrm{Adv}},K_{33\mathrm{Adv}}$ | 热对流残差及其对孔压、温度的导数 | [8.5](#section-35) |
-| $S_{\mathrm{PPP}}$ | 已乘稳定化系数的 PPP 矩阵 | [第 10 节](#section-42) |
+| $\boldsymbol f_u^{\mathrm{skel}},\bm{K}_{11},\bm{K}_{13}$ | 骨架内力、力学切线及温度引起的力学耦合 | [8.2](#section-29) |
+| $\bm{K}_{12},\bm{K}_{21}$ | 位移—孔压耦合 | [8.2](#section-29) |
+| $\bm{K}_{22S},\bm{K}_{23},\bm{K}_{33X}$ | 储水、温度—流体含量耦合、热容量 | [8.3](#section-31) |
+| $\bm{K}_{22P},\boldsymbol G_p,\bm{K}_{33G}$ | 孔压扩散、Darcy 重力项、热传导 | [8.4](#section-32) |
+| $\boldsymbol f_T^{\mathrm{adv}},\bm{K}_{32\mathrm{Adv}},\bm{K}_{33\mathrm{Adv}}$ | 热对流残差及其对孔压、温度的导数 | [8.5](#section-35) |
+| $\bm{S}_{\mathrm{PPP}}$ | 已乘稳定化系数的 PPP 矩阵 | [第 10 节](#section-42) |
 | $\boldsymbol F_u^{\mathrm{ext}}=\boldsymbol F_u^\Gamma+\boldsymbol F_u^{\mathrm{body}}$ | 面力与机械体力的等效节点外荷载 | [第 12 节](#section-48) |
 | $\boldsymbol Q_p^{\mathrm{step}},\boldsymbol Q_T^{\mathrm{step}}$ | 本步等效节点流体流入体积与传导热量 | 本节下式 |
 
@@ -637,7 +656,7 @@ $$
 
 **边界积分使用原始 T3 型函数 $N_I$，沿实际网格边界计算并按节点相加，不使用光滑型函数或 SNS 虚拟点。** 给定通量不依赖当前未知量，因此不增加切线项。这里的热流仅指传导热流；流体携热已由[第 8.5 节](#section-35)的域内对流项表示。
 
-**关闭热对流时，同时令 $\boldsymbol f_T^{\mathrm{adv}},K_{32\mathrm{Adv}},K_{33\mathrm{Adv}}$ 为零。** 机械体力外载 $\boldsymbol F_u^{\mathrm{body}}$ 和流体残差中的 $-\Delta t\boldsymbol G_p$ 仍保留。温度方程对孔压的切线块在关闭对流时为零，开启时为 $\Delta tK_{32\mathrm{Adv}}$；温度方程对位移的切线块始终为零。
+**关闭热对流时，同时令 $\boldsymbol f_T^{\mathrm{adv}},\bm{K}_{32\mathrm{Adv}},\bm{K}_{33\mathrm{Adv}}$ 为零。** 机械体力外载 $\boldsymbol F_u^{\mathrm{body}}$ 和流体残差中的 $-\Delta t\boldsymbol G_p$ 仍保留。温度方程对孔压的切线块在关闭对流时为零，开启时为 $\Delta t\bm{K}_{32\mathrm{Adv}}$；温度方程对位移的切线块始终为零。
 
 **注意：** Darcy 重力已通过 $-\Delta t\boldsymbol G_p$ 计入流体残差，不再并入 $\boldsymbol Q_p^{\mathrm{step}}$。
 
@@ -647,37 +666,37 @@ $$
 
 $$
 \Delta\boldsymbol\varepsilon_{kg}^{\mathrm{mech}}
-=\widetilde B_{kg}\Delta\boldsymbol U_k
--\alpha_s\boldsymbol m\widetilde N_{kg}\Delta\boldsymbol T_k,
+=\widetilde{\mathbf{B}}_{kg}\Delta\boldsymbol U_k
+-\alpha_s\boldsymbol m\widetilde{\mathbf{N}}_{kg}\Delta\boldsymbol T_k,
 \qquad \boldsymbol m=[1,1,1,0]^T,
 $$
 
 $$
 \boldsymbol f_{u,k}^{\mathrm{skel}}
-=\sum_gW_{kg}\widetilde B_{kg}^T\boldsymbol\sigma'_{kg},
+=\sum_gW_{kg}\widetilde{\mathbf{B}}_{kg}^T\boldsymbol\sigma'_{kg},
 $$
 
 $$
-K_{11}^k=\sum_gW_{kg}\widetilde B_{kg}^TC_{kg}^{\mathrm{ep}}\widetilde B_{kg},
+\bm{K}_{11}^k=\sum_gW_{kg}\widetilde{\mathbf{B}}_{kg}^T\bm{C}_{kg}^{\mathrm{ep}}\widetilde{\mathbf{B}}_{kg},
 \qquad
-K_{13}^k=\sum_gW_{kg}\widetilde B_{kg}^TC_{kg}^{\mathrm{ep}}\alpha_s\boldsymbol m\widetilde N_{kg}.
+\bm{K}_{13}^k=\sum_gW_{kg}\widetilde{\mathbf{B}}_{kg}^T\bm{C}_{kg}^{\mathrm{ep}}\alpha_s\boldsymbol m\widetilde{\mathbf{N}}_{kg}.
 $$
 
-$C_{kg}^{\mathrm{ep}}$ 是轴对称本构接口采用的 $4\times4$ 算法切线，即有效应力对机械应变试算增量的导数；从三维 UMAT 提取该矩阵的方式见[第 11.2 节](#section-45)。上标 $\mathrm{ep}$ 表示弹塑性；材料均匀时，各点的应力、塑性状态和算法切线仍可不同。热应变从总应变中扣除，因此力学方程对温度的切线块为 $-K_{13}$。**内力与切线使用同一组 $\widetilde B_{kg},\widetilde N_{kg},W_{kg}$。**
+$\bm{C}_{kg}^{\mathrm{ep}}$ 是轴对称本构接口采用的 $4\times4$ 算法切线，即有效应力对机械应变试算增量的导数；从三维 UMAT 提取该矩阵的方式见[第 11.2 节](#section-45)。上标 $\mathrm{ep}$ 表示弹塑性；材料均匀时，各点的应力、塑性状态和算法切线仍可不同。热应变从总应变中扣除，因此力学方程对温度的切线块为 $-\bm{K}_{13}$。**内力与切线使用同一组 $\widetilde{\mathbf{B}}_{kg},\widetilde{\mathbf{N}}_{kg},W_{kg}$。**
 
 孔压耦合使用原始 T3 型函数的体积积分行向量
 
 $$
-I_{N,k}^{V}
-=\operatorname*{Assemble}_{e\ni k}\left[\int_{D_{ke}}N_e\,\mathrm dV\right],
+\mathbf{I}_{N,k}^{V}
+=\operatorname*{Assemble}_{e\ni k}\left[\int_{D_{ke}}\mathbf{N}_e\,\mathrm dV\right],
 \qquad
-\boxed{K_{12}^k=(\overline B_k^V)^T\boldsymbol m I_{N,k}^{V},
-\quad K_{21}^k=(K_{12}^k)^T.}
+\boxed{\bm{K}_{12}^k=(\overline{\mathbf{B}}_k^V)^T\boldsymbol m \mathbf{I}_{N,k}^{V},
+\quad \bm{K}_{21}^k=(\bm{K}_{12}^k)^T.}
 $$
 
-$I_{N,k}^{V}$ 中的 $I$ 是积分结果的名称，不是单位矩阵或节点编号。$\overline B_k^V$ 采用[第 4.3 节](#section-15)的精确体积平均；[第 7.2 节](#section-26)定义的平均型函数行向量 $\overline N_k^V$ 满足 $\overline N_k^V=I_{N,k}^{V}/V_k$，因此也有 $K_{12}^k=V_k(\overline B_k^V)^T\boldsymbol m\overline N_k^V$。组装后保持 $K_{21}=K_{12}^T$。
+$\mathbf{I}_{N,k}^{V}$ 是型函数积分行矩阵，其中的 $\mathbf{I}$ 是积分结果的名称，不是单位矩阵或节点编号。$\overline{\mathbf{B}}_k^V$ 采用[第 4.3 节](#section-15)的精确体积平均；[第 7.2 节](#section-26)定义的平均型函数行向量 $\overline{\mathbf{N}}_k^V$ 满足 $\overline{\mathbf{N}}_k^V=\mathbf{I}_{N,k}^{V}/V_k$，因此也有 $\bm{K}_{12}^k=V_k(\overline{\mathbf{B}}_k^V)^T\boldsymbol m\overline{\mathbf{N}}_k^V$。组装后保持 $\bm{K}_{21}=\bm{K}_{12}^T$。
 
-**注意：** 面积平均 $\overline N_k^A$ 乘以 $V_k$ 通常不等于型函数体积积分 $I_{N,k}^V$。规定孔压也不会自动施加机械壁面压力；面力仍按[第 12 节](#section-48)处理。
+**注意：** 面积平均 $\overline{\mathbf{N}}_k^A$ 乘以 $V_k$ 通常不等于型函数体积积分 $\mathbf{I}_{N,k}^V$。规定孔压也不会自动施加机械壁面压力；面力仍按[第 12 节](#section-48)处理。
 
 每轮 Newton 和 line search 试算均从上一步已收敛的本构状态出发。UMAT 更新试算应力和算法切线，MEX 使用它们组装矩阵；当前时间步收敛后再保存本构状态。
 
@@ -686,17 +705,17 @@ $I_{N,k}^{V}$ 中的 $I$ 是积分结果的名称，不是单位矩阵或节点�
 原始 T3 型函数乘积的体积积分矩阵为
 
 $$
-M_k^V=\operatorname*{Assemble}_{e\ni k}
-\left[\int_{D_{ke}}N_e^TN_e\,\mathrm dV\right].
+\bm{M}_k^V=\operatorname*{Assemble}_{e\ni k}
+\left[\int_{D_{ke}}\mathbf{N}_e^T\mathbf{N}_e\,\mathrm dV\right].
 $$
 
 使用[第 0 节](#section-1)定义的常系数 $S,\beta_T,C_T$，得到
 
 $$
 \boxed{
-K_{22S}^k=SM_k^V,\qquad
-K_{23}^k=\beta_TM_k^V,\qquad
-K_{33X}^k=C_TM_k^V.
+\bm{K}_{22S}^k=S\bm{M}_k^V,\qquad
+\bm{K}_{23}^k=\beta_T\bm{M}_k^V,\qquad
+\bm{K}_{33X}^k=C_T\bm{M}_k^V.
 }
 $$
 
@@ -704,11 +723,11 @@ $$
 
 | 局部贡献 | 物理含义 |
 | --- | --- |
-| $K_{22S}^k\Delta\boldsymbol P_k$ | 孔压变化引起的等效节点流体储存体积变化。 |
-| $-K_{23}^k\Delta\boldsymbol T_k$ | 温度变化引起的等效节点流体含量变化；负号与[第 8.1 节](#section-34)一致。 |
-| $K_{33X}^k\Delta\boldsymbol T_k$ | 温度变化引起的等效节点储热量变化。 |
+| $\bm{K}_{22S}^k\Delta\boldsymbol P_k$ | 孔压变化引起的等效节点流体储存体积变化。 |
+| $-\bm{K}_{23}^k\Delta\boldsymbol T_k$ | 温度变化引起的等效节点流体含量变化；负号与[第 8.1 节](#section-34)一致。 |
+| $\bm{K}_{33X}^k\Delta\boldsymbol T_k$ | 温度变化引起的等效节点储热量变化。 |
 
-$M_k^V$ 按实际四边形子域积分，积分规则见[第 9 节](#section-41)。矩阵下标中的 $S,P,X,G$ 沿用代码名称，不是额外的物理变量。
+$\bm{M}_k^V$ 按实际四边形子域积分，积分规则见[第 9 节](#section-41)。矩阵下标中的 $S,P,X,G$ 沿用代码名称，不是额外的物理变量。
 
 ### 8.4 Darcy 流动、重力与热传导
 
@@ -724,17 +743,17 @@ $k_f$ 是水力传导系数，$\gamma_f$ 是参考流体重度；$H_f$ 的单位
 
 $$
 \boldsymbol q_{f,kg}
-=-H_f\widetilde E_{kg}\boldsymbol P_k+\rho_fH_f\boldsymbol g.
+=-H_f\widetilde{\mathbf{E}}_{kg}\boldsymbol P_k+\rho_fH_f\boldsymbol g.
 $$
 
-采用前文的 $\widetilde E_{kg}$ 和 $W_{kg}=V_k/4$，**孔压扩散矩阵** $K_{22P}^k$、**Darcy 重力项** $\boldsymbol G_{p,k}$ 和**热传导矩阵** $K_{33G}^k$ 分别为
+采用前文的 $\widetilde{\mathbf{E}}_{kg}$ 和 $W_{kg}=V_k/4$，**孔压扩散矩阵** $\bm{K}_{22P}^k$、**Darcy 重力项** $\boldsymbol G_{p,k}$ 和**热传导矩阵** $\bm{K}_{33G}^k$ 分别为
 
 $$
 \boxed{
 \begin{aligned}
-K_{22P}^k&=\sum_gW_{kg}\widetilde E_{kg}^TH_f\widetilde E_{kg},\\
-\boldsymbol G_{p,k}&=\sum_gW_{kg}\widetilde E_{kg}^TH_f\rho_f\boldsymbol g,\\
-K_{33G}^k&=\sum_gW_{kg}\widetilde E_{kg}^Tk_T\widetilde E_{kg}.
+\bm{K}_{22P}^k&=\sum_gW_{kg}\widetilde{\mathbf{E}}_{kg}^TH_f\widetilde{\mathbf{E}}_{kg},\\
+\boldsymbol G_{p,k}&=\sum_gW_{kg}\widetilde{\mathbf{E}}_{kg}^TH_f\rho_f\boldsymbol g,\\
+\bm{K}_{33G}^k&=\sum_gW_{kg}\widetilde{\mathbf{E}}_{kg}^Tk_T\widetilde{\mathbf{E}}_{kg}.
 \end{aligned}
 }
 $$
@@ -765,17 +784,17 @@ $$
 \int_Dv_T\rho_fc_f\boldsymbol q_f\cdot\nabla T\,\mathrm dV.
 $$
 
-试函数使用 $\widetilde N_{kg}$，温度梯度使用 $\widetilde E_{kg}\boldsymbol T_k$；Darcy 通量沿用[第 8.4 节](#section-32)。四点积分得到局部对流残差
+试函数使用 $\widetilde{\mathbf{N}}_{kg}$，温度梯度使用 $\widetilde{\mathbf{E}}_{kg}\boldsymbol T_k$；Darcy 通量沿用[第 8.4 节](#section-32)。四点积分得到局部对流残差
 
 $$
 \boxed{
 \boldsymbol f_{T,k}^{\mathrm{adv}}(\boldsymbol P_k,\boldsymbol T_k)
-=\rho_fc_f\sum_gW_{kg}\widetilde N_{kg}^{T}
-\left[\boldsymbol q_{f,kg}^{T}\widetilde E_{kg}\boldsymbol T_k\right].
+=\rho_fc_f\sum_gW_{kg}\widetilde{\mathbf{N}}_{kg}^{T}
+\left[\boldsymbol q_{f,kg}^{T}\widetilde{\mathbf{E}}_{kg}\boldsymbol T_k\right].
 }
 $$
 
-$\widetilde N_{kg}$、$\widetilde E_{kg}$ 的尺寸分别为 $1\times n_{\mathrm{node},k}$、$2\times n_{\mathrm{node},k}$，局部残差含 $n_{\mathrm{node},k}$ 个分量。组装后得到 $\boldsymbol f_T^{\mathrm{adv}}=\operatorname*{Assemble}_k[\boldsymbol f_{T,k}^{\mathrm{adv}}]$。**此向量尚未乘 $\Delta t$；每点权重已是 $V_k/4$，不再乘半径。**
+$\widetilde{\mathbf{N}}_{kg}$、$\widetilde{\mathbf{E}}_{kg}$ 的尺寸分别为 $1\times n_{\mathrm{node},k}$、$2\times n_{\mathrm{node},k}$，局部残差含 $n_{\mathrm{node},k}$ 个分量。组装后得到 $\boldsymbol f_T^{\mathrm{adv}}=\operatorname*{Assemble}_k[\boldsymbol f_{T,k}^{\mathrm{adv}}]$。**此向量尚未乘 $\Delta t$；每点权重已是 $V_k/4$，不再乘半径。**
 
 #### 8.5.2 热对流切线
 
@@ -783,27 +802,27 @@ $\widetilde N_{kg}$、$\widetilde E_{kg}$ 的尺寸分别为 $1\times n_{\mathrm
 
 $$
 \boxed{
-K_{33\mathrm{Adv}}^k
+\bm{K}_{33\mathrm{Adv}}^k
 =\frac{\partial\boldsymbol f_{T,k}^{\mathrm{adv}}}{\partial\boldsymbol T_k}
-=\rho_fc_f\sum_gW_{kg}\widetilde N_{kg}^{T}
-\boldsymbol q_{f,kg}^{T}\widetilde E_{kg},
+=\rho_fc_f\sum_gW_{kg}\widetilde{\mathbf{N}}_{kg}^{T}
+\boldsymbol q_{f,kg}^{T}\widetilde{\mathbf{E}}_{kg},
 }
 $$
 
 $$
 \boxed{
-K_{32\mathrm{Adv}}^k
+\bm{K}_{32\mathrm{Adv}}^k
 =\frac{\partial\boldsymbol f_{T,k}^{\mathrm{adv}}}{\partial\boldsymbol P_k}
-=-\rho_fc_f\sum_gW_{kg}\widetilde N_{kg}^{T}
-(\widetilde E_{kg}\boldsymbol T_k)^TH_f\widetilde E_{kg}.
+=-\rho_fc_f\sum_gW_{kg}\widetilde{\mathbf{N}}_{kg}^{T}
+(\widetilde{\mathbf{E}}_{kg}\boldsymbol T_k)^TH_f\widetilde{\mathbf{E}}_{kg}.
 }
 $$
 
-两者均为 $n_{\mathrm{node},k}\times n_{\mathrm{node},k}$ 矩阵，组装后分别得到 $K_{33\mathrm{Adv}}$、$K_{32\mathrm{Adv}}$，对应代码 `K33Adv`、`K32Adv`。**它们本身不含 $\Delta t$，时间步长已在[第 8.1 节](#section-34)的整体切线中计入。**
+两者均为 $n_{\mathrm{node},k}\times n_{\mathrm{node},k}$ 矩阵，组装后分别得到 $\bm{K}_{33\mathrm{Adv}}$、$\bm{K}_{32\mathrm{Adv}}$，对应代码 `K33Adv`、`K32Adv`。**它们本身不含 $\Delta t$，时间步长已在[第 8.1 节](#section-34)的整体切线中计入。**
 
-$K_{33\mathrm{Adv}}$ 使用含重力的完整通量，随当前孔压更新；$K_{32\mathrm{Adv}}$ 随当前温度梯度更新。参考系数固定时，重力通量对孔压的导数为零，不增加 $K_{32\mathrm{Adv}}$ 的独立项。两者均在每轮 Newton 和 line search 试算时更新。
+$\bm{K}_{33\mathrm{Adv}}$ 使用含重力的完整通量，随当前孔压更新；$\bm{K}_{32\mathrm{Adv}}$ 随当前温度梯度更新。参考系数固定时，重力通量对孔压的导数为零，不增加 $\bm{K}_{32\mathrm{Adv}}$ 的独立项。两者均在每轮 Newton 和 line search 试算时更新。
 
-**$K_{32\mathrm{Adv}}$ 与 $K_{23}^T$ 是不同的耦合项。** 前者来自孔压对流体携热的影响，后者来自温度对流体含量的影响，整体切线一般不对称。对流中的孔压驱动项 $-\rho_fc_fH_f\nabla p\cdot\nabla T$ 含孔压梯度与温度梯度的乘积，因此即使骨架线弹性，耦合方程仍可非线性。
+**$\bm{K}_{32\mathrm{Adv}}$ 与 $\bm{K}_{23}^T$ 是不同的耦合项。** 前者来自孔压对流体携热的影响，后者来自温度对流体含量的影响，整体切线一般不对称。对流中的孔压驱动项 $-\rho_fc_fH_f\nabla p\cdot\nabla T$ 含孔压梯度与温度梯度的乘积，因此即使骨架线弹性，耦合方程仍可非线性。
 
 #### 8.5.3 重力对流的计入
 
@@ -812,34 +831,34 @@ $K_{33\mathrm{Adv}}$ 使用含重力的完整通量，随当前孔压更新；$K
 $$
 \boldsymbol q_f^{\mathrm{grav}}=\rho_fH_f\boldsymbol g,
 \qquad
-K_{33\mathrm{Adv,grav}}^k
-=\rho_fc_f\sum_gW_{kg}\widetilde N_{kg}^{T}
-(\boldsymbol q_f^{\mathrm{grav}})^T\widetilde E_{kg},
+\bm{K}_{33\mathrm{Adv,grav}}^k
+=\rho_fc_f\sum_gW_{kg}\widetilde{\mathbf{N}}_{kg}^{T}
+(\boldsymbol q_f^{\mathrm{grav}})^T\widetilde{\mathbf{E}}_{kg},
 $$
 
 $$
 \boldsymbol f_{T,k}^{\mathrm{adv,grav}}
-=K_{33\mathrm{Adv,grav}}^k\boldsymbol T_k.
+=\bm{K}_{33\mathrm{Adv,grav}}^k\boldsymbol T_k.
 $$
 
-局部贡献组装为 $K_{33\mathrm{Adv,grav}}$ 和 $\boldsymbol f_T^{\mathrm{adv,grav}}$。完整对流残差满足
+局部贡献组装为 $\bm{K}_{33\mathrm{Adv,grav}}$ 和 $\boldsymbol f_T^{\mathrm{adv,grav}}$。完整对流残差满足
 
 $$
 \boxed{
 \boldsymbol f_T^{\mathrm{adv}}(\boldsymbol P,\boldsymbol T;\boldsymbol g)
-=K_{33\mathrm{Adv}}(\boldsymbol P;\boldsymbol g)\boldsymbol T
-=K_{32\mathrm{Adv}}(\boldsymbol T)\boldsymbol P
+=\bm{K}_{33\mathrm{Adv}}(\boldsymbol P;\boldsymbol g)\boldsymbol T
+=\bm{K}_{32\mathrm{Adv}}(\boldsymbol T)\boldsymbol P
 +\boldsymbol f_T^{\mathrm{adv,grav}}(\boldsymbol T).
 }
 $$
 
-本文使用含完整通量的 `dt*K33Adv*Trial.T` 组装时间离散后的对流残差。**其中已包含重力对流，不得再加 `dt*fAdvGrav`。** `fAdvGrav` 表示尚未乘时间步长的 $\boldsymbol f_T^{\mathrm{adv,grav}}$。只有重力对流贡献为零时，才能单独用 $K_{32\mathrm{Adv}}\boldsymbol P$ 表示完整对流残差。
+本文使用含完整通量的 `dt*K33Adv*Trial.T` 组装时间离散后的对流残差。**其中已包含重力对流，不得再加 `dt*fAdvGrav`。** `fAdvGrav` 表示尚未乘时间步长的 $\boldsymbol f_T^{\mathrm{adv,grav}}$。只有重力对流贡献为零时，才能单独用 $\bm{K}_{32\mathrm{Adv}}\boldsymbol P$ 表示完整对流残差。
 
 ## 9. 加入半径后，哪些积分需要增加高斯点
 
 在直边 T3 上，$r$ 与 $N_i$ 都是物理坐标的线性函数。因此 $rN_i$ 是二次多项式，$rN_iN_j$ 是三次多项式。
 
-本文用 Q4（四节点双线性四边形）型函数描述子域几何，采用 $3\times3$ Gauss 点。这里 $J$ 是从四边形自然坐标到 $(r,z)$ 的几何映射 Jacobian 矩阵，$\det J$ 是积分换元的面积比例因子。$2\times2$ 表示两个自然坐标方向各用 2 个点，共 4 点；$3\times3$ 同理为 9 点。积分中加入 $r$ 后，$rN_iN_j\det J$ 在四边形自然坐标下一般会出现四次项，因此 $2\times2$ Gauss 点不能保证精确。这里 Q4 只描述积分子域的几何，物理场仍由原始 T3 型函数插值。$2\times2$ Gauss 点计算 $rN_i$ 仍然足够，但计算储水、热容量和 PPP 所需的 $rN_iN_j$ 就不一定够了。
+本文用 Q4（四节点双线性四边形）型函数描述子域几何，采用 $3\times3$ Gauss 点。这里 $\bm{J}$ 是从四边形自然坐标到 $(r,z)$ 的几何映射 Jacobian 矩阵，$\det \bm{J}$ 是积分换元的面积比例因子。$2\times2$ 表示两个自然坐标方向各用 2 个点，共 4 点；$3\times3$ 同理为 9 点。积分中加入 $r$ 后，$rN_iN_j\det \bm{J}$ 在四边形自然坐标下一般会出现四次项，因此 $2\times2$ Gauss 点不能保证精确。这里 Q4 只描述积分子域的几何，物理场仍由原始 T3 型函数插值。$2\times2$ Gauss 点计算 $rN_i$ 仍然足够，但计算储水、热容量和 PPP 所需的 $rN_iN_j$ 就不一定够了。
 
 原 markdown 文件还记录了下面的积分核对例子：母三角形为 $(1,0),(3,0),(2,1)$，节点 1 子域为 $(1,0),(2,0),(2,1/3),(1.5,1/2)$，$N_1=(3-r-z)/2$。不含公共因子 $2\pi$ 时，
 
@@ -857,7 +876,7 @@ $$
 
 若体积积分中的被积函数为常数，直接用该常数乘积分域体积即可。
 
-**注意：** 若被积函数包含随位置变化的 N 或 $N^TN$，一般不能先按面积积分，再乘一个平均半径，因为对一般随位置变化的被积函数 $f(r,z)$，$\int r f\,\mathrm{d}A$ 不等于 $\overline r^A\int f\,\mathrm{d}A$。这里 $\overline r^A=\int r\,\mathrm{d}A/\int\mathrm{d}A$ 是该积分域的面积平均半径。
+**注意：** 若被积函数包含随位置变化的 $\mathbf{N}_e$ 或 $\mathbf{N}_e^T\mathbf{N}_e$，一般不能先按面积积分，再乘一个平均半径，因为对一般随位置变化的被积函数 $f(r,z)$，$\int r f\,\mathrm{d}A$ 不等于 $\overline r^A\int f\,\mathrm{d}A$。这里 $\overline r^A=\int r\,\mathrm{d}A/\int\mathrm{d}A$ 是该积分域的面积平均半径。
 
 ## 10. PPP 的旋转体积平均
 
@@ -872,10 +891,10 @@ $$
 PPP 稳定化矩阵为
 
 $$
-S_{\mathrm{PPP}}=\operatorname*{Assemble}_k\left\{\operatorname*{Assemble}_{e\ni k}\left[c_{\mathrm{PPP}}\int_{D_{ke}}(N_e-\Pi_e^VN_e)^T(N_e-\Pi_e^VN_e)\,\mathrm{d}V\right]\right\}.
+\bm{S}_{\mathrm{PPP}}=\operatorname*{Assemble}_k\left\{\operatorname*{Assemble}_{e\ni k}\left[c_{\mathrm{PPP}}\int_{D_{ke}}(\mathbf{N}_e-\Pi_e^V\mathbf{N}_e)^T(\mathbf{N}_e-\Pi_e^V\mathbf{N}_e)\,\mathrm{d}V\right]\right\}.
 $$
 
-$c_{\mathrm{PPP}}$ 是由同一组固定弹性参考参数和稳定化倍率确定的常数，在所有光滑域中相同，不随塑性切线更新。$\Pi_e^VN_e$ 表示对 $N_e$ 的三个分量分别求同一种平均。均匀压力与其平均值之差为零，因此 $S_{\mathrm{PPP}}$ 乘均匀压力向量得到零。**流体残差 $\boldsymbol R_p$ 中实际使用的是 $S_{\mathrm{PPP}}\Delta\boldsymbol P$，所以均匀孔压增量使稳定化残差为零。** 当前孔压均匀，但上一个已收敛时间步的孔压可能不均匀，因此两者之差可能不均匀，PPP 稳定化残差就不一定为零。若压力不均匀，压力与这个体积平均值之差，在整个母三角形上的体积积分仍为零（注意：PPP 对应的二次型是压力与平均值之差**的平方**的体积积分乘以稳定化系数）。如果用一个常数近似母三角形内的压力，那么体积平均压力能使“压力与该常数之差的平方”的体积积分最小。
+$c_{\mathrm{PPP}}$ 是由同一组固定弹性参考参数和稳定化倍率确定的常数，在所有光滑域中相同，不随塑性切线更新。$\Pi_e^V\mathbf{N}_e$ 表示对 $\mathbf{N}_e$ 的三个分量分别求同一种平均。均匀压力与其平均值之差为零，因此 $\bm{S}_{\mathrm{PPP}}$ 乘均匀压力向量得到零。**流体残差 $\boldsymbol R_p$ 中实际使用的是 $\bm{S}_{\mathrm{PPP}}\Delta\boldsymbol P$，所以均匀孔压增量使稳定化残差为零。** 当前孔压均匀，但上一个已收敛时间步的孔压可能不均匀，因此两者之差可能不均匀，PPP 稳定化残差就不一定为零。若压力不均匀，压力与这个体积平均值之差，在整个母三角形上的体积积分仍为零（注意：PPP 对应的二次型是压力与平均值之差**的平方**的体积积分乘以稳定化系数）。如果用一个常数近似母三角形内的压力，那么体积平均压力能使“压力与该常数之差的平方”的体积积分最小。
 
 温度方程不添加 PPP 项。
 
@@ -922,7 +941,7 @@ $$
 
 本文使用单一均匀、各向同性材料，$b=1$、$K_s\to\infty$。不需要各向异性材料的方向转换。
 
-**[第 8.2 节](#section-29)、[第 8.3 节](#section-31)已经按上述材料假设简化。** 孔压耦合使用 $\boldsymbol m$，储水系数为 $S=n/K_f$，$\beta_T$ 与 $C_T$ 使用统一的常参数表达式。这些简化来自材料假设；B、E 的几何构造、应变分量对应和积分中的 $2\pi r$ 则来自轴对称。
+**[第 8.2 节](#section-29)、[第 8.3 节](#section-31)已经按上述材料假设简化。** 孔压耦合使用 $\boldsymbol m$，储水系数为 $S=n/K_f$，$\beta_T$ 与 $C_T$ 使用统一的常参数表达式。这些简化来自材料假设；$\mathbf{B}$、$\mathbf{E}$ 的几何构造、应变分量对应和积分中的 $2\pi r$ 则来自轴对称。
 
 ### 11.4 应力、沉降与误差的显示
 
@@ -1042,7 +1061,7 @@ $$
 =\boldsymbol F_u^{\mathrm{body}}+\boldsymbol F_u^\Gamma,
 \qquad
 \boldsymbol R_u
-=\boldsymbol f_u^{\mathrm{skel}}-K_{12}\boldsymbol P
+=\boldsymbol f_u^{\mathrm{skel}}-\bm{K}_{12}\boldsymbol P
 -\boldsymbol F_u^{\mathrm{ext}}.
 $$
 
@@ -1050,13 +1069,13 @@ $$
 
 ## 13. 哪些数据可以预计算，哪些 MEX 需要重新编译
 
-在本文的固定网格下，面积、实际体积、型函数的体积积分、B/E 及其梯度、虚拟点矩阵、自由度编号和边界几何都可以只算一次、保存起来供后面使用。材料参数应单独读取；试算应力、塑性变量和算法切线则随本构更新，不能当作固定的几何数据。
+在本文的固定网格下，面积、实际体积、型函数的体积积分、$\mathbf{B}$/$\mathbf{E}$ 及其梯度、虚拟点矩阵、自由度编号和边界几何都可以只算一次、保存起来供后面使用。材料参数应单独读取；试算应力、塑性变量和算法切线则随本构更新，不能当作固定的几何数据。
 
-**注意：** 开启热对流后，$K_{33\mathrm{Adv}}$ 取决于当前孔压，$K_{32\mathrm{Adv}}$ 取决于当前温度梯度；它们须在每轮 Newton 和每次 line search 候选试算时更新，即使固体是线弹性也不能直接当作常数矩阵重复使用。
+**注意：** 开启热对流后，$\bm{K}_{33\mathrm{Adv}}$ 取决于当前孔压，$\bm{K}_{32\mathrm{Adv}}$ 取决于当前温度梯度；它们须在每轮 Newton 和每次 line search 候选试算时更新，即使固体是线弹性也不能直接当作常数矩阵重复使用。
 
 轴对称 MEX 需按本文的几何与材料接口重新编译，并支持可变的节点数、单元数。平面 MEX 的几何字段和积分公式不同，不能直接复用。
 
-在固定几何、常体力和常参考系数下，$\boldsymbol F_u^{\mathrm{body}}$ 可按 T3 母单元预计算；$\boldsymbol G_p$ 与纯重力对流矩阵 $K_{33\mathrm{Adv,grav}}$ 也可预计算。完整 $K_{33\mathrm{Adv}}$ 仍随当前孔压更新。
+在固定几何、常体力和常参考系数下，$\boldsymbol F_u^{\mathrm{body}}$ 可按 T3 母单元预计算；$\boldsymbol G_p$ 与纯重力对流矩阵 $\bm{K}_{33\mathrm{Adv,grav}}$ 也可预计算。完整 $\bm{K}_{33\mathrm{Adv}}$ 仍随当前孔压更新。
 
 ## 14. 检查要求与已有验证记录
 
@@ -1071,12 +1090,12 @@ $$
 | 几何体积 | 子域体积总和等于母单元体积；面积不为零的光滑域，其旋转体积也应大于零，包括轴线节点的光滑域。 |
 | 刚体平移与均匀应变 | 轴向刚体平移产生零应变；$u_r=\varepsilon_{r0}r,u_z=\varepsilon_{z0}z+u_{z0}$ 在所有虚拟点给出正确的均匀应变，应变梯度为零。 |
 | 均匀应力下的平衡 | 在无机械体力的 patch 中，选取满足轴对称平衡方程的均匀应力，施加对应的边界面力，检查内部节点合内力。任意均匀应力未必满足这一前提。规则、不规则和含轴线网格都应检查。含体力时转用[第 14.3 节](#section-57)的完整平衡要求。 |
-| 均匀温度与自由膨胀 | 均匀温度使热传导贡献 $\Delta tK_{33G}\boldsymbol T$ 为零；无机械体力、无初始应力和额外机械约束，且所有节点规定 $p=0$ 时，均匀温升应使有效应力为零。零流速 patch 同时设置 $\boldsymbol g=\boldsymbol0$。 |
-| 体积积分 | 各子域上的 $\int_{D_{ke}}1\,\mathrm{d}V$、$\int_{D_{ke}}N_e\,\mathrm{d}V$、$\int_{D_{ke}}N_e^TN_e\,\mathrm{d}V$ 与精确积分一致；均匀孔压增量的 PPP 残差为零。 |
+| 均匀温度与自由膨胀 | 均匀温度使热传导贡献 $\Delta t\bm{K}_{33G}\boldsymbol T$ 为零；无机械体力、无初始应力和额外机械约束，且所有节点规定 $p=0$ 时，均匀温升应使有效应力为零。零流速 patch 同时设置 $\boldsymbol g=\boldsymbol0$。 |
+| 体积积分 | 各子域上的 $\int_{D_{ke}}1\,\mathrm{d}V$、$\int_{D_{ke}}\mathbf{N}_e\,\mathrm{d}V$、$\int_{D_{ke}}\mathbf{N}_e^T\mathbf{N}_e\,\mathrm{d}V$ 与精确积分一致；均匀孔压增量的 PPP 残差为零。 |
 | 残差与切线 | 对节点向量 $\boldsymbol U,\boldsymbol P,\boldsymbol T$ 分别施加小扰动，用残差变化检查切线。J2/DP 分别选明确处于弹性、塑性状态的点，避开状态切换位置。 |
 | 有解析解或可靠参考解的算例 | 厚壁圆筒检查非均匀环向响应；球壳或半球检查圆弧法向压力；含轴线圆柱检查轴线附近结果；热传导、固结检查轴对称积分。 |
 | 稳定性与收敛 | 检查额外零刚度模式、近不排水孔压振荡、网格加密、畸变及 $h/r$ 对误差的影响（$h$ 为网格特征尺寸，$r$ 为离轴距离，取 $r>0$）。DP 非关联流动切线可以不对称，不应强行对称化。开启热对流时，还应检查对流占优算例的误差与振荡。 |
-| 无重力热对流回归 | 在原有四种零流速 patch 的条件下，明确设置 $\boldsymbol g=\boldsymbol0$，比较关闭与开启对流的结果；另用非均匀孔压、温度核对 $\boldsymbol f_T^{\mathrm{adv}}$、$K_{32\mathrm{Adv}}$ 和 $K_{33\mathrm{Adv}}$。含重力状态按[第 14.3 节](#section-57)检查。 |
+| 无重力热对流回归 | 在原有四种零流速 patch 的条件下，明确设置 $\boldsymbol g=\boldsymbol0$，比较关闭与开启对流的结果；另用非均匀孔压、温度核对 $\boldsymbol f_T^{\mathrm{adv}}$、$\bm{K}_{32\mathrm{Adv}}$ 和 $\bm{K}_{33\mathrm{Adv}}$。含重力状态按[第 14.3 节](#section-57)检查。 |
 | MATLAB 与 MEX | 对相同网格和状态比较结果，再检查节点数、单元数变化后的兼容性。 |
 
 ### 14.2 原 markdown 文件记录的已有检查结果
@@ -1095,16 +1114,16 @@ $$
 | --- | --- |
 | 机械体力积分 | 按[第 12.4 节](#section-52)核对每个母三角形对节点 $I$ 的体力贡献 $\frac{\pi A_e}{6}(2r_I+r_J+r_L)\boldsymbol f$，以及径向、轴向分量的组装；每个单元的节点力之和应为 $V_e\boldsymbol f$。 |
 | 机械自重平衡 | 同时使用体力、相应初始有效应力和边界面力，检查完整机械残差；不能只检查 Darcy 通量就宣称机械自重已平衡。 |
-| 静水 Darcy 平衡 | 对 $p=p_{\mathrm{ref}}-\rho_fg(z-z_{\mathrm{ref}})$，核对 $\widetilde E_{kg}\boldsymbol P_k=\rho_f\boldsymbol g$、$\boldsymbol q_{f,kg}=\boldsymbol0$ 与 $K_{22P}\boldsymbol P-\boldsymbol G_p=\boldsymbol0$。以同一静水压力场作为初态，继续计算后续时间步，避免把加载增量与静水平衡混为一谈。 |
-| 含重力的热对流切线 | 选取非零 Darcy 通量和温度梯度，分别扰动孔压、温度，检查 $K_{32\mathrm{Adv}}$、$K_{33\mathrm{Adv}}$；核对温度残差中的 $\Delta t\boldsymbol f_T^{\mathrm{adv}}$ 已包含重力对流，且不重复计入。 |
-| 热对流开关与零重力情形 | $\boldsymbol g=\boldsymbol0$ 时恢复无重力公式；关闭热对流时仍保留机械体力外载 $\boldsymbol F_u^{\mathrm{body}}$ 和流体残差中的 $-\Delta t\boldsymbol G_p$。均匀温度的对流残差为零，但非零通量下 $K_{33\mathrm{Adv}}$ 一般不为零。 |
+| 静水 Darcy 平衡 | 对 $p=p_{\mathrm{ref}}-\rho_fg(z-z_{\mathrm{ref}})$，核对 $\widetilde{\mathbf{E}}_{kg}\boldsymbol P_k=\rho_f\boldsymbol g$、$\boldsymbol q_{f,kg}=\boldsymbol0$ 与 $\bm{K}_{22P}\boldsymbol P-\boldsymbol G_p=\boldsymbol0$。以同一静水压力场作为初态，继续计算后续时间步，避免把加载增量与静水平衡混为一谈。 |
+| 含重力的热对流切线 | 选取非零 Darcy 通量和温度梯度，分别扰动孔压、温度，检查 $\bm{K}_{32\mathrm{Adv}}$、$\bm{K}_{33\mathrm{Adv}}$；核对温度残差中的 $\Delta t\boldsymbol f_T^{\mathrm{adv}}$ 已包含重力对流，且不重复计入。 |
+| 热对流开关与零重力情形 | $\boldsymbol g=\boldsymbol0$ 时恢复无重力公式；关闭热对流时仍保留机械体力外载 $\boldsymbol F_u^{\mathrm{body}}$ 和流体残差中的 $-\Delta t\boldsymbol G_p$。均匀温度的对流残差为零，但非零通量下 $\bm{K}_{33\mathrm{Adv}}$ 一般不为零。 |
 
 
 ### 14.4 静水状态与热对流检查
 
 热对流的残差和切线在以下典型状态下应满足：
 
-| 当前状态 | $\boldsymbol f_T^{\mathrm{adv}}$ | $K_{33\mathrm{Adv}}$ | $K_{32\mathrm{Adv}}$ |
+| 当前状态 | $\boldsymbol f_T^{\mathrm{adv}}$ | $\bm{K}_{33\mathrm{Adv}}$ | $\bm{K}_{32\mathrm{Adv}}$ |
 | --- | --- | --- | --- |
 | 各虚拟点 $\boldsymbol q_{f,kg}=\boldsymbol0$，但温度有梯度 | 零 | 零 | 一般非零 |
 | 温度处处相同，但存在 $\boldsymbol q_{f,kg}\ne\boldsymbol0$ 的虚拟点 | 零 | 一般非零；乘均匀温度向量为零 | 零 |
@@ -1122,26 +1141,26 @@ $$
 能准确计算该线性压力场梯度的离散算子应满足
 
 $$
-\widetilde E_{kg}\boldsymbol P_k=\rho_f\boldsymbol g,
+\widetilde{\mathbf{E}}_{kg}\boldsymbol P_k=\rho_f\boldsymbol g,
 \qquad \boldsymbol q_{f,kg}=\boldsymbol0,
-\qquad K_{22P}\boldsymbol P-\boldsymbol G_p=\boldsymbol0.
+\qquad \bm{K}_{22P}\boldsymbol P-\boldsymbol G_p=\boldsymbol0.
 $$
 
 通量和扩散残差应在浮点舍入误差范围内为零。若不满足，应同时检查离散压力梯度、重力项和扩散项的符号及所用算子。
 
-**注意：** 这是 Darcy 通量和流体扩散残差的检查。机械自重平衡还要求初始有效应力、边界面力与体力 $\rho\boldsymbol g$ 满足力学平衡。保持已有静水初态时，$\Delta\boldsymbol P=\boldsymbol0$；从零孔压首次施加静水压力时，储水项 $K_{22S}\Delta\boldsymbol P$ 和 PPP 项 $S_{\mathrm{PPP}}\Delta\boldsymbol P$ 不必为零。
+**注意：** 这是 Darcy 通量和流体扩散残差的检查。机械自重平衡还要求初始有效应力、边界面力与体力 $\rho\boldsymbol g$ 满足力学平衡。保持已有静水初态时，$\Delta\boldsymbol P=\boldsymbol0$；从零孔压首次施加静水压力时，储水项 $\bm{K}_{22S}\Delta\boldsymbol P$ 和 PPP 项 $\bm{S}_{\mathrm{PPP}}\Delta\boldsymbol P$ 不必为零。
 
 ## 15. 已确定的策略与实现顺序
 
 以下列出本文采用的离散策略与实现顺序。
 
 1. **光滑与体积，已确定：** 所有光滑操作均按体积加权。使用四边形子域的实际旋转体积，不用母三角形旋转体积的 $1/3$，也不用四个顶点的平均半径代替子域面积形心半径。
-2. **矩阵构造，已确定：** 按[第 4.3 节](#section-15)计算平均 B，按[第 5.3 节](#section-19)、[第 7.3 节](#section-27)计算 B、E 的梯度，再按[第 6.1 节](#section-21)、[第 7.3 节](#section-27)构造虚拟点矩阵。
+2. **矩阵构造，已确定：** 按[第 4.3 节](#section-15)计算平均 $\mathbf{B}$，按[第 5.3 节](#section-19)、[第 7.3 节](#section-27)计算 $\mathbf{B}$、$\mathbf{E}$ 的梯度，再按[第 6.1 节](#section-21)、[第 7.3 节](#section-27)构造虚拟点矩阵。
 3. **SNS 四点，已确定：** 保留$\ell_k=\sqrt{A_k/\pi}$的点距，每点权重为 $V_k/4$，不重新布点或改成不等权。
 4. **THM 矩阵与残差，已确定：** 按已确定的几何与光滑方案使用[第 8 节](#section-28)的公式。[第 8.2 节](#section-29)、[第 8.3 节](#section-31)使用均匀各向同性、$b=1$ 的简化材料公式，残差与切线使用同一套几何矩阵和积分，并用数值扰动核对。
 5. **积分与 PPP，已确定：** 四边形采用 $3\times3$ Gauss 点；PPP 改用母三角形的体积平均压力，其积分按实际旋转体积计算，系数仍根据固定弹性模量计算。
 6. **轴线与材料：** 在轴线上施加 $u_r=0$，$u_z$ 只按实际的轴向位移边界条件约束；采用[第 0 节](#section-1)的单一均匀、各向同性且 $b=1$ 的材料设定。
 7. **外荷载，已确定：** 常体力按[第 12.4 节](#section-52)直接由 T3 母单元组装；面力沿直边使用各段的外法向，积分保留 $2\pi r$。
-8. **热对流：** 用 `Keyword.HeatAdvection` 开关选择。按[第 8.5 节](#section-35)使用四个虚拟积分点，Darcy 速度与温度梯度均用 $\widetilde E_{kg}$，试函数用 $\widetilde N_{kg}$ 插值，每点权重为 $V_k/4$。将 $\Delta t\boldsymbol f_T^{\mathrm{adv}}$ 加入温度残差，并将 $\Delta tK_{33\mathrm{Adv}}$、$\Delta tK_{32\mathrm{Adv}}$ 分别加入温度方程对温度、孔压的切线块，保持非线性本构接口。
+8. **热对流：** 用 `Keyword.HeatAdvection` 开关选择。按[第 8.5 节](#section-35)使用四个虚拟积分点，Darcy 速度与温度梯度均用 $\widetilde{\mathbf{E}}_{kg}$，试函数用 $\widetilde{\mathbf{N}}_{kg}$ 插值，每点权重为 $V_k/4$。将 $\Delta t\boldsymbol f_T^{\mathrm{adv}}$ 加入温度残差，并将 $\Delta t\bm{K}_{33\mathrm{Adv}}$、$\Delta t\bm{K}_{32\mathrm{Adv}}$ 分别加入温度方程对温度、孔压的切线块，保持非线性本构接口。
 
 按[第 14 节](#section-54)进行检查：基础机械与温升 patch 先设体力、重力为零，所有节点规定 $p=0$；再用有解析解的非均匀轴对称算例检查网格加密效果。
