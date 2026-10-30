@@ -134,7 +134,7 @@ $r$ 是到旋转轴的距离，$A_k$ 是二维面积，$V_k$ 是旋转一周后�
 | 母单元 2，扩展后 | $\mathbf{B}_{2,4}$ | $\bm{0}$ | $\mathbf{B}_{2,12}$ | $\mathbf{B}_{2,19}$ |
 | 按对应列相加 | $\mathbf{B}_{1,4}+\mathbf{B}_{2,4}$ | $\mathbf{B}_{1,8}$ | $\mathbf{B}_{1,12}+\mathbf{B}_{2,12}$ | $\mathbf{B}_{2,19}$ |
 
-表中每项都是 $4\times2$ 列块，$\bm{0}$ 表示同尺寸零块，因此组装后的矩阵是 $4\times8$。各子域的积分及平均系数按相应公式计入；这里仅说明列的位置。
+表中每项都是 $4\times2$ 列块，$\bm{0}$ 表示同尺寸零块，因此组装后的矩阵是 $4\times8$。该表仅展示节点列的对齐、补零和相加；具体积分及除以 $V_k$ 的体积平均操作，见[第 4.3 节](#section-15)和[第 5.3 节](#section-19)。
 
 **后文所有 Assemble 都采用这一对齐规则。** $\mathbf{B}$、$\mathbf{N}$、$\mathbf{E}$ 及其梯度只对齐节点列，物理分量行保持原顺序；力或残差向量按节点自由度对齐条目；刚度、耦合及型函数乘积积分矩阵需要同时对齐行和列，耦合块的行、列分别对应各自的物理场。光滑域上的 $\mathbf{N}$、$\mathbf{E}$ 分别有 $n_{\mathrm{node},k}$ 列，$\mathbf{B}$ 有 $2n_{\mathrm{node},k}$ 列。
 
@@ -387,7 +387,9 @@ $$
 
 径向、轴向梯度矩阵分别记为 $\mathbf{G}_{B,r,k}^V$、$\mathbf{G}_{B,z,k}^V$，上标 $V$ 表示体积加权。下标依次标明矩阵种类 $\mathbf{B}$、方向 r 或 z、光滑域编号 $k$；逗号只分隔标签，不表示求导。后面的 $\mathbf{G}_{E,r,k}^V,\mathbf{G}_{E,z,k}^V$ 也采用这一顺序。
 
-$\widehat{\mathbf{B}}$ 表示梯度积分所使用的母单元矩阵，其取值在[第 5.2 节](#section-18)给出。积分前按[第 2.3 节](#section-6)对齐并补齐节点列。
+$\widehat{\mathbf{B}}$ 由[第 5.2 节](#section-18)的母单元中心矩阵得到。**积分前按[第 2.3 节](#section-6)对齐并补齐节点列。** 对齐后，$\widehat{\mathbf{B}}$ 的尺寸为 $4\times(2n_{\mathrm{node},k})$，列数通常多于单个 T3 矩阵 $\mathbf{B}_e$ 的 6 列；母单元未包含的支撑节点，其对应两列补零。
+
+$\boldsymbol U_k$ 表示**光滑域 $k$ 全部支撑节点的位移列向量**：从全局节点位移中，按[第 2.3 节](#section-6)的支撑节点顺序取值，每个节点依次排列径向、轴向位移。其尺寸为 $(2n_{\mathrm{node},k})\times1$，与 $\widehat{\mathbf{B}}$ 的列一一对应；下标 $k$ 标记光滑域，不表示只有节点 $k$ 的两个位移分量。
 
 $\partial D_k$ 是光滑域边界，$\boldsymbol n_{\mathrm{out}}=[n_{\mathrm{out},r},n_{\mathrm{out},z}]^T$ 是其单位外法向，两个分量分别对应径向、轴向。
 
@@ -400,7 +402,7 @@ N_I(r_{ec},z_{ec})=\frac13,\qquad
 \left.\frac{N_I}{r}\right|_{(r_{ec},z_{ec})}=\frac{1}{3r_{ec}}.
 $$
 
-因此，$\widehat{\mathbf{B}}$ 的第 3 行径向位移列取 $1/(3r_{ec})$，轴向位移列取零；其余行使用该 T3 单元的常数型函数导数。
+因此，$\widehat{\mathbf{B}}$ 第 3 行中，该母单元三个节点的径向位移列取 $1/(3r_{ec})$，轴向位移列均为零；其余三行在该母单元对应列使用 T3 型函数的常数导数。**未属于该母单元的支撑节点，其对应两列在所有行中均为零。**
 
 每个母三角形内部的 $\widehat{\mathbf{B}}$ 是常数，相邻三角形的取值一般不同。[第 5.3 节](#section-19)的公式计入这些跨单元的差别。**不能仅因各母单元内的矩阵为常数，就把光滑梯度设为零。**
 
@@ -451,7 +453,65 @@ $$
 \boldsymbol\varepsilon_0=[\varepsilon_{r0},\varepsilon_{z0},\varepsilon_{r0},0]^T.
 $$
 
-此时 $\widehat{\mathbf{B}}\boldsymbol U_k=\boldsymbol\varepsilon_0$ 在光滑域内处处相同，径向、轴向应变梯度都应为零。以非零的 $\boldsymbol\varepsilon_0$ 为例，若省略径向梯度中的域内修正项 $-\frac{1}{V_k}\int_{D_k}2\pi\widehat{\mathbf{B}}\,\mathrm dA$，则会得到
+**先看一个母三角形。** 将其三个顶点局部编号为 $1,2,3$，半径和轴向坐标分别为 $r_i,z_i$。该单元的节点位移列向量为
+
+$$
+\boldsymbol U_e=
+[u_{r,1},u_{z,1},u_{r,2},u_{z,2},u_{r,3},u_{z,3}]^T,
+\qquad
+u_{r,i}=\varepsilon_{r0}r_i,\quad
+u_{z,i}=\varepsilon_{z0}z_i+u_{z0}.
+$$
+
+$\boldsymbol U_e$ 的尺寸为 $6\times1$，与 $4\times6$ 的母单元中心矩阵 $\mathbf{B}_e$ 相乘。T3 型函数精确再现上述线性位移场，所以第 1、2、4 行分别给出 $\varepsilon_{r0}$、$\varepsilon_{z0}$ 和零工程剪应变。第 3 行在母三角形中心取值，利用 $r_{ec}=(r_1+r_2+r_3)/3$，得到
+
+$$
+\varepsilon_{\theta\theta}
+=\frac{u_{r,1}+u_{r,2}+u_{r,3}}{3r_{ec}}
+=\varepsilon_{r0}\frac{r_1+r_2+r_3}{3r_{ec}}
+=\varepsilon_{r0}.
+$$
+
+因此，每个母三角形都给出同一个应变向量
+
+$$
+\mathbf{B}_e\boldsymbol U_e
+=[\varepsilon_{r0},\varepsilon_{z0},\varepsilon_{r0},0]^T
+=\boldsymbol\varepsilon_0.
+$$
+
+**再看光滑域中的四边形子域。** 在 $D_{ke}$ 内，$\widehat{\mathbf{B}}$ 就是该母单元的 $\mathbf{B}_e$ 对齐、补零后的矩阵。它乘[第 5.1 节](#section-17)定义的 $\boldsymbol U_k$，与原来的单元乘积完全相同：
+
+$$
+\left.\widehat{\mathbf{B}}\right|_{D_{ke}}\boldsymbol U_k
+=\mathbf{B}_e\boldsymbol U_e
+=\boldsymbol\varepsilon_0.
+$$
+
+每个子域都如此，所以 $\widehat{\mathbf{B}}\boldsymbol U_k$ 在整个光滑域内恒等于 $\boldsymbol\varepsilon_0$，子域交界处也没有应变跳跃。它的体积平均仍是同一个常量：
+
+$$
+\frac{1}{V_k}\int_{D_k}\widehat{\mathbf{B}}\boldsymbol U_k\,\mathrm dV
+=\frac{1}{V_k}\sum_{e\ni k}V_{ke}\boldsymbol\varepsilon_0
+=\boldsymbol\varepsilon_0.
+$$
+
+**应变在整个光滑域内没有空间变化，因此应变梯度为零，其体积平均也为零。** 使用上面的完整梯度公式，有
+
+$$
+\begin{aligned}
+\mathbf{G}_{B,r,k}^{V}\boldsymbol U_k
+&=\frac{1}{V_k}\int_{D_k}\frac{\partial(\widehat{\mathbf{B}}\boldsymbol U_k)}{\partial r}\,\mathrm dV
+=\boldsymbol0,\\
+\mathbf{G}_{B,z,k}^{V}\boldsymbol U_k
+&=\frac{1}{V_k}\int_{D_k}\frac{\partial(\widehat{\mathbf{B}}\boldsymbol U_k)}{\partial z}\,\mathrm dV
+=\boldsymbol0.
+\end{aligned}
+$$
+
+这里为零的是该位移场产生的应变梯度，$\mathbf{G}_{B,r,k}^{V}$、$\mathbf{G}_{B,z,k}^{V}$ 本身不必是零矩阵。
+
+以非零的 $\boldsymbol\varepsilon_0$ 为例，若省略径向梯度中的域内修正项 $-\frac{1}{V_k}\int_{D_k}2\pi\widehat{\mathbf{B}}\,\mathrm dA$，则会得到
 
 $$
 \begin{aligned}
