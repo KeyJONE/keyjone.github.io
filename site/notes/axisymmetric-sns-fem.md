@@ -226,7 +226,7 @@ $$
 \boldsymbol x_{ie}^{A}=\frac{22\boldsymbol x_i+7\boldsymbol x_j+7\boldsymbol x_l}{36}.
 $$
 
-这里 $\boldsymbol x_{ie}^{A}$ 是子域 $D_{ie}$ 的面积形心坐标，$A_{ie}=A_e/3$ 是子域面积，$V_{ie}$ 是其真实旋转体积。因此
+这里 $A_{ie}=A_e/3$ 是子域面积，$V_{ie}$ 是其真实旋转体积。因此
 
 $$
 \boxed{V_{ie}=2\pi\frac{A_e}{3}\frac{22r_i+7r_j+7r_l}{36}.}
@@ -256,13 +256,13 @@ $$
 
 ### 3.3 四个顶点的平均坐标不等于面积形心（注意）
 
-上述四边形的顶点平均坐标记为 $\boldsymbol x_{ie}^{\mathrm{vertices}}$，其中上标 $\mathrm{vertices}$ 只标明“顶点平均”：
+上述四边形的顶点平均坐标记为 $\boldsymbol x_{ie}^{\mathrm{vertices}}$，其中上标 $\mathrm{vertices}$ 代表“顶点平均”：
 
 $$
 \boldsymbol x_{ie}^{\mathrm{vertices}}=\frac{14\boldsymbol x_i+5\boldsymbol x_j+5\boldsymbol x_l}{24},
 $$
 
-四个顶点的平均坐标 $\boldsymbol x_{ie}^{\mathrm{vertices}}$ 一般不等于[第 3.2 节定义的面积形心坐标](#section-10) $\boldsymbol x_{ie}^{A}=[r_{ie}^{A},z_{ie}^{A}]^T$。这里 $i$ 是子域所对应的节点编号，$e$ 是母三角形编号，上标 $A$ 表示按面积求平均。$\boldsymbol x_{ie}^{A}$ 是把整个四边形子域 $D_{ie}$ 看成均匀薄片时的重心坐标，其中 $r_{ie}^{A}$ 是计算该子域实际旋转体积所用的半径。
+四个顶点的平均坐标 $\boldsymbol x_{ie}^{\mathrm{vertices}}$ 一般不等于[第 3.2 节定义的面积形心坐标](#section-10) $\boldsymbol x_{ie}^{A}=[r_{ie}^{A},z_{ie}^{A}]^T$。
 
 原 markdown 文件（本讨论整理前的技术笔记）记载，参考函数 `Smooth_T3_axisym.m` 使用 `xc_sub=(x1+xm1+xc+xm3)/4` 计算子域中心坐标，并使用 `N_ino/center_SD_ino` 计算 $\mathbf{B}$ 的环向应变行。按这条四点算术平均表达式，代码变量 `xc_sub` 对应本文的 $\boldsymbol x_{ie}^{\mathrm{vertices}}$，即四个顶点坐标的平均，一般不等于面积形心 $\boldsymbol x_{ie}^{A}$。下面分析这两条表达式对环向应变的影响。
 
@@ -625,7 +625,7 @@ $$
 \Delta\boldsymbol\varepsilon_{kg}^{\mathrm{th}}=\alpha_s\boldsymbol m\widetilde{\mathbf{N}}_{kg}\Delta\boldsymbol T_k,\qquad \boldsymbol m=[1,1,1,0]^T.
 $$
 
-$\alpha_s$ 是固体的线膨胀系数；$\boldsymbol m=[1,1,1,0]^T$ 将标量热膨胀量放入三个正应变分量，并使剪应变为零。$\Delta\boldsymbol\varepsilon_{kg}^{\mathrm{th}}$ 是第 $g$ 个虚拟点的热应变增量，上标 $\mathrm{th}$ 表示热应变。这里的 $\widetilde{\mathbf{N}}_{kg}$ 将节点温度增量换算成该点用于计算热应变的温度增量。它由平均型函数行向量 $\overline{\mathbf{N}}_k^V$ 加减梯度项得到，不需要判断虚拟点落在哪个三角形里，再去求那个三角形的型函数。
+$\alpha_s$ 是固体的线膨胀系数；$\boldsymbol m$ 将标量热膨胀量放入三个正应变分量，并使剪应变为零。$\Delta\boldsymbol\varepsilon_{kg}^{\mathrm{th}}$ 是第 $g$ 个虚拟点的热应变增量，上标 $\mathrm{th}$ 表示热应变。这里的 $\widetilde{\mathbf{N}}_{kg}$ 将节点温度增量换算成该点用于计算热应变的温度增量。它由平均型函数行向量 $\overline{\mathbf{N}}_k^V$ 加减梯度项得到，不需要判断虚拟点落在哪个三角形里，再去求那个三角形的型函数。
 
 均匀温升时必须有 $\overline{\mathbf{N}}_k^V\boldsymbol 1=1$、$\overline{\mathbf{E}}_k^V\boldsymbol 1=\boldsymbol 0$，其中 $\boldsymbol 1$ 是与节点数量对应的全 1 列向量，所以四个虚拟点获得相同热应变。在本文均匀材料假设下，无初始应力、无机械体力、无额外机械约束，且孔压保持 $p=0$ 时，自由膨胀位移为 $u_r=\alpha_s\Delta T r,\ u_z=\alpha_s\Delta T z$（$\Delta T$ 为均匀温升）。此时总应变减去热应变得到的机械应变为零，包括环向分量。**注意：** 不排水升温可能产生孔压，不能直接套用这一自由膨胀检查。
 
@@ -1176,16 +1176,7 @@ $$
 
 **每个单元分配给三个节点的力之和为 $V_e\boldsymbol f$，但一般不能三等分。** 上述节点力积分已包含旋转因子 $2\pi r$。每个节点只有径向、轴向两个力学分量，没有额外的环向节点体力或 $N_I/r$ 体力项。
 
-机械外荷载及残差为
-
-$$
-\boldsymbol F_u^{\mathrm{ext}}
-=\boldsymbol F_u^{\mathrm{body}}+\boldsymbol F_u^\Gamma,
-\qquad
-\boldsymbol R_u
-=\boldsymbol f_u^{\mathrm{skel}}-\bm{K}_{12}\boldsymbol P
--\boldsymbol F_u^{\mathrm{ext}}.
-$$
+机械外荷载及残差按[第 8.1 节](#section-34)组装。
 
 常体力和固定几何不依赖当前未知量，因此体力外载不增加切线项，也不乘 $\Delta t$。Darcy 重力仍按[第 8.4 节](#section-32)与 SNS 扩散算子配套构造。
 
