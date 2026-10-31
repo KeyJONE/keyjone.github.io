@@ -55,6 +55,15 @@ if (fs.existsSync(directory)) for (const file of fs.readdirSync(directory).filte
   const headings = [];
   const usedIds = new Set();
   const renderer = {
+    blockquote(token) {
+      const content = this.parser.parse(token.tokens);
+      // Explicit Markdown callout; normal quotations keep their usual markup.
+      if (/^\[!SIZE\](?:\n|$)/.test(token.text)) {
+        return '<div class="note-dimensions" role="note">' +
+          content.replace(/^<p>\[!SIZE\]/, '<p><strong>尺寸</strong>') + '</div>\n';
+      }
+      return `<blockquote>\n${content}</blockquote>\n`;
+    },
     heading(token) {
       // Match the source heading, including TeX, rather than temporary math IDs.
       const sourceHeading = token.text.replace(/NOTEMATHPLACEHOLDER(\d+)END/g,

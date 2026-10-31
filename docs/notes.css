@@ -30,6 +30,30 @@
   font-size: 1.06em;
 }
 
+/* Dimensions remain identifiable by their label as well as their red color. */
+.note-dimensions {
+  color: #b42318;
+  border-left: 3px solid currentColor;
+  padding: 0.1em 0 0.1em 0.85em;
+  margin: 1em 0;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+.note-dimensions p,
+.note-dimensions ul,
+.note-dimensions .note-table-scroll {
+  margin: 0.35em 0;
+}
+
+.note-dimensions .katex {
+  white-space: nowrap;
+}
+
+@media print {
+  .note-dimensions { color: #000; }
+}
+
 .note-article .katex-display {
   overflow-x: auto;
   overflow-y: hidden;

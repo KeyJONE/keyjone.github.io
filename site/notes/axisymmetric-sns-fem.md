@@ -137,7 +137,18 @@ $r$ 是到旋转轴的距离，$A_k$ 是二维面积，$V_k$ 是旋转一周后�
 
 表中每项都是 $4\times2$ 列块，$\bm{0}$ 表示同尺寸零块，因此组装后的矩阵是 $4\times8$。该表仅展示节点列的对齐、补零和相加；具体积分及除以 $V_k$ 的体积平均操作，见[第 4.3 节](#section-15)和[第 5.3 节](#section-19)。
 
-**后文所有 Assemble 都采用这一对齐规则。** $\mathbf{B}$、$\mathbf{N}$、$\mathbf{E}$ 及其梯度只对齐节点列，物理分量行保持原顺序；力或残差向量按节点自由度对齐条目；刚度、耦合及型函数乘积积分矩阵需要同时对齐行和列，耦合块的行、列分别对应各自的物理场。光滑域上的 $\mathbf{N}$、$\mathbf{E}$ 分别有 $n_{\mathrm{node},k}$ 列，$\mathbf{B}$ 有 $2n_{\mathrm{node},k}$ 列。
+**后文所有 Assemble 都采用这一对齐规则。** $\mathbf{B}$、$\mathbf{N}$、$\mathbf{E}$ 及其梯度只对齐节点列，物理分量行保持原顺序；力或残差向量按节点自由度对齐条目；刚度、耦合及型函数乘积积分矩阵需要同时对齐行和列，耦合块的行、列分别对应各自的物理场。
+
+> [!SIZE]
+> **母 T3 与光滑域的算子尺寸（行数 × 列数）**
+>
+> | 算子 | 母 T3，未扩展 | 按光滑域 $k$ 的支撑节点排列 |
+> | --- | --- | --- |
+> | 应变–位移矩阵 $\mathbf{B}$ | $4\times6$ | $4\times(2n_{\mathrm{node},k})$ |
+> | 型函数行矩阵 $\mathbf{N}$ | $1\times3$ | $1\times n_{\mathrm{node},k}$ |
+> | 标量型函数梯度矩阵 $\mathbf{E}$ | $2\times3$ | $2\times n_{\mathrm{node},k}$ |
+>
+> 按同一光滑域的支撑节点对齐后，横线、帽号和波浪线所标记的算子均采用表中右列尺寸。$\mathbf{G}_{B,r,k}^V,\mathbf{G}_{B,z,k}^V$ 与域内 $\mathbf{B}$ 同尺寸；$\mathbf{G}_{E,r,k}^V,\mathbf{G}_{E,z,k}^V$ 与域内 $\mathbf{E}$ 同尺寸。$\mathbf{I}_{N,k}^V$ 是 $1\times n_{\mathrm{node},k}$ 行矩阵。记号见[第 2.4 节](#section-7)。
 
 同一光滑域的四个虚拟点矩阵已经采用相同节点顺序，因此对 $g$ 求和时可直接相加；得到局部贡献后，再按全局节点自由度组装。
 
@@ -378,7 +389,7 @@ $$
 
 ![图 3：精确旋转体积平均、构造四点矩阵、本构更新与骨架内力组装](../images/notes/axisymmetric/02_B_to_internal_force_current.png)
 
-**图 3。** 第 1 步采用方法三，第 4 步使用每点 $V_k/4$ 的体积权重。有效应力由本构更新得到，输入的位移、温度增量**均从上一步已收敛状态算起**。四个虚拟点的骨架内力分别计算后组装，孔压内力另行组装。
+**图 3。** 第 1 步采用方法三，第 3 步使用四点应变–位移矩阵 $\widetilde{\mathbf{B}}_{kg}$、用于计算热应变的型函数行矩阵 $\widetilde{\mathbf{N}}_{kg}$、本步位移总增量 $\Delta\boldsymbol U_k$、本步温度总增量 $\Delta\boldsymbol T_k$，以及上一步已收敛状态。两种总增量**均从上一步已收敛状态算起**。第 4 步使用每点 $V_k/4$ 的体积权重，四点骨架内力求和后组装，孔压内力另行组装。
 
 ## 5. 光滑梯度的构造
 
@@ -388,9 +399,12 @@ $$
 
 径向、轴向梯度矩阵分别记为 $\mathbf{G}_{B,r,k}^V$、$\mathbf{G}_{B,z,k}^V$，上标 $V$ 表示体积加权。下标依次标明矩阵种类 $\mathbf{B}$、方向 r 或 z、光滑域编号 $k$；逗号只分隔标签，不表示求导。后面的 $\mathbf{G}_{E,r,k}^V,\mathbf{G}_{E,z,k}^V$ 也采用这一顺序。
 
-$\widehat{\mathbf{B}}$ 由[第 5.2 节](#section-18)的母单元中心矩阵得到。**积分前按[第 2.3 节](#section-6)对齐并补齐节点列。** 对齐后，$\widehat{\mathbf{B}}$ 的尺寸为 $4\times(2n_{\mathrm{node},k})$，列数通常多于单个 T3 矩阵 $\mathbf{B}_e$ 的 6 列；母单元未包含的支撑节点，其对应两列补零。
+$\widehat{\mathbf{B}}$ 由[第 5.2 节](#section-18)的母单元中心矩阵得到。**积分前按[第 2.3 节](#section-6)对齐并补齐节点列。** 对齐后的列数通常多于单个 T3 矩阵 $\mathbf{B}_e$ 的 6 列；母单元未包含的支撑节点，其对应两列补零。
 
-$\boldsymbol U_k$ 表示**光滑域 $k$ 全部支撑节点的位移列向量**：从全局节点位移中，按[第 2.3 节](#section-6)的支撑节点顺序取值，每个节点依次排列径向、轴向位移。其尺寸为 $(2n_{\mathrm{node},k})\times1$，与 $\widehat{\mathbf{B}}$ 的列一一对应；下标 $k$ 标记光滑域，不表示只有节点 $k$ 的两个位移分量。
+$\boldsymbol U_k$ 表示**光滑域 $k$ 全部支撑节点的位移列向量**：从全局节点位移中，按[第 2.3 节](#section-6)的支撑节点顺序取值，每个节点依次排列径向、轴向位移，与 $\widehat{\mathbf{B}}$ 的列一一对应；下标 $k$ 标记光滑域，不表示只有节点 $k$ 的两个位移分量。
+
+> [!SIZE]
+> $\widehat{\mathbf{B}},\mathbf{G}_{B,r,k}^V,\mathbf{G}_{B,z,k}^V$：$4\times(2n_{\mathrm{node},k})$；$\boldsymbol U_k$：$(2n_{\mathrm{node},k})\times1$。
 
 $\partial D_k$ 是光滑域边界，$\boldsymbol n_{\mathrm{out}}=[n_{\mathrm{out},r},n_{\mathrm{out},z}]^T$ 是其单位外法向，两个分量分别对应径向、轴向。
 
@@ -610,6 +624,9 @@ $$
 \end{aligned}
 $$
 
+> [!SIZE]
+> $\overline{\mathbf{N}}_k^V$：$1\times n_{\mathrm{node},k}$；$\overline{\mathbf{E}}_k^V$：$2\times n_{\mathrm{node},k}$。下文的四点矩阵 $\widetilde{\mathbf{N}}_{kg},\widetilde{\mathbf{E}}_{kg}$ 分别保持这两个尺寸；$\boldsymbol P_k,\boldsymbol T_k$ 及其增量均为 $n_{\mathrm{node},k}\times1$ 列向量。
+
 T3 的 $\nabla \mathbf{N}_e$ 在母单元内为常数，后一式可以直接用子域体积加权。**注意：** $\overline{\mathbf{E}}_k^V$ 是“先求导、再平均”，不应当对已经存为常数的 $\overline{\mathbf{N}}_k^V$ 直接求导而得到零。
 
 这里 $\nabla=(\partial_r,\partial_z)^T$，$\partial_r,\partial_z$ 分别表示对 $r,z$ 求偏导。$\overline{\mathbf{E}}_{r,k}^V$、$\overline{\mathbf{E}}_{z,k}^V$ 分别是平均梯度矩阵 $\overline{\mathbf{E}}_k^V$ 的第一行、第二行。继续定义
@@ -774,6 +791,13 @@ $\mathbf{I}_{N,k}^{V}$ 是型函数积分行矩阵，其中的 $\mathbf{I}$ 是�
 
 **注意：** 面积平均 $\overline{\mathbf{N}}_k^A$ 乘以 $V_k$ 通常不等于型函数体积积分 $\mathbf{I}_{N,k}^V$。规定孔压也不会自动施加机械壁面压力；面力仍按[第 12 节](#section-48)处理。
 
+> [!SIZE]
+> 以下为光滑域 $k$ 的局部贡献，按节点组装后才形成全局矩阵：
+>
+> - $\bm{K}_{11}^k$：$(2n_{\mathrm{node},k})\times(2n_{\mathrm{node},k})$。
+> - $\bm{K}_{12}^k,\bm{K}_{13}^k$：$(2n_{\mathrm{node},k})\times n_{\mathrm{node},k}$；$\bm{K}_{21}^k$：$n_{\mathrm{node},k}\times(2n_{\mathrm{node},k})$。
+> - $\boldsymbol f_{u,k}^{\mathrm{skel}}$：$(2n_{\mathrm{node},k})\times1$。
+
 每轮 Newton 和 line search 试算均从上一步已收敛的本构状态出发。UMAT 更新试算应力和算法切线，MEX 使用它们组装矩阵；当前时间步收敛后再保存本构状态。
 
 ### 8.3 储水、温度—流体含量耦合与热容量
@@ -851,6 +875,9 @@ $$
 
 $\boldsymbol G_p=\operatorname*{Assemble}_k[\boldsymbol G_{p,k}]$。$H_f,\rho_f,\boldsymbol g$ 及几何固定时，$\boldsymbol G_p$ 与当前未知量无关，因此不增加切线项。
 
+> [!SIZE]
+> $\bm{K}_{22P}^k,\bm{K}_{33G}^k$：$n_{\mathrm{node},k}\times n_{\mathrm{node},k}$；$\boldsymbol G_{p,k}$：$n_{\mathrm{node},k}\times1$。
+
 本步边界流入的等效节点流体体积 $\boldsymbol Q_p^{\mathrm{step}}$ 和传导热量 $\boldsymbol Q_T^{\mathrm{step}}$ 按[第 8.1 节](#section-34)计算。静水平衡及零通量检查见[第 14.4 节](#section-40)。
 
 **注意：** 关闭重力时令 $\boldsymbol g=\boldsymbol0$，分母中的参考流体重度 $\gamma_f$ 保持不变。
@@ -885,7 +912,10 @@ $$
 }
 $$
 
-$\widetilde{\mathbf{N}}_{kg}$、$\widetilde{\mathbf{E}}_{kg}$ 的尺寸分别为 $1\times n_{\mathrm{node},k}$、$2\times n_{\mathrm{node},k}$，局部残差含 $n_{\mathrm{node},k}$ 个分量。组装后得到 $\boldsymbol f_T^{\mathrm{adv}}=\operatorname*{Assemble}_k[\boldsymbol f_{T,k}^{\mathrm{adv}}]$。**此向量尚未乘 $\Delta t$；每点权重已是 $V_k/4$，不再乘半径。**
+> [!SIZE]
+> $\widetilde{\mathbf{N}}_{kg}$：$1\times n_{\mathrm{node},k}$；$\widetilde{\mathbf{E}}_{kg}$：$2\times n_{\mathrm{node},k}$；局部残差 $\boldsymbol f_{T,k}^{\mathrm{adv}}$：$n_{\mathrm{node},k}\times1$。
+
+组装后得到 $\boldsymbol f_T^{\mathrm{adv}}=\operatorname*{Assemble}_k[\boldsymbol f_{T,k}^{\mathrm{adv}}]$。**此向量尚未乘 $\Delta t$；每点权重已是 $V_k/4$，不再乘半径。**
 
 #### 8.5.2 热对流切线
 
@@ -909,7 +939,10 @@ $$
 }
 $$
 
-两者均为 $n_{\mathrm{node},k}\times n_{\mathrm{node},k}$ 矩阵，组装后分别得到 $\bm{K}_{33\mathrm{Adv}}$、$\bm{K}_{32\mathrm{Adv}}$，对应代码 `K33Adv`、`K32Adv`。**它们本身不含 $\Delta t$，时间步长已在[第 8.1 节](#section-34)的整体切线中计入。**
+> [!SIZE]
+> $\bm{K}_{33\mathrm{Adv}}^k,\bm{K}_{32\mathrm{Adv}}^k$ 均为 $n_{\mathrm{node},k}\times n_{\mathrm{node},k}$ 矩阵。
+
+组装后分别得到 $\bm{K}_{33\mathrm{Adv}}$、$\bm{K}_{32\mathrm{Adv}}$，对应代码 `K33Adv`、`K32Adv`。**它们本身不含 $\Delta t$，时间步长已在[第 8.1 节](#section-34)的整体切线中计入。**
 
 $\bm{K}_{33\mathrm{Adv}}$ 使用含重力的完整通量，随当前孔压更新；$\bm{K}_{32\mathrm{Adv}}$ 随当前温度梯度更新。参考系数固定时，重力通量对孔压的导数为零，不增加 $\bm{K}_{32\mathrm{Adv}}$ 的独立项。两者均在每轮 Newton 和 line search 试算时更新。
 
