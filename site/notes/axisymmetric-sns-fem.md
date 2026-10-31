@@ -362,7 +362,7 @@ $$
 
 ### 4.3 方法三：原始 $\mathbf{B}$ 的精确旋转体积平均（本文采用）
 
-直接积分原始位置相关矩阵 $\mathbf{B}(r,z)$：
+直接积分原始位置相关矩阵 $\mathbf{B}(r,z)$，各母单元的积分贡献按[第 2.3 节](#section-6)对齐节点列、补零并组装，再除以 $V_k$：
 
 $$
 \boxed{\overline{\mathbf{B}}_k^V=\frac{1}{V_k}\operatorname*{Assemble}_{e\ni k}
@@ -377,7 +377,7 @@ $$
 =\frac{2\pi}{V_k}\sum_{e\ni k}\int_{D_{ke}}N_I\,\mathrm{d}A.}
 $$
 
-这里用 $\mathrm{d}V=2\pi r\,\mathrm{d}A$ 抵消了 $1/r$。右端虽写成面积积分，除数仍为真实体积 $V_k$，所以仍是旋转体积平均。节点列的对齐与补零遵循[第 2.3 节](#section-6)。
+这里用 $\mathrm{d}V=2\pi r\,\mathrm{d}A$ 抵消了 $1/r$。右端虽写成面积积分，除数仍为真实体积 $V_k$，所以仍是旋转体积平均。
 
 对本文的“节点—边中点—单元中心—另一边中点”四边形，节点 $k,j,l$ 按母三角形顺序排列，有
 
