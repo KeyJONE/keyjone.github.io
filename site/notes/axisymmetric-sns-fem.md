@@ -199,7 +199,7 @@ $r$ 是到旋转轴的距离，$A_k$ 是二维面积，$V_k$ 是旋转一周后�
 | $\overline{\mathbf{E}}_{r,k}^{V}$、$\overline{\mathbf{E}}_{z,k}^{V}$ | 光滑域 $k$ 的平均 $\mathbf{E}$ 矩阵中，对应径向、轴向的两行。 |
 | $n_{\mathrm{out},r}$、$n_{\mathrm{out},z}$ | 边界单位外法向的径向、轴向分量。 |
 | $\mathbf{B}_{e,I}$ | 母三角形 $e$ 中，节点 $I$ 的两个位移自由度对应的 $\mathbf{B}$ 矩阵列块。 |
-| $\mathbf{I}_{N,k}^{V}$、$n_{\mathrm{node},k}$ | 前者是光滑域 $k$ 的型函数体积积分，后者是该域涉及的节点数。 |
+| $\mathbf{I}_{N,k}^{V}$、$n_{\mathrm{node},k}$ | 前者是光滑域 $k$ 的型函数体积积分行矩阵，定义见[第 8.2 节](#section-29)；后者是该域涉及的节点数。 |
 | $\boldsymbol f_{u,k}^{\mathrm{skel}}$ | 光滑域 $k$ 的骨架内力向量，含该域涉及的所有节点的力学分量，**不是节点 $k$ 的一个力**；见[第 8.2 节](#section-29)。 |
 | $\boldsymbol f_{T,k}^{\mathrm{adv}}$ | 光滑域 $k$ 的热对流残差向量，$T$ 标记温度方程，$\mathrm{adv}$ 标记对流；见[第 8.5.1 节](#section-37)。 |
 | $\boldsymbol F_{u,I}^{\mathrm{body}}$ | **组装后节点 $I$ 的两个体力等效外力分量**，依次为径向、轴向；$u$ 标记力学方程，见[第 12.4 节](#section-52)。 |
