@@ -611,7 +611,7 @@ $$
 
 本文用 SNS 虚拟点矩阵计算渗流和热传导。为区分不同的 $\mathbf{E}$，本文记原始 T3 型函数梯度为 $\mathbf{E}_e=\nabla \mathbf{N}_e$，常数 NS 矩阵为 $\overline{\mathbf{E}}_k^V$，SNS 虚拟点矩阵为 $\widetilde{\mathbf{E}}_{kg}$；其中 $k,g$ 分别标明光滑域和虚拟点。四点矩阵由平均 $\mathbf{E}$ 加减相应方向的梯度项得到。
 
-[热传导](#section-32)使用四点 $\widetilde{\mathbf{E}}_{kg}$，[热容量](#section-31)使用原始 T3 型函数。关闭热对流时，温度方程不依赖 $\boldsymbol u,p$；开启后，仍用四点 $\widetilde{\mathbf{E}}_{kg}$ 计算 Darcy 速度和温度梯度，新增项见[第 8.5 节](#section-35)。温度方程不额外加入 PPP 项，$\mathbf{E}$ 中的 SNS 梯度项保留。节点光滑在瞬态导热中也可能出现积分不足造成的数值问题，保留这些梯度项有依据，见 [Cui 等关于稳态与瞬态导热的研究](https://doi.org/10.1016/j.ijthermalsci.2016.06.027)。
+热传导（见[第 8.4 节](#section-32)）使用四点 $\widetilde{\mathbf{E}}_{kg}$，热容量（见[第 8.3 节](#section-31)）使用原始 T3 型函数。关闭热对流时，温度方程不依赖 $\boldsymbol u,p$；开启后，仍用四点 $\widetilde{\mathbf{E}}_{kg}$ 计算 Darcy 速度和温度梯度，新增项见[第 8.5 节](#section-35)。温度方程不额外加入 PPP 项，$\mathbf{E}$ 中的 SNS 梯度项保留。节点光滑在瞬态导热中也可能出现积分不足造成的数值问题，保留这些梯度项有依据，见 [Cui 等关于稳态与瞬态导热的研究](https://doi.org/10.1016/j.ijthermalsci.2016.06.027)。
 
 ### 7.2 体积平均的温度与其梯度
 
