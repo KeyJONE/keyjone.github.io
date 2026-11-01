@@ -88,7 +88,7 @@ for n, dx, dy, tx, ty in (
     ax.add_patch(Circle((cx+dx, cy+dy), 8, color=BLUE))
     label(cx+dx+tx, cy+dy+ty, str(n), size=19, color=BLUE, weight="bold")
 label(675, 653, r"得到四点 $\widetilde{\mathbf{B}}_{kg}$ 和 $\widetilde{\mathbf{N}}_{kg}$", size=21)
-label(675, 698, "用于温度增量插值", size=18, color=MUTED)
+label(675, 698, "用于位移和温度增量插值", size=18, color=MUTED)
 
 # 3. Constitutive updates use total increments from the converged state.
 label(1125, 242, r"四点 $\widetilde{\mathbf{B}}_{kg}$：应变–位移矩阵", size=19)
@@ -118,7 +118,7 @@ label(1575, 597, "四点求和", size=21, weight="bold")
 label(1575, 642, "得到光滑域骨架内力", size=20, weight="bold")
 label(1575, 698, "孔压内力另行组装", size=16, color=MUTED)
 
-label(900, 862, "本步位移、温度总增量均从上一步已收敛状态算起。", size=19, color=MUTED)
+label(900, 862, "本步位移总增量、温度总增量均从上一步已收敛状态算起", size=19, color=MUTED)
 OUTPUT.parent.mkdir(parents=True, exist_ok=True)
 fig.savefig(OUTPUT, dpi=120)
 plt.close(fig)

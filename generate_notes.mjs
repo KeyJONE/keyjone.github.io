@@ -102,6 +102,11 @@ if (fs.existsSync(directory)) for (const file of fs.readdirSync(directory).filte
   const parser = new Marked({gfm:true, breaks:false});
   parser.use({renderer});
   let html = parser.parse(source);
+  // Keep a numbered caption inside the same visual and semantic figure as its image.
+  html = html.replace(
+    /<p>(<a class="note-image-link"[^>]*><img[^>]*><\/a>)<\/p>\s*<p>(<strong>图 \d+。<\/strong>[\s\S]*?)<\/p>/g,
+    '<figure class="note-figure">$1<figcaption>$2</figcaption></figure>\n',
+  );
   html = html.replace(/<table>/g, '<div class="note-table-scroll"><table>').replace(/<\/table>/g, '</table></div>');
   const toc = '<details class="note-toc"><summary>目录</summary><ul>' + headings.filter(h => h.depth === 2).map(h => `<li><a href="#${h.id}">${h.label}</a></li>`).join('') + '</ul></details>';
   html = toc + '\n<article class="note-article">\n' + html + '</article>\n';
