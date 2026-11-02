@@ -1159,23 +1159,23 @@ $$
 这里 $\Gamma$ 泛指需要施加荷载的边界线，$N_I$ 表示节点 $I$ 的原始 T3 型函数在该边界上的取值，$\boldsymbol F_{u,I}^\Gamma$ 是这条边界对节点 $I$ 的径向、轴向等效力：
 
 $$
-\boxed{\boldsymbol F_{u,I}^\Gamma=\int_\Gamma N_I\boldsymbol t\,2\pi r\,\mathrm{d}s,\qquad \boldsymbol t=[t_r,t_z]^T.}
+\boxed{\boldsymbol F_{u,I}^\Gamma=\int_\Gamma N_I\overline{\boldsymbol t}\,2\pi r\,\mathrm{d}s,\qquad \overline{\boldsymbol t}=[\overline t_r,\overline t_z]^T.}
 $$
 
-$\boldsymbol t$ 是旋转表面单位面积上的面力，也就是 traction，两个分量分别沿径向、轴向。若壁面压力 $p_w$ 以受压为正，则
+$\overline{\boldsymbol t}$ 是旋转表面单位面积上的给定面力，也就是 traction，两个分量分别沿径向、轴向。若壁面压力 $p_w$ 以受压为正，则
 
 $$
-\boldsymbol t=-p_w\boldsymbol n_{\mathrm{out}}.
+\overline{\boldsymbol t}=-p_w\boldsymbol n_{\mathrm{out}}.
 $$
 
 $\boldsymbol n_{\mathrm{out}}$ 是**所计算固体域的单位外法向**，上标或下标中的 $\mathrm{out}$ 表示向外。
 
 **注意：** 内腔边界的外法向指向腔内，不能统一认定它都指向圆心外侧。规定孔压与施加机械压力依然是两件事，必须分别设置。
 
-对任意直线斜边，将两个端点局部编号为 $1,2$，对应半径为 $r_1,r_2$，边长为 $L$；这个例子中的 $\Gamma$ 就是该直边。若面力 $\boldsymbol t$ 的径向、轴向分量沿该边都为常数，使用线性边型函数可得精确结果
+对任意直线斜边，将两个端点局部编号为 $1,2$，对应半径为 $r_1,r_2$，边长为 $L$；这个例子中的 $\Gamma$ 就是该直边。若面力 $\overline{\boldsymbol t}$ 的径向、轴向分量沿该边都为常数，使用线性边型函数可得精确结果
 
 $$
-\boldsymbol F_{u,1}^\Gamma=\frac{2\pi L}{6}(2r_1+r_2)\boldsymbol t,\qquad \boldsymbol F_{u,2}^\Gamma=\frac{2\pi L}{6}(r_1+2r_2)\boldsymbol t.
+\boldsymbol F_{u,1}^\Gamma=\frac{2\pi L}{6}(2r_1+r_2)\overline{\boldsymbol t},\qquad \boldsymbol F_{u,2}^\Gamma=\frac{2\pi L}{6}(r_1+2r_2)\overline{\boldsymbol t}.
 $$
 
 将各边界段对同一节点的力相加，再按全局自由度顺序排列，得到 $\boldsymbol F_u^\Gamma$。除非两端半径相同，否则上述两个节点分得的力不相等。这个常值面力的例子使用二点 Gauss 就足够；若面力沿边变化，需要根据函数形式增加积分点，或使用自适应数值积分。边界流量、热流量按 $\mathrm{d}S$ 积分；体力、热源按 $\mathrm{d}V$ 积分。
