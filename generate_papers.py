@@ -152,9 +152,15 @@ def generate():
             alt=escape(figure['alt'],quote=True)
             width=int(figure['width'])
             height=int(figure['height'])
+            style=''
+            if figure.get('display_width') is not None:
+                display_width=int(figure['display_width'])
+                if display_width<=0:
+                    raise ValueError('Figure display width must be positive.')
+                style=f' style="width: {display_width}px;"'
             lines.extend([
                 '~~~','{}{raw}',
-                '<figure class="paper-figure">',
+                f'<figure class="paper-figure"{style}>',
                 f'<a href="{src}" target="_blank" rel="noopener noreferrer"><img src="{src}" alt="{alt}" width="{width}" height="{height}"></a>',
                 '</figure>','~~~','',
             ])
