@@ -40,7 +40,9 @@ def linked_text(value,links):
 def citation(paper):
     if paper.get('citation_override'):
         return text(paper['citation_override'])
-    value='/'+text(paper['journal'])+'/'
+    journal=(link(paper['journal_url'],paper['journal'])
+             if paper.get('journal_url') else text(paper['journal']))
+    value='/'+journal+'/'
     if paper.get('publication_status'):
         return value+', '+text(paper['publication_status'])+'.'
     volume=str(paper.get('volume') or '')
@@ -139,6 +141,8 @@ def generate():
             lines.extend([text(authors(p['equal_contributors'])+' contributed equally to this work.'),''])
         if p.get('manuscript_url'):
             lines.append('- '+link(p['manuscript_url'],'Manuscript'))
+        elif p.get('manuscript_pending'):
+            lines.append('- Manuscript')
         for extra in p.get('extra_links',[]):
             lines.append('- '+link(extra['url'],extra['label']))
         lines.append('')

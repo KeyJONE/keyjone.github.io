@@ -1,17 +1,5 @@
 [
   {
-    "id": 58,
-    "slug": "an-axisymmetric-stabilized-smoothed-finite-element-method-for-thm-coupling",
-    "title": "An axisymmetric stabilized smoothed finite element method for coupled thermo-hydro-mechanical analysis of porous media",
-    "authors": [
-      "X. Sheng",
-      "Z.-Q. Tang",
-      "Q. Zhang"
-    ],
-    "group_year": 2026,
-    "detail_page": false
-  },
-  {
     "id": 53,
     "slug": "multiscale-modeling-of-hydrate-extraction-by-thermal-stimulation",
     "title": "Multiscale modeling of hydrate extraction by thermal stimulation: From pore-scale mechanisms to Darcy-scale simulations",
@@ -22,7 +10,15 @@
       "X. Li"
     ],
     "group_year": 2026,
-    "detail_page": false
+    "detail_page": true,
+    "journal": "Energy",
+    "journal_url": "https://www.sciencedirect.com/journal/energy",
+    "publication_status": "accepted for publication",
+    "manuscript_pending": true,
+    "abstract_kind": "original",
+    "abstract_source": "Full abstract and first-page image supplied by the author in chat on 2026-11-02.",
+    "abstract_reuse_basis": "User-provided text, reproduced at the user's request.",
+    "abstract_latex": "Thermal stimulation is one of the most fundamental approaches to extract natural gas hydrates, whose efficiency is dominated by heat transfer process in the reservoir. Hence, accurate predictions of thermal properties help understand the evolution of physical fields and gas production during hydrate extraction. Motivated by this, a novel multiscale framework linking heat transfer mechanisms at pore scale to Darcy-scale production behavior is established. By integrating Gaussian random field theory, Fourier's law, and the finite difference method, the pore-scale model systematically characterizes the effects of porosity, hydrate saturation, particle size, and hydrate occurrence patterns on effective thermal conductivity (ETC) and effective thermal diffusivity (ETD). To enhance computational efficiency, polynomial ridge regression is applied to provide an explicit ETC expression ($R^2 > 0.95$) within the investigated simulation conditions and parameter ranges, and ETD is calculated from the predicted ETC and volumetric heat capacity. Besides, the results are bidirectionally embedded into a Darcy-scale coupled thermal-hydraulic-mechanical hydrate extraction simulator, enabling updates of dynamic thermal properties during thermal stimulation. Results demonstrate that hydrate occurrence patterns influence the ETC, but their effect on ETD can be ignored since the hydrate saturation dominates the ETD evolution. Additionally, the gas production per unit cross-sectional area ($t = 10^5\\,\\mathrm{s}$) rises from $18.5\\,\\mathrm{m^3}$ to $43.0\\,\\mathrm{m^3}$ as stimulation temperature and solid thermal conductivity rise from $450\\,\\mathrm{K}$ to $650\\,\\mathrm{K}$ and from $1\\,\\mathrm{W/m/K}$ to $8\\,\\mathrm{W/m/K}$, respectively. The framework provides critical insights into hydrate dissociation and gas production evolution, advancing predictive capabilities for optimizing hydrate extraction."
   },
   {
     "id": 54,
