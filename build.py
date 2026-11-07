@@ -84,6 +84,9 @@ def main():
         if (SITE / directory).is_dir():
             shutil.copytree(SITE / directory, OUT / directory, dirs_exist_ok=True,
                             ignore=shutil.ignore_patterns("*.jemdoc", "*.conf", "katexcache", "__pycache__"))
+    animations = SITE / "notes" / "animations"
+    if animations.is_dir():
+        shutil.copytree(animations, OUT / "notes" / "animations", dirs_exist_ok=True)
     (OUT / ".nojekyll").touch()
     all_sources = [SITE / source for source in sources] + paper_sources + note_sources
     for source in all_sources:

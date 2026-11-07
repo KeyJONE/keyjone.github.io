@@ -1,0 +1,7 @@
+# jemdoc: menu{../MENU}{notes.html}{../}, addcss{../custom.css}
+= Finite element animation
+
+- [animations/global_shape_functions_q4.html Four-node quadrilateral shape functions (Q4)]
+- [animations/global_shape_functions_q8.html Eight-node quadrilateral shape functions (Q8)]
+- [animations/global_shape_functions_t6.html Six-node triangular shape functions (T6)]
+- [animations/stiffness_assembly.html Stiffness matrix assembly using four-node quadrilateral elements (Q4)]
