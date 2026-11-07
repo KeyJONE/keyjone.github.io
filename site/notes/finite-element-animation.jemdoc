@@ -1,5 +1,5 @@
 # jemdoc: menu{../MENU}{notes.html}{../}, addcss{../custom.css}
-= ZHANG, Qi -- Notes - Finite element animation
+= Finite element animation
 [https://feg.um.edu.mo/cee/ Department of Civil and Environmental Engineering], [https://www.um.edu.mo/ University of Macau]
 
 - [animations/global_shape_functions_q4.html Four-node quadrilateral shape functions (Q4)]
